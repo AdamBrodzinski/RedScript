@@ -21,6 +21,12 @@ conviences and syntax to make working with straight objects and prototypes
 * More explicet object literals
 * Define object methods with def keyword
 
+Once I have a solid parser/lexer, I would like to implement:
+
+* optional parens
+* no var declarations (e.g. coffeescript/ruby/python)
+* possibly optional type checking? not sure how useful it would be
+
 ### NPM module coming soon!
 
 
@@ -36,7 +42,7 @@ function sayHello () {
 }
 
 # Arrow function in a callback
-fs.readFile('/etc/passwd', -> |err, data|
+fs.readFile('/etc/passwd', (err, data) ->
   if (err) throw err;
   console.log(data);
 });
