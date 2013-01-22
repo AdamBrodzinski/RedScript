@@ -60,8 +60,8 @@ func sayHello () {
   alert("Hi!");
 }
 
-# alias { } with do end (do implied)
-func sayHello (msg) do
+# alias { } with do end
+func sayHello(msg) do
   alert(msg);
 end
 
