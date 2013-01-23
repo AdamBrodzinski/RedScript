@@ -4,8 +4,7 @@
 RedScript was created to provide a better syntax for AMD modules and to provide
 a few aliases to make things a bit nicer to work with.
 
-It was also created as a side project to learn more about Node, NPM Modules and
-to learn Regular Expressions. In the future I would also like to add a
+It was also created as a side project to learn more about Node, NPM Modules and Regular Expressions. In the future I would also like to add a
 lexer/parser to implement more advanced features (feel free to fork!).
 
 I would also like to let JavaScript's prototype goodness shine through by adding
@@ -32,7 +31,7 @@ Once I have a solid parser/lexer, I would like to implement:
 
 #### A better AMD RequireJS syntax
 ```coffeescript
-# define an anonymous AMD module and require deps    // # define an anonymous AMD module and require deps
+# define an anonymous AMD module & require deps    // # define an anonymous AMD module & require deps
 define module                                        define(
 require 'jquery' as $                                ["jquery", "./libs/toolbox", "backbone"], function($,_,Backbone) {
 require './libs/toolbox' as tb
@@ -40,10 +39,11 @@ require 'backbone' as Backbone
 
 # do stuff                                           // do stuff
 
-export {                                            return {
-  apiName1: methodName1                             apiName1: methodName1
-	apiName2: methodName2                             apiName2: methodName2 
-}                                                   }
+export {                                              return {
+  apiName1: methodName1                                 apiName1: methodName1
+  apiName2: methodName2                                 apiName2: methodName2 
+}                                                     }       
+                                                    });
 ```
 
 ```coffeescript
