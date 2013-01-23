@@ -30,6 +30,21 @@ Once I have a solid parser/lexer, I would like to implement:
 ### NPM module coming soon!
 
 
+#### A better AMD RequireJS syntax
+```coffeescript
+# define an anonymous AMD module and require deps    // # define an anonymous AMD module and require deps
+define module                                        define(
+require 'jquery' as $                                ["jquery", "./libs/toolbox", "backbone"], function($,_,Backbone) {
+require './libs/toolbox' as tb
+require 'backbone' as Backbone                       
+
+# do stuff                                           // do stuff
+
+export {                                            return {
+  apiName1: methodName1                             apiName1: methodName1
+	apiName2: methodName2                             apiName2: methodName2 
+}                                                   }
+```
 
 ```coffeescript
 # define an anonymous AMD module and require dependancies
