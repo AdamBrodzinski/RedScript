@@ -1,0 +1,26 @@
+{
+  "name": "redscript",
+  "description": "RedScript Compiler",
+  "version": "0.0.1",
+  "author": {
+    "name": "Adam Brodzinski",
+    "email": "adambrodzinski@gmail.com"
+  },
+  "repository": "git://github.com/AdamBrodzinski/RedScript",
+  "keywords": ["redscript", "compiler"],
+  "bin": {
+    "redscript": "./bin/redscript"
+  },
+  "directories.lib":"./lib",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*"
+  },
+  "scripts": {
+    "test": "mocha -R spec",
+    "prepublish": "npm prune"
+  },
+  "preferGlobal": "true"
+}

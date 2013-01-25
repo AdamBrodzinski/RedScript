@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+/*!
+ * RedScript compiler
+ * v 0.0.1
+ * Copyright(c) 2013 Adam Brodzinski <adambrodzinski@gmail.com>
+ * MIT Licensed
+ */
+
+ var fs  = require('fs')
+  , cmd = require('../lib/cmdLine')
+
+  , args = process.argv.slice(2)
+  , opts = cmd.getOptions(args)
+  , files = cmd.getFiles(args)
+     // for now just read the first file
+  , source = files[0]
+    // extract last param and replace it's extension with .js
+  , target = source.substring(0, source.lastIndexOf('.')) + '.js';
+
+
+  /*  debugz  */
+//console.log(""); console.log("options are "); console.log(opts);
+console.log("ZZ"); console.log("files: " + files);
+console.log("source: " + source + " target: " + target);
