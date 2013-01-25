@@ -4,8 +4,7 @@
 RedScript was created to provide a better syntax for AMD modules and to provide
 a few aliases to make things a bit nicer to work with.
 
-It was also created as a side project to learn more about Node, NPM Modules and
-to learn Regular Expressions. In the future I would also like to add a
+It was also created as a side project to learn more about Node, NPM Modules and Regular Expressions. In the future I would also like to add a
 lexer/parser to implement more advanced features (feel free to fork!).
 
 I would also like to let JavaScript's prototype goodness shine through by adding
@@ -21,9 +20,31 @@ conviences and syntax to make working with straight objects and prototypes
 * More explicet object literals
 * Define object methods with def keyword
 
+Once I have a solid parser/lexer, I would like to implement:
+
+* optional parens
+* no var declarations (e.g. coffeescript/ruby/python)
+* possibly optional type checking? not sure how useful it would be
+
 ### NPM module coming soon!
 
 
+#### A better AMD RequireJS syntax
+```coffeescript
+# define an anonymous AMD module & require deps    // # define an anonymous AMD module & require deps
+define module                                        define(
+require 'jquery' as $                                ["jquery","./libs/toolbox","backbone"], function($,_,Backbone) {
+require './libs/toolbox' as tb
+require 'backbone' as Backbone                       
+
+# do stuff                                           // do stuff
+
+export {                                              return {
+  methodName: funcName                                 methodName: funcName
+  methodName: funcName                                 methodName: funcName 
+}                                                     }       
+                                                    });
+```
 
 ```coffeescript
 # define an anonymous AMD module and require dependancies
@@ -36,7 +57,7 @@ function sayHello () {
 }
 
 # Arrow function in a callback
-fs.readFile('/etc/passwd', -> |err, data|
+fs.readFile('/etc/passwd', (err, data) ->
   if (err) throw err;
   console.log(data);
 });
@@ -60,8 +81,8 @@ func sayHello () {
   alert("Hi!");
 }
 
-# alias { } with do end (do implied)
-func sayHello (msg) do
+# alias { } with do end
+func sayHello(msg) do
   alert(msg);
 end
 
