@@ -26,7 +26,9 @@ Once I have a solid parser/lexer, I would like to implement:
 * no var declarations (e.g. coffeescript/ruby/python)
 * possibly optional type checking? not sure how useful it would be
 
-### NPM module coming soon!
+
+#### To Install
+`npm install -g redscript`
 
 
 #### A better AMD RequireJS syntax
