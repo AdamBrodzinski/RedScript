@@ -6,19 +6,42 @@
  * MIT Licensed
  */
 
- var fs  = require('fs')
-  , cmd = require('../lib/cmdLine')
+/**
+ * Dependencies
+ */
+ var cmd = require('../lib/cmdLine')
+  , render = require('../lib/render');
 
-  , args = process.argv.slice(2)
-  , opts = cmd.getOptions(args)
-  , files = cmd.getFiles(args)
-     // for now just read the first file
-  , source = files[0]
-    // extract last param and replace it's extension with .js
-  , target = source.substring(0, source.lastIndexOf('.')) + '.js';
+var args =  process.argv.slice(2)
+  , opts =  cmd.getOptions(args)
+  , files = cmd.getFiles(args);
+
+
+
+if (opts.watchFiles && files.length) {
+    
+
+
+} else if (files.length) {
+    files.forEach(function(file) {
+       render(file);
+    });
+    console.log();
+    console.log('files compiled successfully.');
+}
+
+
+
+
+
+
+
+
+
+
 
 
   /*  debugz  */
 //console.log(""); console.log("options are "); console.log(opts);
-console.log("ZZ"); console.log("files: " + files);
-console.log("source: " + source + " target: " + target);
+console.log("");console.log(""); console.log("file list: " + files);
+//console.log("source: " + source + " target: " + target);

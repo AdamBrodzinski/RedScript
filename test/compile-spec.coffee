@@ -5,6 +5,4 @@ compile = require '../lib/compile'
 
 describe '#compile', ->
   it 'should return hello world', ->
-    ss = compile()
-    console.log ss
-    #s.should.eq "Hello"
+    compile('Wooo').should.eq 'Wooo Testing output'
