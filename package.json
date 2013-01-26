@@ -13,6 +13,7 @@
   },
   "directories.lib":"./lib",
   "dependencies": {
+    "colors": "*"
   },
   "devDependencies": {
     "mocha": "*",

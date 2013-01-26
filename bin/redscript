@@ -22,7 +22,6 @@ var args =  process.argv.slice(2)
  * If user passes watch flag, check every 100ms to see if the current
  * modification date is more than the previous check. If so, render file.
  */
-
 if (opts.watchFiles && files.length) {
     console.log();
     console.log(">>> RedScript is watching for changes. Pres Ctrl-C to quit");
@@ -42,13 +41,13 @@ if (opts.watchFiles && files.length) {
        render(file);
     });
 }
+
 // OCD induced blank line
 console.log();
 
 
-/*  debugz  */
+//  debugz
 this.debug = false;
-
 if (this.debug) {
     console.log(""); console.log("options are "); console.log(opts);
     console.log("file list: "); console.log(files);

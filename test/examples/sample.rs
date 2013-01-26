@@ -134,6 +134,4 @@ end
 
 var someOb >> helloWorld
   alert "hello world"
-end
-
-
+end  
