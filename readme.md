@@ -4,52 +4,51 @@
 RedScript was created to provide a better syntax for AMD modules and to provide
 a few aliases to make things a bit nicer to work with.
 
-It was also created as a side project to learn more about Node, NPM Modules and Regular Expressions. In the future I would also like to add a
-lexer/parser to implement more advanced features (feel free to fork!).
+It was also created as a side project to learn more about Node, NPM Modules and Regular Expressions. In the future I would also like to add a lexer/parser to implement more advanced features like optional parens and optional var declarations (feel free to fork!).
 
-I would also like to let JavaScript's prototype goodness shine through by adding
-conviences and syntax to make working with straight objects and prototypes
-*easier* than using faux classes and constructors.
+I would also like to let JavaScript's prototypal goodness shine through by adding
+convinces and syntax to make working with just objects & prototypes
+*easier* than using faux classes with constructors.
 
-* Better syntax for AMD modules
-* Better object inheritence
-* Easier ES5 object litterals
-* Alias { } with do end
-* Alias is, isnt, and, or with ===, !==, &&, ||
-* Arrow function
-* More explicet object literals
+* Cleaner syntax for AMD modules
+* Easier prototypal object inheritance
+* Cleaner ES5 object literals
+* Alias `{` `}` with `do` & `end`
+* Alias `is`, `isnt`, `and`, `or` `==`   with   `===`, `!==`, `&&`, `||` `===`
+* Alias `prototype` with `>>`
+* Alias `#` with `//`
+* Alias `func` with `function`
+* Arrow function ` -> ` and ` (foo, bar) -> `
 * Define object methods with def keyword
-
-Once I have a solid parser/lexer, I would like to implement:
-
-* optional parens
-* no var declarations (e.g. coffeescript/ruby/python)
-* possibly optional type checking? not sure how useful it would be
-
 
 #### To Install
 `npm install -g redscript`
 
+#### *** Check History.md for changes and current working syntax ***
 
 #### A better AMD RequireJS syntax
 ```coffeescript
-# define an anonymous AMD module & require deps    // # define an anonymous AMD module & require deps
-define module                                        define(
-require 'jquery' as $                                ["jquery","./libs/toolbox","backbone"], function($,_,Backbone) {
-require './libs/toolbox' as tb
-require 'backbone' as Backbone                       
-
-# do stuff                                           // do stuff
-
-export {                                              return {
-  methodName: funcName                                 methodName: funcName
-  methodName: funcName                                 methodName: funcName 
-}                                                     }       
-                                                    });
+define module                                                   define(function() {        
+ 
+var options = {                                                     var options = {
+    moonRoof: true,                                                     moonRoof: true,   
+    seats: 5                                                            seats: 5      
+}                                                                   }          
+ 
+getCost = 16899                                                 var getCost = 16899;  
+var wheels = 4                                                      var wheels = 4;
+ 
+# export literal compiles to an object that gets returned           // export literal compiles to an object that gets returned          
+export                                                              return {   
+  getCost                                                             getCost : getCost,
+  hasMoonRoof from options.moonRoof                                   hasMoonRoof : options.moonRoof,   
+  getWheels from wheels                                               getWheels : wheels     
+end                                                                 }           
+                                                                }); 
 ```
 
 ```coffeescript
-# define an anonymous AMD module and require dependancies
+# define an anonymous AMD module and require dependencies
 define module
 require 'jquery' as $
 require './utils/toolbox' as tb
@@ -70,13 +69,8 @@ model.on('change', @render)
 ```
 
 
-
-
-
 ```coffeescript
 define module
-require 'jquery' as $
-require './myFile' as baz
 
 # Func alias
 func sayHello () {
