@@ -102,3 +102,5 @@ end
 ```
 
 See more syntax examples on RedScript's website (coming soon)
+
+![analytics](http://cl.ly/image/1R062u1A290l)
