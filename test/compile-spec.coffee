@@ -45,4 +45,5 @@ describe '#compile', ->
     it 'should pass without parens', ->
       compile('puts foo').should.eq 'console.log(foo);'
       compile('puts "bar"').should.eq 'console.log("bar");'
+      compile('puts(foo); puts "bar"').should.eq 'console.log(foo); console.log("bar");'
       compile('puts method(param)').should.eq 'console.log(method(param));'
