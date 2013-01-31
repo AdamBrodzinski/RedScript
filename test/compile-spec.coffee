@@ -10,12 +10,15 @@ describe '#compile', ->
     it 'should allow JS comments', ->
       line = "// commented line"
       compile(line).should.eq '// commented line'
-    it 'should not skip comments that are in the middle'
-      #line = "do # commented line"
-      #compile(line).should.eq '{ // commented line'
+    it 'should not skip comments that are in the middle', ->
+      line = "do # commented line"
+      compile(line).should.eq '{ // commented line'
     it 'should not process line that starts with a comment', ->
       line = "  # commented do"
       compile(line).should.eq '  // commented do'
+    it 'should not comment out string interpolation', ->
+      line = ' "this is str #{foo}" '
+      compile(line).should.eq ' "this is str #{foo}" '
 
   describe '@ symbol', ->
     it 'should alias this', ->
@@ -33,3 +36,4 @@ describe '#compile', ->
       compile('@$foo').should.eq 'this.$foo'
     it 'should work when two @ are used', ->
       compile('@prop1 = @prop2').should.eq 'this.prop1 = this.prop2'
+      
