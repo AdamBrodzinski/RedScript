@@ -32,8 +32,17 @@ describe '#compile', ->
       compile(line).should.eq 'function (callBack, this )'
     it 'should work with a trailling dot', ->
       compile('@.foo').should.eq 'this.foo'
+      compile('@.foo @bar').should.eq 'this.foo this.bar'
       compile('@_foo').should.eq 'this._foo'
       compile('@$foo').should.eq 'this.$foo'
     it 'should work when two @ are used', ->
       compile('@prop1 = @prop2').should.eq 'this.prop1 = this.prop2'
-      
+
+  describe '#puts', ->
+    it 'should pass with parens', ->
+      compile('puts(foo)').should.eq 'console.log(foo)'
+      compile('puts(method(param))').should.eq 'console.log(method(param))'
+    it 'should pass without parens', ->
+      compile('puts foo').should.eq 'console.log(foo);'
+      compile('puts "bar"').should.eq 'console.log("bar");'
+      compile('puts method(param)').should.eq 'console.log(method(param));'
