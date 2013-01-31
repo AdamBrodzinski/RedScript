@@ -22,11 +22,14 @@ describe '#compile', ->
       compile('@prop').should.eq  'this.prop'
       compile('@_prop').should.eq 'this._prop'
       compile('@$prop').should.eq 'this.$prop'
-    it 'should work when @ is floating?'
-      #line = 'function (callBack, @)'
-      #compile(line).should.eq 'function (callBack, this)'
-      #line = 'function (callBack, @ )'
-      #compile(line).should.eq 'function (callBack, this )'
+    it 'should work when @ is floating?', ->
+      line = 'function (callBack, @)'
+      compile(line).should.eq 'function (callBack, this)'
+      line = 'function (callBack, @ )'
+      compile(line).should.eq 'function (callBack, this )'
     it 'should work with a trailling dot', ->
-      line = '@.foo'
-      compile(line).should.eq 'this.foo'
+      compile('@.foo').should.eq 'this.foo'
+      compile('@_foo').should.eq 'this._foo'
+      compile('@$foo').should.eq 'this.$foo'
+    it 'should work when two @ are used', ->
+      compile('@prop1 = @prop2').should.eq 'this.prop1 = this.prop2'
