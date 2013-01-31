@@ -47,3 +47,27 @@ describe '#compile', ->
       compile('puts "bar"').should.eq 'console.log("bar");'
       compile('puts(foo); puts "bar"').should.eq 'console.log(foo); console.log("bar");'
       compile('puts method(param)').should.eq 'console.log(method(param));'
+  
+  describe 'do end aliases', ->
+      it 'should alias correctly', ->
+        line = '''
+        function foo() do
+        end
+        '''
+        compile(line).should.eq '''
+        function foo() {
+        }
+        '''
+      it 'should not alias a do loop', ->
+        line = '''
+        do {
+        } while (i < 5);
+        '''
+        compile(line).should.eq '''
+        do {
+        } while (i < 5);
+        '''
+      it 'should pass when used on a single line', ->
+        line = 'function foo() do return 1*2 end'
+        compile(line).should.eq 'function foo() { return 1*2 }'
+        compile(' do end ').should.eq ' { } '
