@@ -8,7 +8,7 @@
 * Optional Ruby/CoffeeScript like aliases
 * String interpolation
 * Arrow function ` -> ` and ` (foo, bar) -> `
-* ------ Check History.md for current working syntax ------
+* ------ Check [History.md](https://github.com/AdamBrodzinski/RedScript/blob/master/History.md) for current working syntax ------
 
 
 RedScript was created to provide a better syntax for AMD modules and to provide
