@@ -19,9 +19,11 @@ It was also created as a side project to learn more about Node, NPM Modules and 
 You can read more about it on my blog: [Introducing RedScript](http://adamb.me/blog/2013/01/27/introducing-redscript/).
 
 
-#### To Install
+#### To Install and Run
 `npm install -g redscript`
-
+`redscript fileName1.rs fileName2.rs`
+or to watch files:
+`redscript watch fileName1.rs fileName2.rs`
 
 #### Learning RedScript is easy, add a bit here and there until you're comfortable!
 ```coffeescript
