@@ -59,15 +59,12 @@ describe '#compile', ->
         }
         '''
       it 'should not alias a do loop', ->
-        line = '''
-        do {
-        } while (i < 5);
-        '''
-        compile(line).should.eq '''
-        do {
-        } while (i < 5);
-        '''
+        line = 'do { '
+        compile(line).should.eq 'do { '
       it 'should pass when used on a single line', ->
         line = 'function foo() do return 1*2 end'
         compile(line).should.eq 'function foo() { return 1*2 }'
         compile(' do end ').should.eq ' { } '
+      it 'should pass lookbehind tests', ->
+        compile('doing').should.eq 'doing'
+        compile('ending').should.eq 'ending'        
