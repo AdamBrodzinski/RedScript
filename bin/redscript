@@ -40,6 +40,8 @@ if (opts.watchFiles && files.length) {
     files.forEach(function(file) {
        render(file);
     });
+} else {
+  console.log(">>> No RedScript files specified, type --help for more info");
 }
 
 // OCD induced blank line
