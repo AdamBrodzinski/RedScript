@@ -78,3 +78,21 @@ describe '#compile', ->
       compile('printf "bar"').should.eq 'process.stdout.write("bar");'
       compile('printf(foo); printf "bar"').should.eq 'process.stdout.write(foo); process.stdout.write("bar");'
       compile('printf method(param)').should.eq 'process.stdout.write(method(param));'
+
+  describe 'arrow function', ->
+    it 'should alias function when it doesnt have parens', ->
+      compile('->').should.eq 'function () {'
+      compile('method(->').should.eq 'method(function () {'
+      compile('method(param1, ->').should.eq 'method(param1,function () {'
+      compile('method(param1,->').should.eq 'method(param1,function () {'
+    it 'should alias function when it has empty parens', ->
+      compile('() ->').should.eq 'function () {'
+      compile('()->').should.eq 'function () {'
+      compile('method(()->').should.eq 'method(function () {'
+      compile('method(()->').should.eq 'method(function () {'
+    it 'should alias function with when it has params', ->
+      compile('(foo) ->').should.eq 'function (foo) {'
+      line = 'method(param1, (foo, bar) ->'
+      compile(line).should.eq 'method(param1, function (foo, bar) {'
+      line = 'method((foo, bar)->'
+      compile(line).should.eq 'method(function (foo, bar) {'
