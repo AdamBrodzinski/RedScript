@@ -20,10 +20,12 @@ You can read more about it on my blog: [Introducing RedScript](http://adamb.me/b
 
 
 #### To Install and Run
-`npm install -g redscript`
-`redscript fileName1.rs fileName2.rs`
-or to watch files:
-`redscript watch fileName1.rs fileName2.rs`
+```
+npm install -g redscript
+
+redscript fileName1.rs fileName2.rs
+redscript watch fileName1.rs fileName2.rs
+```
 
 #### Learning RedScript is easy, add a bit here and there until you're comfortable!
 ```coffeescript
