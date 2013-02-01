@@ -37,16 +37,6 @@ describe '#compile', ->
       compile('@$foo').should.eq 'this.$foo'
     it 'should work when two @ are used', ->
       compile('@prop1 = @prop2').should.eq 'this.prop1 = this.prop2'
-
-  describe '#puts', ->
-    it 'should pass with parens', ->
-      compile('puts(foo)').should.eq 'console.log(foo)'
-      compile('puts(method(param))').should.eq 'console.log(method(param))'
-    it 'should pass without parens', ->
-      compile('puts foo').should.eq 'console.log(foo);'
-      compile('puts "bar"').should.eq 'console.log("bar");'
-      compile('puts(foo); puts "bar"').should.eq 'console.log(foo); console.log("bar");'
-      compile('puts method(param)').should.eq 'console.log(method(param));'
   
   describe 'do end aliases', ->
       it 'should alias correctly', ->
@@ -68,3 +58,23 @@ describe '#compile', ->
       it 'should pass lookbehind tests', ->
         compile('doing').should.eq 'doing'
         compile('ending').should.eq 'ending'        
+
+  describe '#puts', ->
+    it 'should pass with parens', ->
+      compile('puts(foo)').should.eq 'console.log(foo)'
+      compile('puts(method(param))').should.eq 'console.log(method(param))'
+    it 'should pass without parens', ->
+      compile('puts foo').should.eq 'console.log(foo);'
+      compile('puts "bar"').should.eq 'console.log("bar");'
+      compile('puts(foo); puts "bar"').should.eq 'console.log(foo); console.log("bar");'
+      compile('puts method(param)').should.eq 'console.log(method(param));'
+
+  describe '#printf', ->
+    it 'should pass with parens', ->
+      compile('printf(foo)').should.eq 'process.stdout.write(foo)'
+      compile('printf(method(param))').should.eq 'process.stdout.write(method(param))'
+    it 'should pass without parens', ->
+      compile('printf foo').should.eq 'process.stdout.write(foo);'
+      compile('printf "bar"').should.eq 'process.stdout.write("bar");'
+      compile('printf(foo); printf "bar"').should.eq 'process.stdout.write(foo); process.stdout.write("bar");'
+      compile('printf method(param)').should.eq 'process.stdout.write(method(param));'
