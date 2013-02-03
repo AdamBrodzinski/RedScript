@@ -96,3 +96,15 @@ describe '#compile', ->
       compile(line).should.eq 'method(param1, function (foo, bar) {'
       line = 'method((foo, bar)->'
       compile(line).should.eq 'method(function (foo, bar) {'
+
+  describe 'func', ->
+    it 'should alias to function using parens', ->
+      compile('func foo()').should.eq 'var foo = function() {'
+      compile('func $bar(foo)').should.eq 'var $bar = function(foo) {'
+      compile('func $bar(foo, bar)').should.eq 'var $bar = function(foo, bar) {'
+    it 'should alias to function with bang and question chars'
+      #compile('func hasUser?()').should.eq 'var hasUser_Q = function() {'
+      #compile('func replace!()').should.eq 'var replace_B = function() {'
+    it 'should have optional parens', ->
+      compile('func bar').should.eq 'var bar = function() {'
+      compile('func $_bar').should.eq 'var $_bar = function() {'

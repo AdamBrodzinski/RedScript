@@ -1,3 +1,20 @@
+### 2-1-14 0.0.6
+
+* Added `func` keyword. This now defines a function using a variable name.
+
+    func foo                     var foo = function() {
+      puts "hello world"           console.log("hello world");
+    end                          }
+
+    func bar(p1, p2)             var bar = function(p1, p2) {
+      puts p1 + p2                 console.log(p1 + p2);
+    end                          }
+
+### 2-1-13 0.0.5
+
+* Added arrow functions. These work like CoffeeScript with one caveat. They need to be closed with a `}` or end. This means using them as a callback will require `});` or `end);` for the time being.
+* 
+
 ### 1-31-13 0.0.4
 
 * Added error message when no files are passed into compiler
