@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 /*!
  * RedScript compiler
- * v 0.0.1
  * Copyright(c) 2013 Adam Brodzinski <adambrodzinski@gmail.com>
  * MIT Licensed
  */
@@ -41,16 +40,12 @@ if (opts.watchFiles && files.length) {
        render(file);
     });
 } else {
-  console.log(">>> No RedScript files specified, type --help for more info");
+  console.log(""+
+    " No RedScript files specified, type --help for more info \n" +
+    " redscript [filename1] [filename2] \n" +
+    " redscript watch [filename1] [filename2]"
+  );
 }
 
 // OCD induced blank line
 console.log();
-
-
-//  debugz
-this.debug = false;
-if (this.debug) {
-    console.log(""); console.log("options are "); console.log(opts);
-    console.log("file list: "); console.log(files);
-}
