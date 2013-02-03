@@ -23,8 +23,7 @@ You can read more about it on my blog: [Introducing RedScript](http://adamb.me/b
 ```
 npm install -g redscript
 
-redscript fileName1.rs fileName2.rs
-redscript watch fileName1.rs fileName2.rs
+redscript watch [fileName fileName2]
 ```
 
 #### Learning RedScript is easy, add a bit here and there until you're comfortable!
@@ -35,16 +34,11 @@ function sayHello(name) {
   console.log("Hello " + name);  
 }
 
-# A little bit of RedScript, func is a more terse alias function, string interpolation
-func sayHello(name) {
-  console.log("Hello #{name}");
-}
-
-
- # A lot of RedScript, alias brackets with do/end, puts aliases console.log
-func sayHello(name) do
-  puts "Hello #{name}"
-end
+# function expressions                                 // function expressions
+func sayHello(name)                                    var sayHello = function(name) {
+  # puts aliases console.log                             // puts aliases console.log
+  puts "Hello #{name}"                                   console.log("Hello " + name);
+end                                                    }
 
 ```
 
@@ -76,7 +70,7 @@ end                                                                 }
 define module
 require "jquery" as $
 
-# Arrow function, great for parameters, (opt parens not currently avail.)
+# Arrow function, great for parameters
 myBtn.on 'click', ->
   $('.widget').slideToggle "slow"
 end
@@ -99,6 +93,23 @@ while foo is 200 do
 end
 
 ```
+
+```ruby
+# Ruby/Coffee style switch statements
+
+switch fruit                                             switch (fruit) {
+when "apple"                                               case "apple":
+  puts "it's an appppple"                                    console.log("it's an appppple");
+  break;                                                     break;
+when "bannana" then puts("bannana")                        case "bannana" : console.log("bannana") ; break;
+when "orange"                                              case "orange":
+  puts "it's an orange"                                      console.log("it's an orange");
+  break;                                                     break;
+default                                                    default:
+  puts "uh oh, bummer"                                       console.log("uh oh, bummer");
+end                                                      }
+```
+
 
 See more syntax examples on RedScript's website (coming soon)
 
