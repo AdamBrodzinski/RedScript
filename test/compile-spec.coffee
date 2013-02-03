@@ -108,3 +108,29 @@ describe '#compile', ->
     it 'should have optional parens', ->
       compile('func bar').should.eq 'var bar = function() {'
       compile('func $_bar').should.eq 'var $_bar = function() {'
+  
+  describe 'switch statement', ->
+    it 'should compile properly', ->
+      redSwitch = '''
+        switch fruit()
+        when "Oranges"
+          alert("oranges");
+          break;
+        when "Apples" then alert()
+        default
+          alert("something else")
+        end
+      '''
+      compile(redSwitch).should.eq '''
+        switch (fruit()) {
+        case "Oranges":
+          alert("oranges");
+          break;
+        case "Apples" : alert() ; break;
+        default:
+          alert("something else")
+        }
+      '''
+
+
+

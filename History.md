@@ -2,6 +2,7 @@
 
 * Added `func` keyword. This now defines a function using a variable name.
 
+```
     func foo                     var foo = function() {
       puts "hello world"           console.log("hello world");
     end                          }
@@ -9,6 +10,8 @@
     func bar(p1, p2)             var bar = function(p1, p2) {
       puts p1 + p2                 console.log(p1 + p2);
     end                          }
+```
+* Added Ruby/CoffeeScript style case/switch statement. Switch is kept the same, as using Ruby's case would be confusing/awkward to most JS devs. A few caveats, currently you still must use break to prevent falling through, unless it's a one liner while/then. In that case the break gets appended automatically. Also the default keyword is still default. I can't use else without lexing the case statement first... perhaps this will change to else in the future. Vanilla Switch/Case still works as normal
 
 ### 2-1-13 0.0.5
 
