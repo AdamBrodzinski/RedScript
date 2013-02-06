@@ -16,9 +16,6 @@ describe '#compile', ->
     it 'should not process line that starts with a comment', ->
       line = "  # commented do"
       compile(line).should.eq '  // commented do'
-    it 'should not comment out string interpolation', ->
-      line = ' "this is str #{foo}" '
-      compile(line).should.eq ' "this is str #{foo}" '
 
   describe '@ symbol', ->
     it 'should alias this', ->
@@ -168,3 +165,17 @@ describe '#compile', ->
       compile('} else if (foo){').should.eq '} else if (foo){'
     it 'should not convert strings', ->
       compile(' "foo else if baz bar" ').should.eq ' "foo else if baz bar" '
+
+  describe 'string interpolation', ->
+    it 'should convert to string concatination', ->
+      line = '"Hello #{name}, how are you?"'
+      compile(line).should.eq '"Hello " + name + ", how are you?"'
+    it 'should convert to string concatination', ->
+      line = '''
+      "Hello #{name}"
+........................................
+      '''
+      compile(line).should.eq '''
+      "Hello " + name"
+........................................
+      '''
