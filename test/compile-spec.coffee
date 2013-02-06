@@ -57,7 +57,9 @@ describe '#compile', ->
         compile(' do end ').should.eq ' { } '
       it 'should pass lookbehind tests', ->
         compile('doing').should.eq 'doing'
-        compile('ending').should.eq 'ending'        
+        compile('ending').should.eq 'ending'
+      it 'should not transform strings'
+        #compile(' "my string do and end "').should.eq ' "my string do and end "'
 
   describe '#puts', ->
     it 'should pass with parens', ->
@@ -118,7 +120,7 @@ describe '#compile', ->
           break;
         when "Apples" then alert()
         default
-          alert("something else")
+          alert("something")
         end
       '''
       compile(redSwitch).should.eq '''
@@ -128,9 +130,41 @@ describe '#compile', ->
           break;
         case "Apples" : alert() ; break;
         default:
-          alert("something else")
+          alert("something")
         }
       '''
+  
+  describe 'if statement', ->
+    it 'should alias to if with parens', ->
+      line = 'if foo === 10'
+      compile(line).should.eq 'if (foo === 10) {'
+    it 'should not transform if with parens', ->
+      compile('if (err) throw err;').should.eq 'if (err) throw err;'
+      compile('if (foo === 10) {').should.eq 'if (foo === 10) {'
+    it 'should not convert strings', ->
+      compile(' "foo b if  bar" ').should.eq ' "foo b if  bar" '
 
+  describe 'else statement', ->
+    it 'should transform to else with brackets', ->
+      compile('else').should.eq '} else {'
+      compile('  else  ').should.eq '  } else {  '
+    it 'should not transform if it already has brackets', ->
+      compile('else {').should.eq 'else {'
+      compile('} else {').should.eq '} else {'
+      compile('}else{').should.eq '}else{'
+      compile('}  else   {').should.eq '}  else   {'
+    it 'should not transform an else if statement', ->
+      compile('else if ').should.eq 'else if '
+    it 'should not convert strings', ->
+      compile(' "foo else b else  bar" ').should.eq ' "foo else b else  bar" '
 
-
+  describe 'else if statement', ->
+    it 'should transform to else with brackets', ->
+      compile('else if foo').should.eq '} else if (foo) {'
+      compile('  else if foo').should.eq '  } else if (foo) {'
+      compile('else if foo === 20').should.eq '} else if (foo === 20) {'
+    it 'should not transform if it already has parens', ->
+      compile('} else if (foo === 20) {').should.eq '} else if (foo === 20) {'
+      compile('} else if (foo){').should.eq '} else if (foo){'
+    it 'should not convert strings', ->
+      compile(' "foo else if baz bar" ').should.eq ' "foo else if baz bar" '
