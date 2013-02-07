@@ -29,7 +29,7 @@ redscript watch [fileName fileName2]
 #### Learning RedScript is easy, add a bit here and there until you're comfortable!
 ```coffeescript
 
-# No RedScript syntax, still works!
+# No RedScript syntax... still works!
 function sayHello(name) {
   console.log("Hello " + name);  
 }
@@ -39,7 +39,6 @@ func sayHello(name)                                    var sayHello = function(n
   # puts aliases console.log                             // puts aliases console.log
   puts "Hello #{name}"                                   console.log("Hello " + name);
 end                                                    }
-
 ```
 
 
@@ -49,15 +48,15 @@ define module                                                   define(
 require 'jquery' as $                                           ['jquery',
 require './views/widget'  as Widget                             './views/widget'], function($, Widget) {        
 
-var options = {                                                    var options = {
+options = {                                                        var options = {
   moonRoof: true,                                                    moonRoof: true,   
   seats: 5                                                           seats: 5      
 }                                                                  }          
  
-var getCost = 16899                                                var getCost = 16899;
-var wheels = 4                                                     var wheels = 4;
+getCost = 16899                                                var getCost = 16899;
+wheels = 4                                                     var wheels = 4;
  
-# export literal compiles to an object that gets returned          // export literal compiles to an object that gets returned          
+# export literal compiles to an object that gets returned
 export                                                              return {   
   getCost                                                               getCost : getCost,
   hasMoonRoof from options.moonRoof                                     hasMoonRoof : options.moonRoof,   
@@ -87,21 +86,28 @@ end
 alert(foo)  # alerts 200
 
 
-# Paren free if/for/while
+# Paren free for/while
 while foo is 200 do
   puts "I'm looping forever"
 end
 
-```
 
-```ruby
+# Multi-Line if/else/else if
+if foo == 10
+  bar("do stuff")
+else if foo == 20
+  bar("do stuff")
+else
+  bar("do stuff")
+end
+
+
 # Ruby/Coffee style switch statements
-
 switch fruit                                             switch (fruit) {
 when "apple"                                               case "apple":
   puts "it's an appppple"                                    console.log("it's an appppple");
   break;                                                     break;
-when "bannana" then puts("bannana")                        case "bannana" : console.log("bannana") ; break;
+when "bannana" then puts("bannana")                        case "bannana": console.log("bannana"); break;
 when "orange"                                              case "orange":
   puts "it's an orange"                                      console.log("it's an orange");
   break;                                                     break;

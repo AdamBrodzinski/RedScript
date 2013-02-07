@@ -2,7 +2,7 @@
 
 * added bracketless if/else if/else statements.
 * found bug were some keywords in string are getting transformed, working on a fix for this.
-added string interpolation. You can add anything inside of #{....} except for curly brackets.... that won't compile.
+* added string interpolation. You can add anything inside of #{....} except for curly brackets.... that won't compile.
 
 ### 2-1-13 0.0.6
 
