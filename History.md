@@ -1,4 +1,10 @@
-### 2-1-14 0.0.6
+### 2-6-13 0.0.7
+
+* added bracketless if/else if/else statements.
+* found bug were some keywords in string are getting transformed, working on a fix for this.
+added string interpolation. You can add anything inside of #{....} except for curly brackets.... that won't compile.
+
+### 2-1-13 0.0.6
 
 * Added `func` keyword. This now defines a function using a variable name.
 

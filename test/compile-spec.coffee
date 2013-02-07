@@ -170,12 +170,32 @@ describe '#compile', ->
     it 'should convert to string concatination', ->
       line = '"Hello #{name}, how are you?"'
       compile(line).should.eq '"Hello " + name + ", how are you?"'
-    it 'should convert to string concatination', ->
+
+    it 'should not concat right side if interp is on right edge of quotes', ->
       line = '''
       "Hello #{name}"
-........................................
       '''
       compile(line).should.eq '''
-      "Hello " + name"
-........................................
+      "Hello " + name
+      '''
+    it 'should not concat left side if interp is on left edge of quotes', ->
+      line = '''
+      "#{name} Hello"
+      '''
+      compile(line).should.eq '''
+      name + " Hello"
+      '''
+    it 'should wrap scary interpolated chars inside parens', ->
+      line = '''
+      "#{foo + bar} Hello"
+      '''
+      compile(line).should.eq '''
+      (foo + bar) + " Hello"
+      '''
+    it 'should wrap scary interpolated chars inside parens', ->
+      line = '''
+      "foo #{2 * 3 - 3 / 7 % 2} Hello"
+      '''
+      compile(line).should.eq '''
+      "foo " + (2 * 3 - 3 / 7 % 2) + " Hello"
       '''
