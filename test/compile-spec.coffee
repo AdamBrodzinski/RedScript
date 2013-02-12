@@ -11,8 +11,8 @@ describe '#compile', ->
       line = "// commented line"
       compile(line).should.eq '// commented line'
     it 'should not skip comments that are in the middle', ->
-      line = "do # commented line"
-      compile(line).should.eq '{ // commented line'
+      line = "something # commented line"
+      compile(line).should.eq 'something // commented line'
     it 'should not process line that starts with a comment', ->
       line = "  # commented do"
       compile(line).should.eq '  // commented do'
@@ -36,22 +36,22 @@ describe '#compile', ->
       compile('@prop1 = @prop2').should.eq 'this.prop1 = this.prop2'
   
   describe 'do end aliases', ->
-      it 'should alias correctly', ->
-        line = '''
-        function foo() do
-        end
-        '''
-        compile(line).should.eq '''
-        function foo() {
-        }
-        '''
+      #it 'should alias correctly', ->
+        #line = '''
+        #function foo() do
+        #end
+        #'''
+        #compile(line).should.eq '''
+        #function foo() {
+        #}
+        #'''
       it 'should not alias a do loop', ->
         line = 'do { '
         compile(line).should.eq 'do { '
-      it 'should pass when used on a single line', ->
-        line = 'function foo() do return 1*2 end'
-        compile(line).should.eq 'function foo() { return 1*2 }'
-        compile(' do end ').should.eq ' { } '
+      #it 'should pass when used on a single line', ->
+        #line = 'function foo() do return 1*2 end'
+        #compile(line).should.eq 'function foo() { return 1*2 }'
+        #compile(' do end ').should.eq ' { } '
       it 'should pass lookbehind tests', ->
         compile('doing').should.eq 'doing'
         compile('ending').should.eq 'ending'
@@ -199,3 +199,14 @@ describe '#compile', ->
       compile(line).should.eq '''
       "foo " + (2 * 3 - 3 / 7 % 2) + " Hello"
       '''
+  describe 'anonymous function block', ->
+    it 'should work without params', ->
+      compile('on("change", do').should.eq 'on("change", function() {'
+      compile('method( do').should.eq 'method( function() {'
+    it 'should work with params', ->
+      compile('method( do |x|').should.eq 'method( function(x) {'
+      compile('method( do |x,y|').should.eq 'method( function(x,y) {'
+      line ='readFile("passwd", do |err, data|'
+      compile(line).should.eq 'readFile("passwd", function(err, data) {'
+
+

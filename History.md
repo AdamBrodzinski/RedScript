@@ -1,3 +1,15 @@
+### 2-11-13 0.0.8
+
+* added anonymous function blocks. These currently still need parens preceding the block (ex below).
+* dropping support for coffeescript style arrow functions in favor of block like syntax.
+
+```
+    myBtn.on('click', do |x|
+      e.preventDefault()
+      @slideToggle "slow"
+    end)
+```
+
 ### 2-6-13 0.0.7
 
 * added bracketless if/else if/else statements.

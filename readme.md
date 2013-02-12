@@ -2,12 +2,13 @@
 ### A Ruby flavored superset of JavaScript
 
 * Paste in compatibility with JS (except a few keywords)
-* Cleaner syntax for AMD modules (or opt out)
+* Cleaner syntax for AMD modules (CommonJS sugar coming later)
 * Easier prototypal inheritance
 * Cleaner ES5 object literals
 * Optional Ruby/CoffeeScript like aliases
 * String interpolation
-* Arrow function ` -> ` and ` (foo, bar) -> `
+* Block like syntax for anonymous functions
+* Function expressions, define functions in a Ruby like way
 * ------ Check [History.md](https://github.com/AdamBrodzinski/RedScript/blob/master/History.md) for current working syntax ------
 
 
@@ -52,7 +53,7 @@ options = {                                                        var options =
   moonRoof: true,                                                    moonRoof: true,   
   seats: 5                                                           seats: 5      
 }                                                                  }          
- 
+
 getCost = 16899                                                var getCost = 16899;
 wheels = 4                                                     var wheels = 4;
  
@@ -69,12 +70,15 @@ end                                                                 }
 define module
 require "jquery" as $
 
-# Arrow function, great for parameters
-myBtn.on 'click', ->
-  $('.widget').slideToggle "slow"
+
+# Block like syntax for anonnynous functions 
+myBtn.on 'click', do |x|
+  e.preventDefault()
+  @slideToggle "slow"
 end
 
-# Alias @ with this.
+
+# Alias this with @.
 model.on('change', @render)
 
 
@@ -87,7 +91,7 @@ alert(foo)  # alerts 200
 
 
 # Paren free for/while
-while foo is 200 do
+while foo is 200
   puts "I'm looping forever"
 end
 
