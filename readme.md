@@ -72,9 +72,9 @@ require "jquery" as $
 
 
 # Block like syntax for anonnynous functions 
-myBtn.on 'click', do |x|
+myBtn.on 'click', do |e|
   e.preventDefault()
-  @slideToggle "slow"
+  @widget.slideToggle "slow"
 end
 
 
