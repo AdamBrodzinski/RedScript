@@ -209,4 +209,10 @@ describe '#compile', ->
       line ='readFile("passwd", do |err, data|'
       compile(line).should.eq 'readFile("passwd", function(err, data) {'
 
+  describe 'object litteral', ->
+    it 'should transform to vanilla object syntax', ->
+      compile('object objectName').should.eq 'var objectName = {'
+      compile('  object _$Bar').should.eq '  var _$Bar = {'
+    it 'should not transform object inside of strings', ->
+      compile(' "i love object lamp" ').should.eq ' "i love object lamp" '
 
