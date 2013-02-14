@@ -1,3 +1,33 @@
+### 2-12-13 0.0.9
+
+* added ruby-esque object literals
+* added `def foo` for methods inside object literal
+* added `def foo.bar` for methods outside object literal
+* added `def foo >>> bar` methods for attaching prototype
+
+```
+    object myWidget
+      key, "value"
+      def sayHi(name)
+        puts puts "Hello #{name}"
+      end,
+      def getKey
+        return @key
+      end
+    end
+
+    # define method outside of object literal
+    def myWidget.sayBye
+      puts "goodbye!"
+    end
+
+    # attaches baz to String's prototype
+    def String >>> baz(x)
+      # do stuff
+    end
+```
+
+
 ### 2-11-13 0.0.8
 
 * added anonymous function blocks. These currently still need parens preceding the block (ex below).

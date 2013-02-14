@@ -206,7 +206,7 @@ describe '#compile', ->
     it 'should work with params', ->
       compile('method( do |x|').should.eq 'method( function(x) {'
       compile('method( do |x,y|').should.eq 'method( function(x,y) {'
-      line ='readFile("passwd", do |err, data|'
+      line = 'readFile("passwd", do |err, data|'
       compile(line).should.eq 'readFile("passwd", function(err, data) {'
 
   describe 'object litteral', ->
@@ -215,4 +215,31 @@ describe '#compile', ->
       compile('  object _$Bar').should.eq '  var _$Bar = {'
     it 'should not transform object inside of strings', ->
       compile(' "i love object lamp" ').should.eq ' "i love object lamp" '
+
+  describe 'def methods', ->
+    it 'should work with parens inside an object literal', ->
+      compile('def foo(p1, p2)').should.eq 'foo: function(p1, p2) {'
+      compile('def Bo_$o()').should.eq 'Bo_$o: function() {'
+    it 'should work without parens inside an object literal', ->
+      compile('def foo').should.eq 'foo: function() {'
+      compile('def Bo_$o').should.eq 'Bo_$o: function() {'
+    it 'should not transform `def foo.bar` or `def foo >> bar`'
+      #compile('def foo.bar').should.eq 'def foo.bar'
+      #compile('def Bo_$o >>> baz').should.eq 'def Bo_$o >>> baz'
+
+  describe 'def foo.bar methods', ->
+    it 'should work with parens', ->
+      compile('def foo.bar(p1, p2)').should.eq 'foo.bar = function(p1, p2) {'
+      compile('def foo.Bo_$o()').should.eq 'foo.Bo_$o = function() {'
+    it 'should work without parens inside an object literal', ->
+      compile('def foo.bar').should.eq 'foo.bar = function() {'
+      compile('def foo.Bo_$o').should.eq 'foo.Bo_$o = function() {'
+
+  describe 'def proto methods', ->
+    it 'should work with parens', ->
+      compile('def foo >>> bar(p1, p2)').should.eq 'foo.prototype.bar = function(p1, p2) {'
+      compile('def foo >>> Bo_$o()').should.eq 'foo.prototype.Bo_$o = function() {'
+    it 'should work without parens inside an object literal', ->
+      compile('def foo >>> bar').should.eq 'foo.prototype.bar = function() {'
+      compile('def foo >>> Bo_$o').should.eq 'foo.prototype.Bo_$o = function() {'
 

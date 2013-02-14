@@ -120,6 +120,34 @@ default                                                    default:
 end                                                      }
 ```
 
+```
+    # object literal declarations
+    
+    object myWidget
+      key, "value"
+      def sayHi(name)
+        puts "Hello #{name}"
+      end,
+      def getKey
+        return @key
+      end
+    end
+
+    # define method outside of object literal
+
+    def myWidget.sayBye
+      puts "goodbye!"
+    end
+
+    # attaches baz to String's prototype
+
+    def String >>> baz(x)
+      # do stuff
+    end
+```
+
+
+
 
 See more syntax examples on RedScript's website (coming soon)
 
