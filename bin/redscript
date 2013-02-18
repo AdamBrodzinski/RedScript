@@ -16,7 +16,6 @@ var args =  process.argv.slice(2)
   , opts =  cmd.getOptions(args)
   , files = cmd.getFiles(args);
 
-
 /**
  * If user passes watch flag, check every 100ms to see if the current
  * modification date is more than the previous check. If so, render file.
