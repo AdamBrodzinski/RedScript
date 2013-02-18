@@ -210,9 +210,9 @@ describe '#compile', ->
       compile(line).should.eq 'readFile("passwd", function(err, data) {'
     it 'should work without a preceding comma', ->
       line = 'get("/users/:user" do |x|'
-      compile(line).should.eq 'get("users/:user", function(x) {'
+      compile(line).should.eq 'get("/users/:user" , function(x) {'
       line = 'get("/users/:user" do'
-      compile(line).should.eq 'get("users/:user", function() {'
+      compile(line).should.eq 'get("/users/:user" , function() {'
 
   describe 'object litteral', ->
     it 'should transform to vanilla object syntax', ->
