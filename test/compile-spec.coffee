@@ -248,3 +248,10 @@ describe '#compile', ->
       compile('def foo >>> bar').should.eq 'foo.prototype.bar = function() {'
       compile('def foo >>> Bo_$o').should.eq 'foo.prototype.Bo_$o = function() {'
 
+  describe 'Conditional Assigment Operator', ->
+    it 'should work', ->
+      compile('app ||= {}').should.eq 'app = app || {}'
+      compile('foo ||= bar').should.eq 'foo = foo || bar'
+      compile('foo   ||=   bar').should.eq 'foo = foo || bar'
+      compile('_foo ||= b$_ar').should.eq '_foo = _foo || b$_ar'
+      # Regex test cases: http://gskinner.com/RegExr/?33qm8
