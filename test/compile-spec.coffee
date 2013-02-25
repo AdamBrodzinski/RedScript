@@ -16,6 +16,9 @@ describe '#compile', ->
     it 'should not process line that starts with a comment', ->
       line = "  # commented do"
       compile(line).should.eq '  // commented do'
+    it 'should not comment out # inside a string', ->
+      line = " $('#someClass') "
+      compile(line).should.eq " $('#someClass') "
 
   describe '@ symbol', ->
     it 'should alias this', ->
