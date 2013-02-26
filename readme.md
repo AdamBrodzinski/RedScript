@@ -38,7 +38,7 @@ require './views/widget' as WidgetView
 
 # Block-like anonymous functions
 #
-app.get '/users/1', do |res, req|
+app.get '/users/:name', do |res, req|
   puts req.params.name
 end
 
@@ -50,7 +50,6 @@ if foo == 2
 else
   alert "Rut Roh"
 end
-
 ```
 See [spec.md](https://github.com/AdamBrodzinski/RedScript/blob/master/spec.md) for more!
 
