@@ -61,6 +61,11 @@ describe '#compile', ->
       it 'should not transform strings'
         #compile(' "my string do and end "').should.eq ' "my string do and end "'
 
+  describe 'kludgey end- alias', ->
+    it 'should alias `end-` `end);`', ->
+      compile('end-').should.eq '});'
+      
+
   describe '#puts', ->
     it 'should pass with parens', ->
       compile('puts(foo)').should.eq 'console.log(foo)'
