@@ -19,5 +19,6 @@
     "trailing": true,
     "smarttabs": true,
     "laxcomma": true,
-    "laxbreak": true
+    "laxbreak": true,
+    "white": false
 }
