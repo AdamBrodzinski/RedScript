@@ -21,32 +21,33 @@ describe 'Transform', ->
   describe '#insertVars', ->
     it 'should insert `var` when needed', ->
       line = 'foo = true'
-      ts.insertVars(line).should.eq 'var foo = true'
+      ts.insertVars(line, []).should.eq 'var foo = true'
     it 'should work with multiple declarations', ->
       line = 'foo = true; bar = false'
-      ts.insertVars(line).should.eq 'var foo = true; var bar = false'
+      ts.insertVars(line, []).should.eq 'var foo = true; var bar = false'
     it 'should work if one var is decalred', ->
       line = 'foo = true; var bar = 20'
-      ts.insertVars(line).should.eq 'var foo = true; var bar = 20'
+      ts.insertVars(line, []).should.eq 'var foo = true; var bar = 20'
     it 'should skip over declarations with var', ->
       line = 'var baz = 10'
-      ts.insertVars(line).should.eq 'var baz = 10'
+      ts.insertVars(line, []).should.eq 'var baz = 10'
     it 'should only assign first in mult assignment', ->
       line = 'foo = baz = 10'
-      ts.insertVars(line).should.eq 'var foo = baz = 10'
+      ts.insertVars(line, []).should.eq 'var foo = baz = 10'
     it 'shouldnt match `==` or `===`', ->
       line = 'baz == 10'
-      ts.insertVars(line).should.eq 'baz == 10'
+      ts.insertVars(line, []).should.eq 'baz == 10'
       line = 'baz === 10'
-      ts.insertVars(line).should.eq 'baz === 10'
+      ts.insertVars(line, []).should.eq 'baz === 10'
     it 'shouldnt insert var on propertys or instance vars', ->
       line = '@foo = 20'
-      ts.insertVars(line).should.eq '@foo = 20'
+      ts.insertVars(line, []).should.eq '@foo = 20'
       line = 'foo.bar = 20'
-      ts.insertVars(line).should.eq 'foo.bar = 20'
-    it 'shouldnt insert a var if its already declared'
-      #line1 = 'foo = 12'
-      #line2 = 'foo = 20'
-      #ts.insertVars(line1).should.eq 'var foo = 12'
-      #ts.insertVars(line2).should.eq 'foo = 20'
+      ts.insertVars(line, []).should.eq 'foo.bar = 20'
+    it 'shouldnt insert a var if its already declared', ->
+      vstate = []
+      line1 = 'foo = 12'
+      line2 = 'foo = 20'
+      ts.insertVars(line1, vstate).should.eq 'var foo = 12'
+      ts.insertVars(line2, vstate).should.eq 'foo = 20'
       # Regex test cases - http://regexr.com?342j9
