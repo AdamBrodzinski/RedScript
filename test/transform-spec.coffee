@@ -60,3 +60,19 @@ describe 'Transform', ->
       line = 'class Bar < Foo'
       ts.classes(line).should.eq 'var Bar = Foo.extend({'
       # Regex test cases - http://regexr.com?342po
+
+  describe '#_super', ->
+    it 'should transform super to this._super', ->
+      line = 'super f00_$'
+      ts.callSuper(line).should.eq 'this._super(f00_$);'
+    it 'should transform without args', ->
+      line = 'super'
+      ts.callSuper(line).should.eq 'this._super();'
+    it 'should transform with multiple args', ->
+      line = 'super foo, bar, baz'
+      ts.callSuper(line).should.eq 'this._super(foo, bar, baz);'
+    it 'should not transform inside a string or comment', ->
+      line = ' "this is super cool" '
+      ts.callSuper(line).should.eq ' "this is super cool" '
+      # Regex test cases - http://regexr.com?342qs
+
