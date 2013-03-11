@@ -51,3 +51,12 @@ describe 'Transform', ->
       ts.insertVars(line1, vstate).should.eq 'var foo = 12'
       ts.insertVars(line2, vstate).should.eq 'foo = 20'
       # Regex test cases - http://regexr.com?342j9
+
+  describe '#classes', ->
+    it 'should transform a single class', ->
+      line = 'class Foo'
+      ts.classes(line).should.eq 'var Foo = Class.extend({'
+    it 'should transform inheriting classes', ->
+      line = 'class Bar < Foo'
+      ts.classes(line).should.eq 'var Bar = Foo.extend({'
+      # Regex test cases - http://regexr.com?342po
