@@ -1,16 +1,16 @@
 # RedScript  
 ### A Ruby flavored superset of JavaScript
 
-* Paste in compatibility with JS (except a few keywords)
+* Paste in compatibility with JS
 * Cleaner syntax for AMD modules (CommonJS sugar coming later)
-* Easier prototypal inheritance
-* Cleaner ES5 object literals
-* Ruby like syntax that still behaves like JavaScript
-* Easy line by line debugging
+* Easier class like inheritance & self based prototypal inheritance syntax
+* Cleaner ES5 object literals with ruby like `attr` syntax
+* Pragmatic Ruby syntax that still behaves like JavaScript
+* Easy debugging
 * Source Maps
 * ------ Check [spec.md](https://github.com/AdamBrodzinski/RedScript/blob/master/spec.md) for full syntax and know bugs------
 
-.
+<br>
 
 RedScript was created to provide a better syntax for AMD modules, easier inheritance and more usable ES5 syntax.
 
@@ -50,6 +50,25 @@ if foo == 2
 else
   alert "Rut Roh"
 end
+
+# Make constructors quack like a duck
+#
+class Duck < Animal
+  def init(name)
+    @name = name
+  end,
+
+  def sayHi
+    puts 'Quack'
+  end
+end
+
+# Easier prototypal inheritance (influenced from self)
+#
+raceCar = {
+  parent*: car,
+  topSpeed: 200
+}
 ```
 See [spec.md](https://github.com/AdamBrodzinski/RedScript/blob/master/spec.md) for more!
 
