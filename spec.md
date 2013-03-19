@@ -1,24 +1,34 @@
 # RedScript Spec Sheet
-### The following lists RedScript's syntax along with how it is currently implemented (if at all).
 
-RedScript is currently aiming at having a near drop in ability for JavaScript. There are a few keywords that could collide, and we'll have linter for that
-in the future. If you have suggestions on different syntax, please create
+If you have suggestions on different syntax, please create
 an issue: [here](https://github.com/AdamBrodzinski/RedScript/issues).
 
-#### Automatic variable declaration & automatic semi-colon insertion 
+<br>
 
-*Status*: **Not Implemented**
+#### Automatic variable declaration & automatic semi-colon insertion  
+*Status*: **Expermental, buggy**
+
+Currently RedScript does not take function scope into account. Any 
+variables that are declared inside of a function multiple times can
+lead to unintended global leaks. To disable auto declaration pass
+`--no-declaration` as an argument. Another work around is to manually
+declare varibles with the var keyword.
 
 ```ruby
-foo = 12                                 var foo = 12;
+foo = 12                 var foo = 12;
+foo = 20                 foo = 20;
 
-# RedScript also catches missing colon
-bar = {                                  var bar = {
-  foo: "bar",                              foo: "bar",
-  baz: "qux"                               baz: "qux",
-  foo2: "bar2"                             foo2: "bar2"
-}                                        };
+# !! Lexical scoping bug in current version !!
+func foo                var foo = function() {
+  baz = 20                var baz = 20;       
+end                     };                    
+
+func bar                var bar = function() {
+  baz = 30                baz = 30;       
+end                     };                     
+
 ```
+<br
 
 #### Convenience method aliases for puts & printf
 
@@ -34,7 +44,7 @@ printf("Hola")                          process.stdout.write("Hola")
 
 #### Optional Parenthesis
 
-*Status:* **Partially Implemented** *(parenless RedScript constructs)*
+*Status:* **Implemented with RedScript constructs only)**
 
 Currently I cannot implement this until I can create a proper lexer. Pull requests welcome ;-) For the time being you have to include parens. A temporary kludgey alias for `end)` is `end-`. This is slightly easier to look at for the short run, but expect this to be dropped in the future.
 
