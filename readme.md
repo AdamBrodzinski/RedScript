@@ -1,20 +1,16 @@
 # RedScript  
-### A Ruby flavored superset of JavaScript
+### A Ruby Flavored JavaScript
 
-* Paste in compatibility with JS
-* Cleaner syntax for AMD modules (CommonJS sugar coming later)
+* Paste (almost) any JS into RedScript
+* Cleaner syntax for modules (AMD and CommonJS)
 * Easier class like inheritance & self based prototypal inheritance syntax
-* Cleaner ES5 object literals with ruby like `attr` syntax
-* Pragmatic Ruby syntax that still behaves like JavaScript
-* Easy debugging
-* Source Maps
-* ------ Check [spec.md](https://github.com/AdamBrodzinski/RedScript/blob/master/spec.md) for full syntax and know bugs------
+* ------ **Check [spec.md](https://github.com/AdamBrodzinski/RedScript/blob/master/spec.md) for implementation status and known bugs**------
 
 <br>
 
 RedScript was created to provide a better syntax for AMD modules, easier inheritance and more usable ES5 syntax.
 
-It was also created as a side project to learn more about Node, NPM Modules and Regular Expressions. In the future I would also like to add a proper lexer/parser to implement more advanced features like optional parens and ES5 `attr` properties. *Pull requests welcome ;-)*
+It was also created as a side project to learn more about Node, NPM Modules and Regular Expressions. In the future I would also like to add a proper lexer/parser to implement more advanced features like optional parens and ES5 `attr_accessor` like properties. *Pull requests welcome ;-)*
 
 You can read more about it on my blog: [Introducing RedScript](http://adamb.me/blog/2013/01/27/introducing-redscript/).
 
@@ -29,46 +25,50 @@ redscript watch [fileName fileName2]
 #### A little RedScript...
 
 ```ruby
-# RequireJS Modules...
+# RequireJS AMD Modules...
 #
 define module
-require Backbone as BB
+require 'backbone' as Backbone                                       * see spec.md for full translation
 require './views/widget' as WidgetView
 
 
 # Block-like anonymous functions
+# Note, parens are currently req. around get/end, see spec.md
 #
-app.get '/users/:name', do |res, req|
-  puts req.params.name
-end
+app.get '/users/:name', do |res, req|                                 app.get('/users/:name', function(res,req) {
+  puts req.params.name                                                  console.log(req.params.name);
+end                                                                   });
 
 
 # Paren-free constructs
 #
-if foo == 2
-  puts "It's #{foo}"
-else
-  alert "Rut Roh"
-end
+if foo == 2                                                           if (foo === 2) {
+  puts "It's #{foo}"                                                    console.log("It's " + foo);
+else                                                                  } else {
+  alert "Rut Roh"                                                       alert("Rut Roh");
+end                                                                   }
+
 
 # Make constructors quack like a duck
-#
-class Duck < Animal
-  def init(name)
-    @name = name
-  end,
+#                                                                     # note, inheritance methods are opt. inserted
+class Duck < Animal                                                   var Duck = Animal.extend({
+  def init(name)                                                        init: function(name) {
+    super foo, bar                                                        this._super(foo, bar);
+    @name = name                                                          this.name = name;
+  end,                                                                  },
 
-  def sayHi
-    puts 'Quack'
-  end
-end
+  def sayHi                                                             sayHi: function() {
+    puts 'Hello!'                                                         console.log('Hello!');
+  end                                                                   }
+end                                                                   });
 
-# Easier prototypal inheritance (influenced from self)
-#
-raceCar = {
-  parent*: car,
-  topSpeed: 200
-}
+
+# Easier prototypal style inheritance (influenced from self)
+#                                                                     # uses non-standard __proto__ prop
+raceCar = {                                                           var racecar = {
+  parent*: car,                                                         __proto__: car,
+  topSpeed: 200                                                         topSpeed: 200
+}                                                                     }
 ```
-See [spec.md](https://github.com/AdamBrodzinski/RedScript/blob/master/spec.md) for more!
+### See [spec.md](https://github.com/AdamBrodzinski/RedScript/blob/master/spec.md) for full syntax!
 
