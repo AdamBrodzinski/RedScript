@@ -6,17 +6,23 @@ an issue: [here](https://github.com/AdamBrodzinski/RedScript/issues).
 <br>
 
 #### Automatic variable declaration & automatic semi-colon insertion  
-*Status*: **Expermental, buggy**
+*Status*: **Working, known bug**
 
 Currently RedScript does not take function scope into account. Any 
 variables that are declared inside of a function multiple times can
 lead to unintended global leaks. To disable auto declaration pass
 `--no-declaration` as an argument. Another work around is to manually
-declare varibles with the var keyword.
+declare variables with the var keyword. Constants are pre-processed at
+compile time. This allows some memory savings in certain cases where it
+can be utilized.
 
 ```ruby
 foo = 12                 var foo = 12;
 foo = 20                 foo = 20;
+
+# Constants are preprocessed
+AMOUNT = 233
+puts AMOUNT             console.log(233)
 
 # !! Lexical scoping bug in current version !!
 func foo                var foo = function() {
@@ -26,9 +32,8 @@ end                     };
 func bar                var bar = function() {
   baz = 30                baz = 30;       
 end                     };                     
-
 ```
-<br
+<br>
 
 #### Convenience method aliases for puts & printf
 
@@ -41,10 +46,11 @@ puts("Hai!")                            console.log("Hai")
 printf "Hola"                           process.stdout.write("Hola")
 printf("Hola")                          process.stdout.write("Hola")
 ```
+<br>
 
 #### Optional Parenthesis
 
-*Status:* **Implemented with RedScript constructs only)**
+*Status:* **Implemented with RedScript constructs only**
 
 Currently I cannot implement this until I can create a proper lexer. Pull requests welcome ;-) For the time being you have to include parens. A temporary kludgey alias for `end)` is `end-`. This is slightly easier to look at for the short run, but expect this to be dropped in the future.
 
@@ -65,9 +71,12 @@ getUser( '/users/1', do
   alert(user)
 end-
 ```
+<br>
 
 
 #### Ruby flavored function expressions
+
+Func declares the function as an expression. I am still undecided if `func` should decalare it like below or just compile into a regular function. The lack of function hoisting obviosly has it pro's and cons. Vanilla JS functions of course will still work as well.
 
 *Status:* **Working**
 
@@ -81,6 +90,7 @@ func sayHello
   puts "Hello"
 end
 ```
+<br>
 
 #### Comments
 
@@ -93,6 +103,7 @@ Comments currently have a bug, they cannot immediately follow a word character. 
 #Currently failing to compile            #Currently failing to compile 
 $('#someID').html(foo)                   $('#someID').html(foo) # No worries here
 ```
+<br>
 
 #### Alias @ with this
 
@@ -104,6 +115,8 @@ function FooClass(name, age) {           function FooClass(name, age){
   @age = age                               this.age = age;
 }                                        }
 ```
+<br>
+
 
 #### Loops
 
@@ -124,8 +137,13 @@ for key,val in obj                      for (var key in obj) { var val = obj[key
   puts 'My value is: #{val}'              console.log('My value is: ' + val);
 end                                     }
 ```
+<br>
 
 #### If/else/else if
+
+*Status:* **Partially implemented**
+
+If statements currently are multi-line. If you would like to use a one liner, you can still use vanilla js `if (err) throw err;`.
 
 ```ruby
 if foo == 10                            if (foo === 10) {
@@ -136,15 +154,16 @@ else                                    } else {
   bar("do stuff")                         bar("do stuff");
 end                                     }
 
-puts("hello") if foo == 2               if (foo === 2) { console.log("hello"); }
+throw err if err                        if (err) { throw err; }
 ```
+<br>
 
 #### Methods & Object Literal
 
 *Status:* **Working**
 
 ```ruby
-object automobile                             var automobile = {
+object auto                                   var auto = {
   wheels: 4,                                    wheels: 4,
   engine: true,                                 engine: true,
 
@@ -158,7 +177,7 @@ object automobile                             var automobile = {
 end                                           }
 
 # Define outside of object literal
-def automobile.add(x, y)                      automobile.add = function(x,y) {
+def auto.add(x, y)                            auto.add = function(x,y) {
   return x + @wheels                            return x + this.wheels;
 end                                           };
 
@@ -167,7 +186,7 @@ def Car >>> sub(x,y)                          Car.prototype.sub = function(x, y)
   return x - y                                  return x - y;
 end                                           };
 ```
-
+<br>
 
 #### Block-like Syntax for Anonymous Functions
 
@@ -185,6 +204,7 @@ $myBtn.click( do                        $myBtn.click( function() {
   alert("hi")                             alert("hi");
 end)                                    });
 ```
+<br>
 
 #### RequireJS Module Sugar 
 
@@ -194,9 +214,9 @@ Using `define module` wraps the current file in a new anonymous RequireJS module
 
 ```ruby
 
-define module                                                   define(
-require 'jquery' as $                                           ['jquery',
-require './views/widget' as Widget                             './views/widget'], function($, Widget) {        
+define module                                                   define([ 'jquery',
+require 'jquery' as $                                                    './views/widget'],
+require './views/widget' as Widget                                function($, Widget) {        
 
 options = {                                                        var options = {
   moonRoof: true,                                                    moonRoof: true,   
@@ -213,15 +233,16 @@ export                                                              return {
   getWheels from wheels                                                 getWheels : wheels     
 end                                                                 }           
                                                                 }); 
-# ================================== new file below ================================#
-define module
+# --------------------------------------  new file below  -------------------------------------------
+define module                                                  define(function() {
 
-func foo(x)
-  puts x
-end
+func foo(x)                                                      var foo = function(x) {
+  puts x                                                           console.log(x);
+end                                                              }
 
-export foo
+export foo                                                       return foo; });
 ```
+<br>
 
 #### Ruby / Coffee style case switch statement
 
@@ -240,6 +261,7 @@ default                                                    default:
   puts "uh oh, bummer"                                       console.log("uh oh, bummer");
 end                                                      }
 ```
+<br>
 
 #### Private Blocks
 
@@ -255,6 +277,7 @@ endPriv                                                   })();
 #alerts 200
 alert(foo)                                                alert(foo);
 ```
+<br>
 
 #### Classical Inheritance
 
@@ -284,6 +307,7 @@ end
 duck = new Duck('Darick')
 duck.sayHi()
 ```
+<br>
 
 #### Prototypal Inheritance
 
@@ -298,7 +322,8 @@ object animal
   end
 end
 
-object duck < animal
+object duck
+  parent*: animal,
   name: null,
 
   def sayHi
@@ -306,10 +331,10 @@ object duck < animal
   end
 end
 
-object myDuck < duck
-   name: 'Darick'
+# this duck's attr's are cloned instead of deligated
+# with `parent*`, usefull for statefull objects
+#
+object myDuck clones duck
+  name: 'Darick'
 end
-#======= or ======#
-myDuck = duck.inherit({ name: 'Darick' })
 ```
-
