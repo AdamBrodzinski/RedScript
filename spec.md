@@ -125,15 +125,49 @@ function FooClass(name, age) {           function FooClass(name, age){
 
 *Status:* **Not Implemented**
 
-Parens are optional on multi-line for/while/until statements
+
+
 ```ruby
-while foo == 200                        while (foo === 200) {
+while foo < 200                        while (foo < 200) {
   puts "I'm looping forever"              console.log("I'm looping forever");
 end                                     }
+
+
+# loop until, loops until a condition is true
+i = 0                               i = 0;                            
+until i == 5                        while (!(i == 5)) { // loop until  
+   puts i                              console.log(i);                
+   i += 1                              i += 1;                        
+end                                 }                                 
+
+
+# prints 5x, 0,1,2,3,4       
+for i in 0...5                      for (var i=0; i < 5; i++) {    
+  puts i                              console.log(i);           
+end                                 }                             
+
+
+# prints 6x, 0,1,2,3,4,5
+for i in 0...5                      for (var i=0; i <= 5; i++) {
+  puts i                                console.log(i)       
+end                                  }                          
+
+```
+
+
+```
+# Iterate over arrays
+basket = ['lemon', 'pear', 'apple']     var basket = ['lemon', 'pear', 'apple'];
+
+for fruit inArr basket                  for (var _i=0, _len=basket.length; _i < _len; _i++) { var fruit = basket[_i];    
+  puts fruit                              console.log(fruit);                                                            
+end                                     }                                                                                
+
 
 for key in obj                          for (var key in obj) {
    alert(key)                             alert(key);
 end                                     }
+
 
 for key,val in obj                      for (var key in obj) { var val = obj[key];
   puts 'My key is: #{key}'                console.log('My key is: ' + key);
