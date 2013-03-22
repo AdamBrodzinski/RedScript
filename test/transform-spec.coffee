@@ -89,3 +89,11 @@ describe 'Transform', ->
       ts.whileLoop(line).should.eq 'while ((x - 2) / 2) {'
       # Regex test cases - http://bit.ly/X0vXdg
 
+  describe 'until loop', ->
+    it 'should transform correctly', ->
+      line = 'until foo === 5'
+      ts.untilLoop(line).should.eq 'while (!( foo === 5 )) { //until'
+      line = 'until (x - 2) / 2'
+      ts.untilLoop(line).should.eq 'while (!( (x - 2) / 2 )) { //until'
+      # Regex test cases - http://bit.ly/106gt3K
+
