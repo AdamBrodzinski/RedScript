@@ -59,6 +59,9 @@ describe 'Transform', ->
     it 'should transform inheriting classes', ->
       line = 'class Bar < Foo'
       ts.classes(line).should.eq 'var Bar = Foo.extend({'
+    it 'should transform a class using dot notation', ->
+      line = 'class App.Model < Backbone.Model'
+      ts.classes(line).should.eq 'App.Model = Backbone.Model.extend({'
       # Regex test cases - http://regexr.com?342po
 
   describe '#_super', ->
