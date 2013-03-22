@@ -5,23 +5,26 @@ an issue: [here](https://github.com/AdamBrodzinski/RedScript/issues).
 
 <br>
 
-#### Automatic variable declaration & automatic semi-colon insertion  
-*Status*: **Working, known bug**
+#### Variables & automatic semi-colon insertion  
+*Status*: **Partially implemented, known bug**
 
-Currently RedScript does not take function scope into account. Any 
+Variables are automatically declared. Using the var keyword is optional and allowed.  
+Constants are pre-processed at compile time. This allows some memory savings in certain cases where itcan be utilized.
+Semi-colons are automatically inserted as needed (currently not implemented).
+
+
+*Currently RedScript does not take function scope into account. Any
 variables that are declared inside of a function multiple times can
 lead to unintended global leaks. To disable auto declaration pass
 `--no-declaration` as an argument. Another work around is to manually
-declare variables with the var keyword. Constants are pre-processed at
-compile time. This allows some memory savings in certain cases where it
-can be utilized.
+declare variables with the var keyword.* 
 
 ```ruby
 foo = 12                 var foo = 12;
 foo = 20                 foo = 20;
 
 # Constants are preprocessed
-AMOUNT = 233
+AMOUNT = 233            
 puts AMOUNT             console.log(233)
 
 # !! Lexical scoping bug in current version !!
@@ -76,7 +79,7 @@ end-
 
 #### Ruby flavored function expressions
 
-Func declares the function as an expression. I am still undecided if `func` should decalare it like below or just compile into a regular function. The lack of function hoisting obviosly has it pro's and cons. Vanilla JS functions of course will still work as well.
+Func declares the function as an expression. I am still undecided if `func` should be decalared like below or just compile into a regular function. The lack of function hoisting obviosly has it pro's and cons. Vanilla JS functions of course will still work as well.
 
 *Status:* **Working**
 
@@ -162,6 +165,10 @@ throw err if err                        if (err) { throw err; }
 
 *Status:* **Working**
 
+An optional way to declare an object literal. The idea is to make it read a bit nicer.  
+Methods are declared using the def keyword and parens are optional *if* they're not used.  
+Attaching a method to an object's prototype be defined using `def objName >>> mthdName`.
+
 ```ruby
 object auto                                   var auto = {
   wheels: 4,                                    wheels: 4,
@@ -233,7 +240,7 @@ export                                                              return {
   getWheels from wheels                                                 getWheels : wheels     
 end                                                                 }           
                                                                 }); 
-# --------------------------------------  new file below  -------------------------------------------
+# --------------------------------------  new file  -------------------------------------------
 define module                                                  define(function() {
 
 func foo(x)                                                      var foo = function(x) {
@@ -248,15 +255,17 @@ export foo                                                       return foo; });
 
 *Status:* **Working**
 
+Switch statements still need `break` inserted to prevent falling through. The exception is one liners, then it's appened to the line.
+
 ```ruby
 switch fruit                                             switch (fruit) {
 when "apple"                                               case "apple":
   puts "it's an appppple"                                    console.log("it's an appppple");
-  break;                                                     break;
+  break                                                      break;
 when "bannana" then puts("bannana")                        case "bannana": console.log("bannana"); break;
 when "orange"                                              case "orange":
   puts "it's an orange"                                      console.log("it's an orange");
-  break;                                                     break;
+  break                                                      break;
 default                                                    default:
   puts "uh oh, bummer"                                       console.log("uh oh, bummer");
 end                                                      }
@@ -267,51 +276,59 @@ end                                                      }
 
 *Status:* **Not Implemented**
 
-Private blocks keep variable scoped inside the block using function scope. There is a slight performance hit due to the IIFE.
+Private blocks keep variable scoped inside the block using function scope. There is a slight performance hit due to the IIFE. Again, due to the lack of proper lexing/parsing I can't yet use an `end` block. A workaround is `endPriv`, this calls the IIFE.
 
 ```ruby                                                   
-foo = 200)                                                var foo = 200; 
-private                                                   (function(){
+foo = 200                                                 var foo = 200; 
+
+private                                                  (function(){
   foo = 10                                                  var foo = 10;
 endPriv                                                   })();
-#alerts 200
-alert(foo)                                                alert(foo);
+
+alert(foo) #alerts 200                                    alert(foo);
 ```
 <br>
 
 #### Classical Inheritance
 
-*Status*: **Not Implemented**
+*Status*: **Working**
+
+RedScript classes are currently using John Resig's simple inheritance. In the future a solution closer to coffeescript would be ideal, allowing one to inherit from any constructor and still have the correct syntax. The current implementation will not inherit unless the base class is created with RedScript. However, backbone and ember both use the `.extend` method which is convenient since using `class Foo < Backbone.Model.extend(` will call their own extend implementation. Backbone does not have a `this._super` method so if you want to call super you would need to use a backbone plugin for that. Ember uses the same `this._super` syntax as RedScript so calling super will call Ember's implementation.
+
+If you're only using their inheritance implementation you can disable the insertion of RedScript's inheritance by passing the `--no-class` flag.
 
 ```ruby
-class Animal
-  def init(name)
-    @name = name
-  end,
+class Animal                                          var Animal = Class.extend({           
+  def init(name)                                        init: function(name) {              
+    @name = name                                          this.name = name;                 
+  end,                                                  },                                  
+                                                                                            
+  def sayHi                                             sayHi: function() {                 
+    puts "Hello"                                          console.log("Hello");             
+  end                                                   }                                   
+end                                                   });                                   
+                                                                                            
+class Duck < Animal                                   var Duck = Animal.extend({            
+  def init                                              init: function(name) {              
+    alert("#{@name} is alive!")                           alert(this.name + " is alive!")   
+  end,                                                  },                                  
+                                                                                            
+  def sayHi                                             sayHi: function() {                 
+    super                                                 this._super();                    
+    puts "Quack"                                          console.log("Quack");             
+  end                                                   }                                   
+end                                                   });                                   
 
-  def sayHi
-    puts "Hello"
-  end
-end
-
-class Duck < Animal
-  def init
-    super
-  end,
-
-  def sayHi
-    puts "Quack"
-  end
-end
-
-duck = new Duck('Darick')
-duck.sayHi()
+duck = new Duck('Darick')                             var duck = new Duck('Darick');
+duck.sayHi()                                          duck.sayHi();
 ```
 <br>
 
 #### Prototypal Inheritance
 
 *Status*: **Not Implemented**
+
+This is an experiment to try and bring out JavaScripts true prototypal nature. The goal is to be able to *easily* inherit without using constructors or faux classes. Vanilla JS makes it very difficult to inherit from another object, unlike [self](http://en.wikipedia.org/wiki/Self_programming_language#Inheritance.2FDelegation), JavaScript's inheritance inspiration. One of the drawbacks to property delegation is keeping state in an object. Using `object myDuck clones duck` will copy all of the properties from duck into myDuck, ensuring it won't grab it's parents property by accident.
 
 ```ruby
 object animal
