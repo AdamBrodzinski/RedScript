@@ -16,7 +16,6 @@ Semi-colons are automatically inserted as needed (currently not implemented).
 *Currently RedScript does not take function scope into account. Any
 variables that are declared inside of a function multiple times can
 lead to unintended global leaks. To disable auto declaration pass
-`--no-declaration` as an argument. Another work around is to manually
 declare variables with the var keyword.* 
 
 ```ruby
@@ -125,16 +124,13 @@ function FooClass(name, age) {           function FooClass(name, age){
 
 *Status:* **Not Implemented**
 
-
-
 ```ruby
 while foo < 200                        while (foo < 200) {
   puts "I'm looping forever"              console.log("I'm looping forever");
 end                                     }
 
 
-# loop until, loops until a condition is true
-i = 0                               i = 0;                            
+# loops until a condition is true
 until i == 5                        while (!(i == 5)) { // loop until  
    puts i                              console.log(i);                
    i += 1                              i += 1;                        
@@ -151,9 +147,13 @@ end                                 }
 for i in 0...5                      for (var i=0; i <= 5; i++) {
   puts i                                console.log(i)       
 end                                  }                          
-
 ```
+<br>
 
+
+#### Itterating over arrays and objects
+
+*Status:* **Not Implemented**
 
 ```
 # Iterate over arrays
