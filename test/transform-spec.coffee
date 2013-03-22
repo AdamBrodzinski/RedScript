@@ -79,3 +79,13 @@ describe 'Transform', ->
       ts.callSuper(line).should.eq ' "this is super cool" '
       # Regex test cases - http://regexr.com?342qs
 
+  describe 'while loop', ->
+    it 'should transform correctly', ->
+      line = 'while foo < 200'
+      ts.whileLoop(line).should.eq 'while (foo < 200) {'
+      line = 'while (foo < 2) {moo}'
+      ts.whileLoop(line).should.eq 'while (foo < 2) {moo}'
+      line = 'while (x - 2) / 2'
+      ts.whileLoop(line).should.eq 'while ((x - 2) / 2) {'
+      # Regex test cases - http://bit.ly/X0vXdg
+
