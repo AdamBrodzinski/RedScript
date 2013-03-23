@@ -97,3 +97,14 @@ describe 'Transform', ->
       ts.untilLoop(line).should.eq 'while (!( (x - 2) / 2 )) { //until'
       # Regex test cases - http://bit.ly/106gt3K
 
+  describe 'for in loop using range operator', ->
+    it 'should transform with two dots', ->
+      line = 'for i in 0..5'
+      ts.forLoopRange(line).should.eq 'for (var i=0; i < 5; i++) {'
+    it 'should transform with three dots', ->
+      line = 'for i in 0...5'
+      ts.forLoopRange(line).should.eq 'for (var i=0; i <= 5; i++) {'
+    it 'should handle variables', ->
+      line = 'for ct in b..e'
+      ts.forLoopRange(line).should.eq 'for (var ct=b; ct < e; ct++) {'
+      # Regex test cases - bit.ly/16Ofgn2

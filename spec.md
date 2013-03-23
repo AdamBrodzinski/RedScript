@@ -122,7 +122,11 @@ function FooClass(name, age) {           function FooClass(name, age){
 
 #### Loops
 
-*Status:* **Not Implemented**
+*Status:* **Working**
+
+*Note*, for loops only support `0..3`, `0...3` or variables e.g. `begin...ending`. Using two dots will loop up until that number, and using 3 dots will loop up to and including the end number.  
+Using `for in [2,4,6]` or `for in myArray` will not work at this time. See next section for more info on arrays.  
+To prevent confusion until loops have a `//until` comment next to the compiled output.
 
 ```ruby
 while foo < 200                        while (foo < 200) {
@@ -131,27 +135,27 @@ end                                     }
 
 
 # loops until a condition is true
-until i == 5                        while (!(i == 5)) { // loop until  
-   puts i                              console.log(i);                
-   i += 1                              i += 1;                        
-end                                 }                                 
-
-
-# prints 5x, 0,1,2,3,4       
-for i in 0...5                      for (var i=0; i < 5; i++) {    
-  puts i                              console.log(i);           
-end                                 }                             
-
-
-# prints 6x, 0,1,2,3,4,5
-for i in 0...5                      for (var i=0; i <= 5; i++) {
-  puts i                                console.log(i)       
-end                                  }                          
+until i == 5                            while (!(i == 5)) { // loop until  
+   puts i                                  console.log(i);                
+   i += 1                                  i += 1;                        
+end                                     }                                 
+                                        
+                                        
+# prints 5x, 0,1,2,3,4                  
+for i in 0..5                           for (var i=0; i < 5; i++) {    
+  puts i                                  console.log(i);           
+end                                     }                             
+                                        
+                                        
+# prints 6x, 0,1,2,3,4,5                
+for i in 0...5                          for (var i=0; i <= 5; i++) {
+  puts i                                  console.log(i)       
+end                                     }                          
 ```
 <br>
 
 
-#### Itterating over arrays and objects
+#### Iterating over arrays and objects
 
 *Status:* **Not Implemented**
 
