@@ -11,12 +11,12 @@ describe 'Transform', ->
       # Regex test cases - http://regexr.com?342i2
 
   describe '#objLiteral', ->
-    it 'should transform `inherits` to `__proto__', ->
-      line = 'object bar inherits foo'
+    it 'should transform `<` to `__proto__', ->
+      line = 'object bar < foo'
       ts.objLiteral(line).should.eq 'var bar = { __proto__: foo,'
-      line = 'object _$bar inherits _f$oo'
+      line = 'object _$bar < _f$oo'
       ts.objLiteral(line).should.eq 'var _$bar = { __proto__: _f$oo,'
-      # Regex test cases - http://regexr.com?342j3
+      # Regex test cases - bit.ly/ZHcSKt
 
   describe '#insertVars', ->
     it 'should insert `var` when needed', ->
