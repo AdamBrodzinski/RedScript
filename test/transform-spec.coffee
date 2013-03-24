@@ -108,3 +108,13 @@ describe 'Transform', ->
       line = 'for ct in b..e'
       ts.forLoopRange(line).should.eq 'for (var ct=b; ct < e; ct++) {'
       # Regex test cases - bit.ly/16Ofgn2
+
+  describe 'normal for in', ->
+    it 'should transform correctly', ->
+      line = 'for key in obj'
+      ts.forIn(line).should.eq 'for (var key in obj) {'
+    it 'should transform with an obj literal', ->
+      line = 'for key in {one: 1}'
+      ts.forIn(line).should.eq 'for (var key in {one: 1}) {'
+      # Regex test cases - bit.ly/ZkxXHv
+
