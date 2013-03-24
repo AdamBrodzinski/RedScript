@@ -1,16 +1,11 @@
 # RedScript  
-### A Ruby Flavored JavaScript
+### A Ruby Flavored JavaScript Experiment
 
-* Paste (almost) any JS into RedScript
+* Paste (almost) any JS into a RedScript file
 * Cleaner syntax for modules (AMD and CommonJS)
 * Easier class like inheritance & self based prototypal inheritance syntax
-* ------ **Check [spec.md](https://github.com/AdamBrodzinski/RedScript/blob/master/spec.md) for implementation status and known bugs**------
 
-<br>
-
-RedScript was created to provide a better syntax for AMD modules, easier inheritance and more usable ES5 syntax.
-
-It was also created as a side project to learn more about Node, NPM Modules and Regular Expressions. In the future I would also like to add a proper lexer/parser to implement more advanced features like optional parens and ES5 `attr_accessor` like properties. *Pull requests welcome ;-)*
+RedScript was created to provide a better syntax for AMD modules, easier inheritance and more usable ES5 syntax. It was also created as a side project to learn more about Node, NPM Modules and Regular Expressions. In the future I would also like to add a proper lexer/parser to implement more advanced features like optional parens and ES5 `attr_accessor` like properties. *Pull requests welcome ;-)*
 
 You can read more about it on my blog: [Introducing RedScript](http://adamb.me/blog/2013/01/27/introducing-redscript/).
 
@@ -18,7 +13,7 @@ You can read more about it on my blog: [Introducing RedScript](http://adamb.me/b
 #### To Install Globally and Run
 
 ```
-npm install -g redscript
+sudo npm install -g redscript
 redscript watch [fileName fileName2]
 ```
 
