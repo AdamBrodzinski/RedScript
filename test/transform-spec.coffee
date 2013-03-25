@@ -118,3 +118,10 @@ describe 'Transform', ->
       ts.forIn(line).should.eq 'for (var key in {one: 1}) {'
       # Regex test cases - bit.ly/ZkxXHv
 
+  describe 'for in array', ->
+    it 'should transform correctly', ->
+      line = 'for fruit inArr basket'
+      ts.forInArr(line).should.eq 'for (var i_=0, len=basket.length; i_ < len; i_++) { var fruit = basket[i_];'
+   it 'should itterate index for multiple for `inArr` statements'
+      # Regex test cases - bit.ly/WPApt4
+

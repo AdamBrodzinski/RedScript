@@ -16,6 +16,41 @@ var args =  process.argv.slice(2)
   , opts =  cmd.getOptions(args)
   , files = cmd.getFiles(args);
 
+
+var state;
+
+// Initialize / reset entire state object
+process.on('state:reset', function() {
+    state = {
+        debug: false,
+        declaredVars: [],
+        ittIndex: 0
+    };
+});
+
+// init the state object
+process.emit('state:reset')
+
+
+// update each key's value in state
+process.on('state:update', function(obj) {
+    for (var key in obj) {
+      state[key] = obj[key];
+    }
+});
+
+
+// Increment a key's value by one
+// @type {string} key
+process.on('ittIndex:inc', function(key) {
+    //console.log('before inc:', state.ittIndex);
+    state.ittIndex += 1;
+    // send an updated count
+    process.emit('state:send', state.ittIndex);
+    //console.log(state);
+});
+
+
 /**
  * If user passes watch flag, check every 100ms to see if the current
  * modification date is more than the previous check. If so, render file.
@@ -47,4 +82,4 @@ if (opts.watchFiles && files.length) {
 }
 
 // OCD induced blank line
-console.log();
+
