@@ -124,6 +124,7 @@ describe 'Transform', ->
       ts.forInArr(line).should.eq 'for (var i_=0, len=basket.length; i_ < len; i_++) { var fruit = basket[i_];'
     it 'should itterate index for multiple for `inArr` statements'
       # Regex test cases - bit.ly/WPApt4
+
   describe 'for key,val in array', ->
     it 'should transform correctly', ->
       line = 'for key,val in obj'
@@ -131,4 +132,35 @@ describe 'Transform', ->
       line = 'for   $k ,   _v in users'
       ts.forKeyVal(line).should.eq 'for (var $k in users) { var _v = users[$k];'
       # Regex test cases - bit.ly/13r7y3b
+
+  describe 'func shorthand', ->
+    it 'should transfrom with name and params', ->
+      line = 'func foo (a, b)'
+      ts.func(line).should.eq 'var foo = function(a, b) {'
+    it 'should pass with name & empty parens', ->
+      line = 'func foo()'
+      ts.func(line).should.eq 'var foo = function() {'
+    it 'should transfrom with name & without params', ->
+      line = 'func bar'
+      ts.func(line).should.eq 'var bar = function() {'
+    it 'should transfrom without name & with params', ->
+      line = 'func(a, b)'
+      ts.func(line).should.eq 'function(a, b) {'
+    it 'it should pass without name and empty parens', ->
+      line = 'func()'
+      ts.func(line).should.eq 'function() {'
+    it 'should transfrom without name & without params', ->
+      line = 'func bar'
+      ts.func(line).should.eq 'var bar = function() {'
+    it 'should transform with just func keyword', ->
+      line = 'func'
+      ts.func(line).should.eq 'function() {'
+    it 'should pass using parens', ->
+      ts.func('func foo()').should.eq 'var foo = function() {'
+      ts.func('func $bar(foo)').should.eq 'var $bar = function(foo) {'
+      ts.func('func $bar(foo, bar)').should.eq 'var $bar = function(foo, bar) {'
+    it 'should have optional parens', ->
+      ts.func('func bar').should.eq 'var bar = function() {'
+      ts.func('func $_bar').should.eq 'var $_bar = function() {'
+      # Regex test cases - bit.ly/YBld3l
 

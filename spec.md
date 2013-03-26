@@ -76,9 +76,9 @@ end-
 <br>
 
 
-#### Ruby flavored function expressions
+#### Ruby flavored functions
 
-Func declares the function as an expression. I am still undecided if `func` should be decalared like below or just compile into a regular function. The lack of function hoisting obviosly has it pro's and cons. Vanilla JS functions of course will still work as well.
+`Func [name]` declares the function as an expression and sets `[name]` to a variable. Braces are optional if no arguments are being passed. If arguments are passed braces must be used. Anonymous functions are declared as `func`, braces are also optional. This type of anonymous function should only be used when using `do |x|` would be awkward, such as in an async's array of parallel functions.
 
 *Status:* **Working**
 
@@ -91,6 +91,15 @@ end                                      };
 func sayHello
   puts "Hello"
 end
+
+# anonymous function
+func                                    function() {
+  # do stuff                              // do stuff
+end                                     }
+
+func(a,b)                               function(a,b) {
+  # do stuff                              // do stuff
+end                                     }
 ```
 <br>
 
