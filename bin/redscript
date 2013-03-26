@@ -56,6 +56,9 @@ process.on('ittIndex:inc', function(key) {
  * modification date is more than the previous check. If so, render file.
  */
 if (opts.watchFiles && files.length) {
+    files.forEach(function(file) {
+       render(file);
+    });
     console.log();
     console.log(">>> RedScript is watching for changes. Pres Ctrl-C to quit");
     files.forEach(function(file) {
