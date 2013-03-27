@@ -322,7 +322,7 @@ end                                                      }
 
 *Status:* **Working**
 
-Private blocks keep variable scoped inside the block using function scope. There is a slight performance hit due to the IIFE. Again, due to the lack of proper lexing/parsing I can't yet use an `end` block. A workaround is `endPriv`, this calls the IIFE. Also due to the variable declaration bug mention above, varibles like the example below will currently need var manually inserted to keep `foo` from leaking out and chaging global `foo` to `10`.
+Private blocks keep variables scoped inside the block using function scope. There is a slight performance hit due to the IIFE. Again, due to the lack of proper lexing/parsing I can't yet use an `end` block. A workaround is `endPriv`, this calls the IIFE. Also due to the variable declaration bug mention above, variables like the example below will currently need var manually inserted to keep `foo` from leaking out and changing global `foo` to `10`. The beginning of the IIFE is nerfed with a semi-colon to prevent any potential errors (especially with the current state of RedScript not having automatic semi-colon insertion). 
 
 ```ruby                                                   
 foo = 200                                                 var foo = 200; 
