@@ -105,13 +105,12 @@ end                                     }
 
 #### Comments
 
-*Status*: **Known Bug**
+*Status*: *Working*
 
-Comments currently have a bug, they cannot immediately follow a word character. This is due to hashes being interpolated inside a string, thus creating a comment inside a jQuery selector. RedScript currently does not have multi-line comments but `/*...*/` can be used.
+Line comments are made with a `#`. RedScript currently does not have multi-line comments but `/*...*/` can be used if needed.
 
 ```coffeescript
-# I'm a comment, compiles ok             // I'm a comment, compiles ok
-#Currently failing to compile            #Currently failing to compile 
+# I'm a comment                          // I'm a comment
 $('#someID').html(foo)                   $('#someID').html(foo) # No worries here
 ```
 <br>

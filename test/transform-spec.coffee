@@ -164,3 +164,26 @@ describe 'Transform', ->
       ts.func('func $_bar').should.eq 'var $_bar = function() {'
       # Regex test cases - bit.ly/YBld3l
 
+describe 'method comments', ->
+  it 'should transform # comments into // comments', ->
+    line = '# this is a commented line'
+    ts.comments(line).should.eq '// this is a commented line'
+  it 'should not comment out a # inside of strings', ->
+    line = '  "foo === 2 # comment about foo" '
+    ts.comments(line).should.eq '  "foo === 2 # comment about foo" '
+  it 'should convert # comments to //', ->
+    line = "# commented line"
+    ts.comments(line).should.eq '// commented line'
+  it 'should allow JS comments', ->
+    line = "// commented line"
+    ts.comments(line).should.eq '// commented line'
+  it 'should not skip comments that are in the middle', ->
+    line = "something # commented line"
+    ts.comments(line).should.eq 'something // commented line'
+  it 'should not process line that starts with a comment', ->
+    line = "  # commented do"
+    ts.comments(line).should.eq '  // commented do'
+  it 'should not comment out # inside a string', ->
+    line = " $('#someClass') "
+    ts.comments(line).should.eq " $('#someClass') "
+    #http://bit.ly/YH5rke
