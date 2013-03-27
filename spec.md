@@ -78,7 +78,7 @@ end-
 
 #### Ruby flavored functions
 
-`Func [name]` declares the function as an expression and sets `[name]` to a variable. Parens are optional if no arguments are being passed. If arguments are passed braces must be used. Anonymous functions are declared as `func`, parens are also optional. This type of anonymous function should only be used when using `do |x|` would be awkward, such as in an async's array of parallel functions.
+`Func [name]` declares the function as an expression and sets `[name]` to a variable. Parens are optional if no arguments are being passed. If arguments are passed braces must be used. Anonymous functions are declared as `func`, parens are also optional. This type of anonymous function should only be used when using `do |x|` would be awkward, such as in an [async](https://github.com/caolan/async)'s array of parallel functions.
 
 *Status:* **Working**
 
@@ -165,7 +165,7 @@ end                                     }
 
 #### Iterating over arrays and objects
 
-*Status:* **Not Implemented**
+*Status:* **Working**
 
 ```
 # Iterate over arrays
