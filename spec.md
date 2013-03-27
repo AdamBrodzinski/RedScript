@@ -320,15 +320,15 @@ end                                                      }
 
 #### Private Blocks
 
-*Status:* **Not Implemented**
+*Status:* **Working**
 
-Private blocks keep variable scoped inside the block using function scope. There is a slight performance hit due to the IIFE. Again, due to the lack of proper lexing/parsing I can't yet use an `end` block. A workaround is `endPriv`, this calls the IIFE.
+Private blocks keep variable scoped inside the block using function scope. There is a slight performance hit due to the IIFE. Again, due to the lack of proper lexing/parsing I can't yet use an `end` block. A workaround is `endPriv`, this calls the IIFE. Also due to the variable declaration bug mention above, varibles like the example below will currently need var manually inserted to keep `foo` from leaking out and chaging global `foo` to `10`.
 
 ```ruby                                                   
 foo = 200                                                 var foo = 200; 
 
 private                                                  (function(){
-  foo = 10                                                  var foo = 10;
+  var foo = 10                                              var foo = 10;
 endPriv                                                   })();
 
 alert(foo) #alerts 200                                    alert(foo);
@@ -372,9 +372,9 @@ duck.sayHi()                                          duck.sayHi();
 
 #### Prototypal Inheritance
 
-*Status*: **Not Implemented**
+*Status*: **Partially Implemented**
 
-This is an experiment to try and bring out JavaScripts true prototypal nature. The goal is to be able to *easily* inherit without using constructors or faux classes. Vanilla JS makes it very difficult to inherit from another object, unlike [self](http://en.wikipedia.org/wiki/Self_programming_language#Inheritance.2FDelegation), JavaScript's inheritance inspiration. One of the drawbacks to property delegation is keeping state in an object. Using `object myDuck clones duck` will copy all of the properties from duck into myDuck, ensuring it won't grab it's parents property by accident.
+This is an experiment to try and bring out JavaScripts true prototypal nature. The goal is to be able to *easily* inherit without using constructors or faux classes. Vanilla JS makes it very difficult to inherit from another object, unlike [self](http://en.wikipedia.org/wiki/Self_programming_language#Inheritance.2FDelegation), JavaScript's inheritance inspiration. One of the drawbacks to property delegation is keeping state in an object. Using `object myDuck clones duck` will copy all of the properties from duck into myDuck, ensuring it won't grab it's parents property by accident. Currently `clones` is not implemeneted yet.
 
 ```ruby
 object animal

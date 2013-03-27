@@ -191,3 +191,21 @@ describe 'method comments', ->
     line = " $('#someClass') "
     ts.comments(line).should.eq " $('#someClass') "
     #http://bit.ly/YH5rke
+
+describe 'method privateBlock', ->
+  it 'should transform private an iife beginning', ->
+    line = 'private'
+    ts.privateBlock(line).should.eq ';(function() {'
+  it 'should transform with surrounding spaces', ->
+    line = '   private '
+    ts.privateBlock(line).should.eq '   ;(function() { '
+    # Regex test cases - bit.ly/ZtC2wB
+  it 'should transform endPriv into ending iifee', ->
+    line = 'endPriv'
+    ts.privateBlock(line).should.eq '})();'
+  it 'should transform endPriv with surrounding spaces', ->
+    line = ' endPriv   '
+    ts.privateBlock(line).should.eq ' })();   '
+    # Regex test cases - bit.ly/Ye61cO
+    
+ 
