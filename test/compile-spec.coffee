@@ -245,3 +245,8 @@ describe '#compile', ->
       compile('foo   ||=   bar').should.eq 'foo = foo || bar'
       compile('_foo ||= b$_ar').should.eq '_foo = _foo || b$_ar'
       # Regex test cases: http://gskinner.com/RegExr/?33qm8
+  
+  describe 'Bracketless for in', ->
+    it 'should compile without conflicts', ->
+      compile('for key in obbj').should.eq 'for (var key in obbj) {'
+      
