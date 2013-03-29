@@ -125,9 +125,13 @@ describe 'method forIn', ->
 describe 'method forInArr', ->
   it 'should transform into a for loop', ->
     line = 'for fruit inArr basket'
-    ts.forInArr(line).should.eq 'for (var i_=0, len=basket.length; i_ < len; i_++) { var fruit = basket[i_];'
-  it 'should itterate index for multiple for `inArr` statements'
-    # Regex test cases - bit.ly/WPApt4
+    ts.forInArr(line).should.eq 'for (var i_=0, len=basket.length; i_ ' +
+      '< len; i_++) { var fruit = basket[i_];'
+  it 'should alias `inStr` to `inArr`', ->
+    line = 'for char inStr myString'
+    ts.forInArr(line).should.eq 'for (var i_=0, len=myString.length; i_ < ' +
+      'len; i_++) { var char = myString[i_];'
+# Regex test cases - bit.ly/WPApt4
 
 describe 'method forKeyVal', ->
   it 'should transform key and value correctly', ->
@@ -207,5 +211,4 @@ describe 'method privateBlock', ->
     line = ' endPriv   '
     ts.privateBlock(line).should.eq ' })();   '
     # Regex test cases - bit.ly/Ye61cO
-    
  
