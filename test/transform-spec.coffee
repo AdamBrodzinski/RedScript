@@ -2,6 +2,25 @@ chai = require 'chai'; chai.should(); expect = chai.expect
 
 ts = require '../lib/transform'
 
+# ---------------- Mock `/bin/redscript` events ----------------
+state = {}
+# Reset entire state object
+process.on 'state:reset', ->
+  state =
+    debug: false,
+    declaredVars: [],
+    ittIndex: 0
+
+# remove any listeners from previous mocha run
+process.removeAllListeners 'ittIndex:inc'
+
+process.on 'ittIndex:inc', (key) ->
+  console.log "ittIndex listening"
+  state.ittIndex += 1
+  # send an updated count
+  process.emit('state:send', state.ittIndex)
+# --------------------------------------------------------------
+
 describe 'method parentProperty', ->
   it 'should transform `parent*` to `__proto__`', ->
     ts.parentProperty('parent*').should.eq '__proto__'
@@ -123,14 +142,16 @@ describe 'method forIn', ->
     # Regex test cases - bit.ly/ZkxXHv
 
 describe 'method forInArr', ->
+  beforeEach ->
+    process.emit 'state:reset' #console.log "resetting state"
   it 'should transform into a for loop', ->
     line = 'for fruit inArr basket'
-    ts.forInArr(line).should.eq 'for (var i_=0, len=basket.length; i_ ' +
-      '< len; i_++) { var fruit = basket[i_];'
-  it 'should alias `inStr` to `inArr`', ->
+    ts.forInArr(line).should.eq 'for (var i1=0, len1=basket.length; i1 ' +
+      '< len1; i1++) { var fruit = basket[i1];'
+  it 'should alias `inStr` to `inArr` for iterating strings', ->
     line = 'for char inStr myString'
-    ts.forInArr(line).should.eq 'for (var i_=0, len=myString.length; i_ < ' +
-      'len; i_++) { var char = myString[i_];'
+    ts.forInArr(line).should.eq 'for (var i1=0, len1=myString.length; i1 < ' +
+      'len1; i1++) { var char = myString[i1];'
 # Regex test cases - bit.ly/WPApt4
 
 describe 'method forKeyVal', ->
