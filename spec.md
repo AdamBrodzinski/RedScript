@@ -15,8 +15,8 @@ Semi-colons are automatically inserted as needed (currently not implemented).
 
 *Currently RedScript does not take function scope into account. Any
 variables that are declared inside of a function multiple times can
-lead to unintended global leaks. To disable auto declaration pass
-declare variables with the var keyword.* 
+lead to unintended global leaks. To disable auto declaration pass `no--declare`. Another workaround is
+to manually declare variables with the var keyword.*
 
 ```ruby
 foo = 12                 var foo = 12;
