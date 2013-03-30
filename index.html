@@ -31,32 +31,405 @@
         <hr>
 
         <section id="main_content">
-          <h3>Welcome to GitHub Pages.</h3>
+          <h1>RedScript Spec Sheet</h1>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>If you have suggestions on different syntax, please create
+an issue: <a href="https://github.com/AdamBrodzinski/RedScript/issues">here</a>.</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<p><br></p>
+
+<h4>Variables &amp; automatic semi-colon insertion</h4>
+
+<p><em>Status</em>: <strong>Partially implemented, known bug</strong></p>
+
+<p>Variables are automatically declared. Using the var keyword is optional and allowed.<br>
+Constants are pre-processed at compile time. This allows some memory savings in certain cases where itcan be utilized.
+Semi-colons are automatically inserted as needed (currently not implemented).</p>
+
+<p><em>Currently RedScript does not take function scope into account. Any
+variables that are declared inside of a function multiple times can
+lead to unintended global leaks. To disable auto declaration pass
+declare variables with the var keyword.</em> </p>
+
+<div class="highlight"><pre><span class="n">foo</span> <span class="o">=</span> <span class="mi">12</span>                 <span class="n">var</span> <span class="n">foo</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+<span class="n">foo</span> <span class="o">=</span> <span class="mi">20</span>                 <span class="n">foo</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+
+<span class="c1"># Constants are preprocessed</span>
+<span class="no">AMOUNT</span> <span class="o">=</span> <span class="mi">233</span>            
+<span class="nb">puts</span> <span class="no">AMOUNT</span>             <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">233</span><span class="p">)</span>
+
+<span class="c1"># !! Lexical scoping bug in current version !!</span>
+<span class="n">func</span> <span class="n">foo</span>                <span class="n">var</span> <span class="n">foo</span> <span class="o">=</span> <span class="n">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">baz</span> <span class="o">=</span> <span class="mi">20</span>                <span class="n">var</span> <span class="n">baz</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>       
+<span class="k">end</span>                     <span class="p">};</span>                    
+
+<span class="n">func</span> <span class="n">bar</span>                <span class="n">var</span> <span class="n">bar</span> <span class="o">=</span> <span class="n">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">baz</span> <span class="o">=</span> <span class="mi">30</span>                <span class="n">baz</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>       
+<span class="k">end</span>                     <span class="p">};</span>                     
+</pre></div>
+
+<p><br></p>
+
+<h4>Convenience method aliases for puts &amp; printf</h4>
+
+<p><em>Status:</em> <strong>Working</strong><br><code>puts</code> and <code>printf</code> are aliases to <code>console.log</code> and <code>process.stdout.write</code>. <code>printf</code> is only available with node enviroments. These are the only methods that have optional parens at this time. If parens are omitted a closing paren will be appended to the end of the line. Parenless multi lines are not possible.</p>
+
+<div class="highlight"><pre><span class="nb">puts</span> <span class="s2">"Hello there"</span>                      <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"Hello there"</span><span class="p">);</span>
+<span class="nb">puts</span><span class="p">(</span><span class="s2">"Hai!"</span><span class="p">)</span>                            <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"Hai"</span><span class="p">)</span>
+<span class="nb">printf</span> <span class="s2">"Hola"</span>                           <span class="n">process</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"Hola"</span><span class="p">)</span>
+<span class="nb">printf</span><span class="p">(</span><span class="s2">"Hola"</span><span class="p">)</span>                          <span class="n">process</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"Hola"</span><span class="p">)</span>
+</pre></div>
+
+<p><br></p>
+
+<h4>Optional Parenthesis</h4>
+
+<p><em>Status:</em> <strong>Implemented with RedScript constructs only</strong></p>
+
+<p>Currently I cannot implement this until I can create a proper lexer. Pull requests welcome ;-) For the time being you have to include parens. A temporary kludgey alias for <code>end)</code> is <code>end-</code>. This is slightly easier to look at for the short run, but expect this to be dropped in the future.</p>
+
+<div class="highlight"><pre><span class="n">alert</span> <span class="s1">'Hello World!'</span>
+
+<span class="n">getUser</span> <span class="s1">'/users/1'</span><span class="p">,</span> <span class="k">do</span>
+  <span class="n">alert</span> <span class="n">user</span>
+<span class="k">end</span>
+
+<span class="c1"># Currently you still have to use parens for anything that's not a RedScript construct.</span>
+<span class="n">getUser</span><span class="p">(</span> <span class="s1">'/users/1'</span><span class="p">,</span> <span class="k">do</span>
+  <span class="n">alert</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+<span class="k">end</span><span class="p">)</span>
+
+<span class="c1"># A kludgey alias for `end)` is `end-`</span>
+<span class="n">getUser</span><span class="p">(</span> <span class="s1">'/users/1'</span><span class="p">,</span> <span class="k">do</span>
+  <span class="n">alert</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+<span class="k">end</span><span class="o">-</span>
+</pre></div>
+
+<p><br></p>
+
+<h4>Ruby flavored functions</h4>
+
+<p><code>Func [name]</code> declares the function as an expression and sets <code>[name]</code> to a variable. Parens are optional if no arguments are being passed. If arguments are passed braces must be used. Anonymous functions are declared as <code>func</code>, parens are also optional. This type of anonymous function should only be used when using <code>do |x|</code> would be awkward, such as in an <a href="https://github.com/caolan/async">async</a>'s array of parallel functions.</p>
+
+<p><em>Status:</em> <strong>Working</strong></p>
+
+<div class="highlight"><pre><span class="n">func</span> <span class="n">say</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>                            <span class="n">var</span> <span class="n">say</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">puts</span> <span class="s2">"Message: </span><span class="si">#{</span><span class="n">msg</span><span class="si">}</span><span class="s2">"</span>                   <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"Message: "</span> <span class="o">+</span> <span class="n">msg</span><span class="p">);</span>
+<span class="k">end</span>                                      <span class="p">};</span>
+
+<span class="c1"># Optional function parens</span>
+<span class="n">func</span> <span class="n">sayHello</span>
+  <span class="nb">puts</span> <span class="s2">"Hello"</span>
+<span class="k">end</span>
+
+<span class="c1"># anonymous function</span>
+<span class="n">func</span>                                    <span class="n">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1"># do stuff                              // do stuff</span>
+<span class="k">end</span>                                     <span class="p">}</span>
+
+<span class="n">func</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>                               <span class="n">function</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># do stuff                              // do stuff</span>
+<span class="k">end</span>                                     <span class="p">}</span>
+</pre></div>
+
+<p><br></p>
+
+<h4>Comments</h4>
+
+<p><em>Status</em>: <em>Working</em></p>
+
+<p>Line comments are made with a <code>#</code>. RedScript currently does not have multi-line comments but <code>/*...*/</code> can be used if needed.</p>
+
+<div class="highlight"><pre><span class="c1"># I'm a comment                          // I'm a comment</span>
+<span class="nx">$</span><span class="p">(</span><span class="s">'#someID'</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">foo</span><span class="p">)</span>                   <span class="nx">$</span><span class="p">(</span><span class="s">'#someID'</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">foo</span><span class="p">)</span> <span class="c1"># No worries here</span>
+</pre></div>
+
+<p><br></p>
+
+<h4>Alias @ with this</h4>
+
+<p><em>Status:</em> Working</p>
+
+<div class="highlight"><pre><span class="n">function</span> <span class="no">FooClass</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span> <span class="p">{</span>           <span class="n">function</span> <span class="no">FooClass</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="n">age</span><span class="p">){</span>
+  <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span>                             <span class="n">this</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="nb">name</span><span class="p">;</span>
+  <span class="vi">@age</span> <span class="o">=</span> <span class="n">age</span>                               <span class="n">this</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span><span class="p">;</span>
+<span class="p">}</span>                                        <span class="p">}</span>
+</pre></div>
+
+<p><br></p>
+
+<h4>Loops</h4>
+
+<p><em>Status:</em> <strong>Working</strong></p>
+
+<p><em>Note</em>, for loops only support <code>0..3</code>, <code>0...3</code> or variables e.g. <code>begin...ending</code>. Using two dots will loop up until that number, and using 3 dots will loop up to and including the end number.<br>
+Using <code>for in [2,4,6]</code> or <code>for in myArray</code> will not work at this time. See next section for more info on arrays.<br>
+To prevent confusion until loops have a <code>//until</code> comment next to the compiled output.</p>
+
+<div class="highlight"><pre><span class="k">while</span> <span class="n">foo</span> <span class="o">&lt;</span> <span class="mi">200</span>                        <span class="k">while</span> <span class="p">(</span><span class="n">foo</span> <span class="o">&lt;</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">puts</span> <span class="s2">"I'm looping forever"</span>              <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"I'm looping forever"</span><span class="p">);</span>
+<span class="k">end</span>                                     <span class="p">}</span>
+
+
+<span class="c1"># loops until a condition is true</span>
+<span class="k">until</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">5</span>                            <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">5</span><span class="p">))</span> <span class="p">{</span> <span class="sr">//</span> <span class="kp">loop</span> <span class="k">until</span>  
+   <span class="nb">puts</span> <span class="n">i</span>                                  <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>                
+   <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>                                  <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>                        
+<span class="k">end</span>                                     <span class="p">}</span>                                 
+
+
+<span class="c1"># prints 5x, 0,1,2,3,4                  </span>
+<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="mi">5</span>                           <span class="k">for</span> <span class="p">(</span><span class="n">var</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>    
+  <span class="nb">puts</span> <span class="n">i</span>                                  <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>           
+<span class="k">end</span>                                     <span class="p">}</span>                             
+
+
+<span class="c1"># prints 6x, 0,1,2,3,4,5                </span>
+<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="mi">5</span>                          <span class="k">for</span> <span class="p">(</span><span class="n">var</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">puts</span> <span class="n">i</span>                                  <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>       
+<span class="k">end</span>                                     <span class="p">}</span>                          
+</pre></div>
+
+<p><br></p>
+
+<h4>Iterating over arrays and objects</h4>
+
+<p><em>Status:</em> <strong>Working</strong></p>
+
+<pre><code># Iterate over arrays
+basket = ['lemon', 'pear', 'apple']     var basket = ['lemon', 'pear', 'apple'];
+
+for fruit inArr basket                  for (var _i=0, _len=basket.length; _i &lt; _len; _i++) { var fruit = basket[_i];    
+  puts fruit                              console.log(fruit);                                                            
+end                                     }                                                                                
+
+
+for key in obj                          for (var key in obj) {
+   alert(key)                             alert(key);
+end                                     }
+
+
+for key,val in obj                      for (var key in obj) { var val = obj[key];
+  puts 'My key is: #{key}'                console.log('My key is: ' + key);
+  puts 'My value is: #{val}'              console.log('My value is: ' + val);
+end                                     }
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p><br></p>
 
-<h3>Designer Templates</h3>
+<h4>If/else/else if</h4>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p><em>Status:</em> <strong>Partially implemented</strong></p>
 
-<h3>Rather Drive Stick?</h3>
+<p>If statements currently are multi-line. If you would like to use a one liner, you can still use vanilla js <code>if (err) throw err;</code>.</p>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<div class="highlight"><pre><span class="k">if</span> <span class="n">foo</span> <span class="o">==</span> <span class="mi">10</span>                            <span class="k">if</span> <span class="p">(</span><span class="n">foo</span> <span class="o">===</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">bar</span><span class="p">(</span><span class="s2">"do stuff"</span><span class="p">)</span>                         <span class="n">bar</span><span class="p">(</span><span class="s2">"do stuff"</span><span class="p">);</span>
+<span class="k">else</span> <span class="k">if</span> <span class="n">foo</span> <span class="o">==</span> <span class="mi">20</span>                       <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">foo</span> <span class="o">===</span> <span class="mi">20</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">bar</span><span class="p">(</span><span class="s2">"do stuff"</span><span class="p">)</span>                         <span class="n">bar</span><span class="p">(</span><span class="s2">"do stuff"</span><span class="p">);</span>
+<span class="k">else</span>                                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="n">bar</span><span class="p">(</span><span class="s2">"do stuff"</span><span class="p">)</span>                         <span class="n">bar</span><span class="p">(</span><span class="s2">"do stuff"</span><span class="p">);</span>
+<span class="k">end</span>                                     <span class="p">}</span>
 
-<h3>Authors and Contributors</h3>
+<span class="kp">throw</span> <span class="n">err</span> <span class="k">if</span> <span class="n">err</span>                        <span class="k">if</span> <span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="p">{</span> <span class="kp">throw</span> <span class="n">err</span><span class="p">;</span> <span class="p">}</span>
+</pre></div>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p><br></p>
 
-<h3>Support or Contact</h3>
+<h4>Methods &amp; Object Literal</h4>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p><em>Status:</em> <strong>Working</strong></p>
+
+<p>An optional way to declare an object literal. The idea is to make it read a bit nicer.<br>
+Methods are declared using the def keyword and parens are optional <em>if</em> they're not used.<br>
+Attaching a method to an object's prototype be defined using <code>def objName &gt;&gt;&gt; mthdName</code>.</p>
+
+<div class="highlight"><pre><span class="n">object</span> <span class="n">auto</span>                                   <span class="n">var</span> <span class="n">auto</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="ss">wheels</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>                                    <span class="ss">wheels</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="ss">engine</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span>                                 <span class="ss">engine</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span>
+
+  <span class="k">def</span> <span class="nf">honk</span>                                      <span class="ss">honk</span><span class="p">:</span> <span class="n">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nb">puts</span> <span class="s2">"hoooonk"</span>                                <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"hooooonk"</span><span class="p">);</span>
+  <span class="k">end</span><span class="p">,</span>                                          <span class="p">},</span>
+
+  <span class="k">def</span> <span class="nf">sayHi</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>                                <span class="ss">sayHi</span><span class="p">:</span> <span class="n">function</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">puts</span> <span class="n">msg</span>                                      <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span>
+  <span class="k">end</span>                                           <span class="p">}</span>
+<span class="k">end</span>                                           <span class="p">}</span>
+
+<span class="c1"># Define outside of object literal</span>
+<span class="k">def</span> <span class="nc">auto</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>                            <span class="n">auto</span><span class="o">.</span><span class="n">add</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="vi">@wheels</span>                            <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">this</span><span class="o">.</span><span class="n">wheels</span><span class="p">;</span>
+<span class="k">end</span>                                           <span class="p">};</span>
+
+<span class="c1"># Define method attached to prototype</span>
+<span class="k">def</span> <span class="nf">Car</span> <span class="o">&gt;&gt;&gt;</span> <span class="nb">sub</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>                          <span class="no">Car</span><span class="o">.</span><span class="n">prototype</span><span class="o">.</span><span class="n">sub</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span>                                  <span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">;</span>
+<span class="k">end</span>                                           <span class="p">};</span>
+</pre></div>
+
+<p><br></p>
+
+<h4>Block-like Syntax for Anonymous Functions</h4>
+
+<p><em>Status:</em> <strong>Working</strong></p>
+
+<p>Block like syntax is a shorter way to write an anonymous function. The preceding comma is optional. However, including it may be easier to understand if it's included. Once we have optional parens working this will look <em>much</em> nicer! </p>
+
+<div class="highlight"><pre>
+<span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'/users/:user'</span><span class="p">,</span> <span class="k">do</span> <span class="o">|</span><span class="n">req</span><span class="o">|</span>        <span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'/users/:user'</span><span class="p">,</span> <span class="n">function</span><span class="p">(</span><span class="n">req</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">puts</span> <span class="n">req</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">name</span>                    <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">name</span><span class="p">);</span>
+<span class="k">end</span><span class="p">)</span>                                    <span class="p">});</span>
+
+<span class="c1"># no params</span>
+<span class="vg">$myBtn</span><span class="o">.</span><span class="n">click</span><span class="p">(</span> <span class="k">do</span>                        <span class="vg">$myBtn</span><span class="o">.</span><span class="n">click</span><span class="p">(</span> <span class="n">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">alert</span><span class="p">(</span><span class="s2">"hi"</span><span class="p">)</span>                             <span class="n">alert</span><span class="p">(</span><span class="s2">"hi"</span><span class="p">);</span>
+<span class="k">end</span><span class="p">)</span>                                    <span class="p">});</span>
+</pre></div>
+
+<p><br></p>
+
+<h4>RequireJS Module Sugar</h4>
+
+<p><em>Status:</em> <strong>Not Implemented</strong>  </p>
+
+<p>Using <code>define module</code> wraps the current file in a new anonymous RequireJS module. Exports can either be exported in a export object literal or by using <code>export foo</code> to export the foo variable only. Any dependencies can be declared by using <code>require 'foo' as foo</code> which sets up foo's returned value in a variable called <code>foo</code>.</p>
+
+<div class="highlight"><pre>
+<span class="n">define</span> <span class="k">module</span>                                                   <span class="nn">define</span><span class="p">(</span><span class="o">[</span> <span class="s1">'jquery'</span><span class="p">,</span>
+<span class="nb">require</span> <span class="s1">'jquery'</span> <span class="n">as</span> <span class="err">$</span>                                                    <span class="s1">'./views/widget'</span><span class="o">]</span><span class="p">,</span>
+<span class="nb">require</span> <span class="s1">'./views/widget'</span> <span class="n">as</span> <span class="no">Widget</span>                                <span class="n">function</span><span class="p">(</span><span class="vg">$,</span> <span class="no">Widget</span><span class="p">)</span> <span class="p">{</span>        
+
+<span class="n">options</span> <span class="o">=</span> <span class="p">{</span>                                                        <span class="n">var</span> <span class="n">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="ss">moonRoof</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span>                                                    <span class="ss">moonRoof</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span>   
+  <span class="ss">seats</span><span class="p">:</span> <span class="mi">5</span>                                                           <span class="ss">seats</span><span class="p">:</span> <span class="mi">5</span>      
+<span class="p">}</span>                                                                  <span class="p">}</span>          
+
+<span class="n">getCost</span> <span class="o">=</span> <span class="mi">16899</span>                                                    <span class="n">var</span> <span class="n">getCost</span> <span class="o">=</span> <span class="mi">16899</span><span class="p">;</span>
+<span class="n">wheels</span> <span class="o">=</span> <span class="mi">4</span>                                                         <span class="n">var</span> <span class="n">wheels</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+
+<span class="c1"># export literal compiles to an object that gets returned</span>
+<span class="n">export</span>                                                              <span class="k">return</span> <span class="p">{</span>   
+  <span class="n">getCost</span>                                                               <span class="n">getCost</span> <span class="p">:</span> <span class="n">getCost</span><span class="p">,</span>
+  <span class="n">hasMoonRoof</span> <span class="n">from</span> <span class="n">options</span><span class="o">.</span><span class="n">moonRoof</span>                                     <span class="n">hasMoonRoof</span> <span class="p">:</span> <span class="n">options</span><span class="o">.</span><span class="n">moonRoof</span><span class="p">,</span>   
+  <span class="n">getWheels</span> <span class="n">from</span> <span class="n">wheels</span>                                                 <span class="n">getWheels</span> <span class="p">:</span> <span class="n">wheels</span>     
+<span class="k">end</span>                                                                 <span class="p">}</span>           
+                                                                <span class="p">});</span> 
+<span class="c1"># --------------------------------------  new file  -------------------------------------------</span>
+<span class="n">define</span> <span class="k">module</span>                                                  <span class="nn">define</span><span class="p">(</span><span class="n">function</span><span class="p">()</span> <span class="p">{</span>
+
+<span class="n">func</span> <span class="n">foo</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>                                                      <span class="n">var</span> <span class="n">foo</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">puts</span> <span class="n">x</span>                                                           <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="k">end</span>                                                              <span class="p">}</span>
+
+<span class="n">export</span> <span class="n">foo</span>                                                       <span class="k">return</span> <span class="n">foo</span><span class="p">;</span> <span class="p">});</span>
+</pre></div>
+
+<p><br></p>
+
+<h4>Ruby / Coffee style case switch statement</h4>
+
+<p><em>Status:</em> <strong>Working</strong></p>
+
+<p>Switch statements still need <code>break</code> inserted to prevent falling through. The exception is one liners, then it's appened to the line.</p>
+
+<div class="highlight"><pre><span class="n">switch</span> <span class="n">fruit</span>                                             <span class="n">switch</span> <span class="p">(</span><span class="n">fruit</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">when</span> <span class="s2">"apple"</span>                                               <span class="k">case</span> <span class="s2">"apple"</span><span class="p">:</span>
+  <span class="nb">puts</span> <span class="s2">"it's an appppple"</span>                                    <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"it's an appppple"</span><span class="p">);</span>
+  <span class="k">break</span>                                                      <span class="k">break</span><span class="p">;</span>
+<span class="k">when</span> <span class="s2">"bannana"</span> <span class="k">then</span> <span class="nb">puts</span><span class="p">(</span><span class="s2">"bannana"</span><span class="p">)</span>                        <span class="k">case</span> <span class="s2">"bannana"</span><span class="p">:</span> <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"bannana"</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
+<span class="k">when</span> <span class="s2">"orange"</span>                                              <span class="k">case</span> <span class="s2">"orange"</span><span class="p">:</span>
+  <span class="nb">puts</span> <span class="s2">"it's an orange"</span>                                      <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"it's an orange"</span><span class="p">);</span>
+  <span class="k">break</span>                                                      <span class="k">break</span><span class="p">;</span>
+<span class="n">default</span>                                                    <span class="ss">default</span><span class="p">:</span>
+  <span class="nb">puts</span> <span class="s2">"uh oh, bummer"</span>                                       <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"uh oh, bummer"</span><span class="p">);</span>
+<span class="k">end</span>                                                      <span class="p">}</span>
+</pre></div>
+
+<p><br></p>
+
+<h4>Private Blocks</h4>
+
+<p><em>Status:</em> <strong>Working</strong></p>
+
+<p>Private blocks keep variables scoped inside the block using function scope. There is a slight performance hit due to the IIFE. Again, due to the lack of proper lexing/parsing I can't yet use an <code>end</code> block. A workaround is <code>endPriv</code>, this calls the IIFE. Also due to the variable declaration bug mention above, variables like the example below will currently need var manually inserted to keep <code>foo</code> from leaking out and changing global <code>foo</code> to <code>10</code>. The beginning of the IIFE is nerfed with a semi-colon to prevent any potential errors (especially with the current state of RedScript not having automatic semi-colon insertion). </p>
+
+<div class="highlight"><pre><span class="n">foo</span> <span class="o">=</span> <span class="mi">200</span>                                                 <span class="n">var</span> <span class="n">foo</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span> 
+
+<span class="kp">private</span>                                                  <span class="p">(</span><span class="n">function</span><span class="p">(){</span>
+  <span class="n">var</span> <span class="n">foo</span> <span class="o">=</span> <span class="mi">10</span>                                              <span class="n">var</span> <span class="n">foo</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="n">endPriv</span>                                                   <span class="p">})();</span>
+
+<span class="n">alert</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span> <span class="c1">#alerts 200                                    alert(foo);</span>
+</pre></div>
+
+<p><br></p>
+
+<h4>Classical Inheritance</h4>
+
+<p><em>Status</em>: <strong>Working</strong></p>
+
+<p>RedScript classes are currently using John Resig's simple inheritance. In the future a solution closer to coffeescript would be ideal, allowing one to inherit from any constructor and still have the correct syntax. The current implementation will not inherit unless the base class is created with RedScript. However, backbone and ember both use the <code>.extend</code> method which is convenient since using <code>class Foo &lt; Backbone.Model.extend(</code> will call their own extend implementation. Backbone does not have a <code>this._super</code> method so if you want to call super you would need to use a backbone plugin for that. Ember uses the same <code>this._super</code> syntax as RedScript so calling super will call Ember's implementation.</p>
+
+<p>If you're only using their inheritance implementation you can disable the insertion of RedScript's inheritance by passing the <code>--no-class</code> flag.</p>
+
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Animal</span>                                          <span class="n">var</span> <span class="no">Animal</span> <span class="o">=</span> <span class="no">Class</span><span class="o">.</span><span class="n">extend</span><span class="p">({</span>           
+  <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>                                        <span class="ss">init</span><span class="p">:</span> <span class="n">function</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span> <span class="p">{</span>              
+    <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span>                                          <span class="n">this</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="nb">name</span><span class="p">;</span>                 
+  <span class="k">end</span><span class="p">,</span>                                                  <span class="p">},</span>                                  
+
+  <span class="k">def</span> <span class="nf">sayHi</span>                                             <span class="ss">sayHi</span><span class="p">:</span> <span class="n">function</span><span class="p">()</span> <span class="p">{</span>                 
+    <span class="nb">puts</span> <span class="s2">"Hello"</span>                                          <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"Hello"</span><span class="p">);</span>             
+  <span class="k">end</span>                                                   <span class="p">}</span>                                   
+<span class="k">end</span>                                                   <span class="p">});</span>                                   
+
+<span class="k">class</span> <span class="nc">Duck</span> <span class="o">&lt;</span> <span class="no">Animal</span>                                   <span class="n">var</span> <span class="no">Duck</span> <span class="o">=</span> <span class="no">Animal</span><span class="o">.</span><span class="n">extend</span><span class="p">({</span>            
+  <span class="k">def</span> <span class="nf">init</span>                                              <span class="ss">init</span><span class="p">:</span> <span class="n">function</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span> <span class="p">{</span>              
+    <span class="n">alert</span><span class="p">(</span><span class="s2">"</span><span class="si">#{</span><span class="vi">@name</span><span class="si">}</span><span class="s2"> is alive!"</span><span class="p">)</span>                           <span class="n">alert</span><span class="p">(</span><span class="n">this</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">" is alive!"</span><span class="p">)</span>   
+  <span class="k">end</span><span class="p">,</span>                                                  <span class="p">},</span>                                  
+
+  <span class="k">def</span> <span class="nf">sayHi</span>                                             <span class="ss">sayHi</span><span class="p">:</span> <span class="n">function</span><span class="p">()</span> <span class="p">{</span>                 
+    <span class="k">super</span>                                                 <span class="n">this</span><span class="o">.</span><span class="n">_super</span><span class="p">();</span>                    
+    <span class="nb">puts</span> <span class="s2">"Quack"</span>                                          <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"Quack"</span><span class="p">);</span>             
+  <span class="k">end</span>                                                   <span class="p">}</span>                                   
+<span class="k">end</span>                                                   <span class="p">});</span>                                   
+
+<span class="n">duck</span> <span class="o">=</span> <span class="kp">new</span> <span class="no">Duck</span><span class="p">(</span><span class="s1">'Darick'</span><span class="p">)</span>                             <span class="n">var</span> <span class="n">duck</span> <span class="o">=</span> <span class="kp">new</span> <span class="no">Duck</span><span class="p">(</span><span class="s1">'Darick'</span><span class="p">);</span>
+<span class="n">duck</span><span class="o">.</span><span class="n">sayHi</span><span class="p">()</span>                                          <span class="n">duck</span><span class="o">.</span><span class="n">sayHi</span><span class="p">();</span>
+</pre></div>
+
+<p><br></p>
+
+<h4>Prototypal Inheritance</h4>
+
+<p><em>Status</em>: <strong>Partially Implemented</strong></p>
+
+<p>This is an experiment to try and bring out JavaScripts true prototypal nature. The goal is to be able to <em>easily</em> inherit without using constructors or faux classes. Vanilla JS makes it very difficult to inherit from another object, unlike <a href="http://en.wikipedia.org/wiki/Self_programming_language#Inheritance.2FDelegation">self</a>, JavaScript's inheritance inspiration. One of the drawbacks to property delegation is keeping state in an object. Using <code>object myDuck clones duck</code> will copy all of the properties from duck into myDuck, ensuring it won't grab it's parents property by accident. Currently <code>clones</code> is not implemeneted yet.</p>
+
+<div class="highlight"><pre><span class="n">object</span> <span class="n">animal</span>
+  <span class="nb">name</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+
+  <span class="k">def</span> <span class="nf">sayHi</span>
+    <span class="nb">puts</span> <span class="s2">"Hello"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">object</span> <span class="n">duck</span>
+  <span class="n">parent</span><span class="o">*</span><span class="p">:</span> <span class="n">animal</span><span class="p">,</span>
+  <span class="nb">name</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+
+  <span class="k">def</span> <span class="nf">sayHi</span>
+    <span class="nb">puts</span> <span class="s2">"Quack"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># this duck's attr's are cloned instead of deligated</span>
+<span class="c1"># with `parent*`, usefull for statefull objects</span>
+<span class="c1">#</span>
+<span class="n">object</span> <span class="n">myDuck</span> <span class="n">clones</span> <span class="n">duck</span>
+  <span class="nb">name</span><span class="p">:</span> <span class="s1">'Darick'</span>
+<span class="k">end</span>
+</pre></div>
         </section>
 
         <footer>
