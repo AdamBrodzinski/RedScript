@@ -232,11 +232,11 @@ describe '#compile', ->
 
   describe 'def proto methods', ->
     it 'should work with parens', ->
-      compile('def foo >>> bar(p1, p2)').should.eq 'foo.prototype.bar = function(p1, p2) {'
-      compile('def foo >>> Bo_$o()').should.eq 'foo.prototype.Bo_$o = function() {'
+      compile('def foo >> bar(p1, p2)').should.eq 'foo.prototype.bar = function(p1, p2) {'
+      compile('def foo >> Bo_$o()').should.eq 'foo.prototype.Bo_$o = function() {'
     it 'should work without parens inside an object literal', ->
-      compile('def foo >>> bar').should.eq 'foo.prototype.bar = function() {'
-      compile('def foo >>> Bo_$o').should.eq 'foo.prototype.Bo_$o = function() {'
+      compile('def foo >> bar').should.eq 'foo.prototype.bar = function() {'
+      compile('def foo >> Bo_$o').should.eq 'foo.prototype.Bo_$o = function() {'
 
   describe 'Conditional Assigment Operator', ->
     it 'should work', ->
