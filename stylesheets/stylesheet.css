@@ -373,7 +373,10 @@ footer a:hover {
 
 body, #container { background: none; }
 p { color: #444; }
-pre { background: #222020; }
+pre {
+  background: #222020;
+  border-radius: 4px;
+}
 .inner {
   min-width: 620px;
   max-width: 720px;
