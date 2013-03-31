@@ -221,6 +221,8 @@ describe '#compile', ->
     it 'should not transform `def foo.bar` or `def foo >> bar`'
       #compile('def foo.bar').should.eq 'def foo.bar'
       #compile('def Bo_$o >>> baz').should.eq 'def Bo_$o >>> baz'
+    it 'should transform def default properly', ->
+      compile('def default').should.eq 'default: function() {'
 
   describe 'def foo.bar methods', ->
     it 'should work with parens', ->
