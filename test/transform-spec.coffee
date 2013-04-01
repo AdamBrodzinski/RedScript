@@ -18,6 +18,13 @@ process.on 'ittIndex:inc', (key) ->
   state.ittIndex += 1
   # send an updated count
   process.emit('state:send', state.ittIndex)
+
+global.options =
+  watchFiles: false
+  moduleType: 'requirejs'
+  aliases: true
+  insertSemiColons: true
+  classInsertion: false
 # --------------------------------------------------------------
 
 describe 'method parentProperty', ->

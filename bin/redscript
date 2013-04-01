@@ -16,15 +16,16 @@ var args =  process.argv.slice(2)
   , opts =  cmd.getOptions(args)
   , files = cmd.getFiles(args);
 
-
-var state;
+// make options from arglist global
+global.options = opts;
 
 // Initialize / reset entire state object
 process.on('state:reset', function() {
-    state = {
+    global.state = {
         debug: false,
         declaredVars: [],
-        ittIndex: 0
+        ittIndex: 0,
+        hasClass: false
     };
 });
 
