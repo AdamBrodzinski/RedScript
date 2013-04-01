@@ -5,9 +5,14 @@
 * Cleaner syntax for modules (AMD and CommonJS)
 * Easier class like inheritance & self based prototypal inheritance syntax
 
-RedScript was created to provide a better syntax for AMD modules, easier inheritance and more usable ES5 syntax. It was also created as a side project to learn more about Node, NPM Modules and Regular Expressions. In the future I would also like to add a proper lexer/parser to implement more advanced features like optional parens and ES5 `attr_accessor` like properties. *Pull requests welcome ;-)*
+RedScript was created to provide a more native experience for modules (AMD & CommonJS), easier inheritence, 
+and a Ruby style syntax that still behaves like JavaScript.  
 
-You can read more about it on my blog: [Introducing RedScript](http://adamb.me/blog/2013/01/27/introducing-redscript/).
+It was also created as a side project to learn more about Node, NPM Modules and Regular Expressions. In the future 
+I would also like to add a proper lexer/parser to implement more advanced features like optional parens 
+and ES5 attr_accessor like properties. *Pull requests welcome ;-)*
+
+More syntax examples at [redscript.org](http://redscript.org)
 
 
 #### To Install Globally and Run
@@ -56,14 +61,6 @@ class Duck < Animal                                                   var Duck =
     puts 'Hello!'                                                         console.log('Hello!');
   end                                                                   }
 end                                                                   });
-
-
-# Easier prototypal style inheritance (influenced from self)
-#                                                                     # uses non-standard __proto__ prop
-raceCar = {                                                           var racecar = {
-  parent*: car,                                                         __proto__: car,
-  topSpeed: 200                                                         topSpeed: 200
-}                                                                     }
 ```
-### See [spec.md](https://github.com/AdamBrodzinski/RedScript/blob/master/spec.md) for full syntax!
+### See [redscript.org](http://redscript.org) for full syntax!
 
