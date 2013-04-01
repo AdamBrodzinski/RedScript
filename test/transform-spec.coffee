@@ -15,7 +15,6 @@ process.on 'state:reset', ->
 process.removeAllListeners 'ittIndex:inc'
 
 process.on 'ittIndex:inc', (key) ->
-  console.log "ittIndex listening"
   state.ittIndex += 1
   # send an updated count
   process.emit('state:send', state.ittIndex)
@@ -51,6 +50,9 @@ describe 'method insertVars', ->
   it 'should skip over declarations with var', ->
     line = 'var baz = 10'
     ts.insertVars(line, []).should.eq 'var baz = 10'
+  it 'should only declare var once on a one liner', ->
+    line = 'baz = 10; baz = 10'
+    ts.insertVars(line, []).should.eq 'var baz = 10; baz = 10'
   it 'should only assign first in mult assignment', ->
     line = 'foo = baz = 10'
     ts.insertVars(line, []).should.eq 'var foo = baz = 10'
@@ -59,18 +61,21 @@ describe 'method insertVars', ->
     ts.insertVars(line, []).should.eq 'baz == 10'
     line = 'baz === 10'
     ts.insertVars(line, []).should.eq 'baz === 10'
-  it 'shouldnt insert var on propertys or instance vars', ->
+  it 'shouldnt insert var on properties or instance vars', ->
     line = '@foo = 20'
     ts.insertVars(line, []).should.eq '@foo = 20'
     line = 'foo.bar = 20'
     ts.insertVars(line, []).should.eq 'foo.bar = 20'
+  it 'should recognize manually declared vars as declared', ->
+    line = 'var foo = 40; foo = 20'
+    ts.insertVars(line, []).should.eq 'var foo = 40; foo = 20'
   it 'shouldnt insert a var if its already declared', ->
     vstate = []
     line1 = 'foo = 12'
     line2 = 'foo = 20'
     ts.insertVars(line1, vstate).should.eq 'var foo = 12'
     ts.insertVars(line2, vstate).should.eq 'foo = 20'
-    # Regex test cases - http://regexr.com?342j9
+    # Regex test cases - http://bit.ly/X5ls6a
 
 describe 'method classes', ->
   it 'should transform a single class', ->
