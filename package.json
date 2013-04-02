@@ -1,7 +1,7 @@
 {
   "name": "redscript",
   "description": "RedScript, a Ruby Flavored Superset Language",
-  "version": "0.0.12",
+  "version": "0.1.0",
   "author": {
     "name": "Adam Brodzinski",
     "email": "adambrodzinski@gmail.com"
