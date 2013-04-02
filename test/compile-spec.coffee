@@ -1,4 +1,4 @@
-chai = require 'chai'; chai.should(); expect = chai.expect;
+chai = require 'chai'; chai.should(); expect = chai.expect
 
 compile = require '../lib/compile'
 

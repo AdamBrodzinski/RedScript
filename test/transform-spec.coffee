@@ -244,4 +244,19 @@ describe 'method privateBlock', ->
     line = ' endPriv   '
     ts.privateBlock(line).should.eq ' })();   '
     # Regex test cases - bit.ly/Ye61cO
+
+describe 'method cjsRequire', ->
+  it 'should transform a short require call', ->
+    line = ' require "http"'
+    ts.cjsRequire(line).should.eq 'var http = require("http");'
+  it 'shouldnt allow a short call with file path', ->
+    line = 'require "../lib/Widget"'
+    ts.cjsRequire(line).should.eq 'var Widget = require("../lib/Widget");'
+  it 'should transform a long require call', ->
+    line = ' require "http" as myHttp'
+    ts.cjsRequire(line).should.eq 'var myHttp = require("http");'
+  it 'should transform a long require call with property', ->
+    line = ' require "http".prop as myHttp'
+    ts.cjsRequire(line).should.eq 'var myHttp = require("http").prop;'
+    # Regex test cases - http://bit.ly/11ehvgU
  
