@@ -28,39 +28,39 @@ redscript watch [fileName fileName2]
 # RequireJS AMD Modules...
 #
 define module
-require 'backbone' as Backbone                                       * see spec.md for full translation
+require 'backbone' as Backbone                                * see spec.md for full translation
 require './views/widget' as WidgetView
 
 
 # Block-like anonymous functions
 # Note, parens are currently req. around get/end, see spec.md
 #
-app.get '/users/:name', do |res, req|                                 app.get('/users/:name', function(res,req) {
-  puts req.params.name                                                  console.log(req.params.name);
-end                                                                   });
+app.get '/users/:name', do |res, req|                           app.get('/users/:name', function(res,req) {
+  puts req.params.name                                            console.log(req.params.name);
+end                                                             });
 
 
 # Paren-free constructs
 #
-if foo == 2                                                           if (foo === 2) {
-  puts "It's #{foo}"                                                    console.log("It's " + foo);
-else                                                                  } else {
-  alert "Rut Roh"                                                       alert("Rut Roh");
-end                                                                   }
+if foo == 2                                                     if (foo === 2) {
+  puts "It's #{foo}"                                              console.log("It's " + foo);
+else                                                            } else {
+  alert "Rut Roh"                                                 alert("Rut Roh");
+end                                                             }
 
 
 # Make constructors quack like a duck
-#                                                                     # note, inheritance methods are opt. inserted
-class Duck < Animal                                                   var Duck = Animal.extend({
-  def init(name)                                                        init: function(name) {
-    super foo, bar                                                        this._super(foo, bar);
-    @name = name                                                          this.name = name;
-  end,                                                                  },
+#                                                               # note, inheritance methods are opt. inserted
+class Duck < Animal                                             var Duck = Animal.extend({
+  def init(name)                                                  init: function(name) {
+    super foo, bar                                                  this._super(foo, bar);
+    @name = name                                                    this.name = name;
+  end,                                                            },
 
-  def sayHi                                                             sayHi: function() {
-    puts 'Hello!'                                                         console.log('Hello!');
-  end                                                                   }
-end                                                                   });
+  def sayHi                                                       sayHi: function() {
+    puts 'Hello!'                                                   console.log('Hello!');
+  end                                                             }
+end                                                             });
 ```
 ### See [redscript.org](http://redscript.org) for full syntax!
 
