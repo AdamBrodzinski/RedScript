@@ -1,5 +1,5 @@
 # RedScript  
-### A Ruby Flavored JavaScript Experiment
+### *Note, the compiler is just a prototype and is not production ready*
 
 * Paste (almost) any JS into a RedScript file
 * Cleaner syntax for modules (AMD and CommonJS)
