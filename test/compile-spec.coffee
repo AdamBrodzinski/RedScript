@@ -130,6 +130,7 @@ describe '#compile', ->
       compile('if (foo === 10) {').should.eq 'if (foo === 10) {'
     it 'should not convert strings', ->
       compile(' "foo b if  bar" ').should.eq ' "foo b if  bar" '
+      compile(' "i saw a gif on reddit" ').should.eq ' "i saw a gif on reddit" '
 
   describe 'else statement', ->
     it 'should transform to else with brackets', ->
@@ -145,8 +146,16 @@ describe '#compile', ->
     it 'should not convert strings', ->
       compile(' "foo else b else  bar" ').should.eq ' "foo else b else  bar" '
 
+  describe 'elsif statement', ->
+    it 'should transform to else if with brackets', ->
+      compile('elsif foo').should.eq '} else if (foo) {'
+      compile('  elsif foo').should.eq '  } else if (foo) {'
+      compile('elsif foo === 20').should.eq '} else if (foo === 20) {'
+    it 'should not convert strings', ->
+      compile(' "foo elsif baz bar" ').should.eq ' "foo elsif baz bar" '
+
   describe 'else if statement', ->
-    it 'should transform to else with brackets', ->
+    it 'should transform to else if with brackets', ->
       compile('else if foo').should.eq '} else if (foo) {'
       compile('  else if foo').should.eq '  } else if (foo) {'
       compile('else if foo === 20').should.eq '} else if (foo === 20) {'
