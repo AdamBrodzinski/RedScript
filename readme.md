@@ -9,8 +9,7 @@ RedScript was created to provide a more native experience for modules (AMD & Com
 and a Ruby style syntax that still behaves like JavaScript.  
 
 It was also created as a side project to learn more about Node, NPM Modules and Regular Expressions. In the future 
-I would also like to add a proper lexer/parser to implement more advanced features like optional parens 
-and ES5 attr_accessor like properties. *Pull requests welcome ;-)*
+I would also like to add a proper lexer/parser to implement more advanced features. *Pull requests welcome ;-)*
 
 More syntax examples at [redscript.org](http://redscript.org)
 
