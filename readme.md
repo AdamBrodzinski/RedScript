@@ -36,3 +36,30 @@ redscript watch [fileName fileName2]
 #>>> ["FOO", "BAR", "BAZ"]
 #>>> ["FOO", "BAR"]
 ```
+
+#### Plays well with React
+
+```elixir
+let Complex = React.createClass({
+  def getInitialState do
+    return { isReady: false }
+  end,
+
+  def render() do
+    <div>
+      <h1>Hello World</h1>
+      <p>Is ready: {this.isReady}</p>
+    </div>
+  end
+})
+export Complex;
+
+# stateless React components work best!
+
+def simple(props) do
+  <div>
+    <h1>Stateless Component</h1>
+    <p>Is ready: {props.isReady}</p>
+  </div>
+end
+```
