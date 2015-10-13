@@ -1,148 +1,144 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <meta charset="UTF-8">
     <title>RedScript by AdamBrodzinski</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
-
   <body>
-    <div id="container">
-      <div class="inner">
+    <section class="page-header">
+      <h1 class="project-name">RedScript</h1>
+      <h2 class="project-tagline">A Ruby Flavored JavaScript Experiment</h2>
+      <a href="https://github.com/AdamBrodzinski/RedScript" class="btn">View on GitHub</a>
+      <a href="https://github.com/AdamBrodzinski/RedScript/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/AdamBrodzinski/RedScript/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-        <header>
-          <h1>RedScript</h1>
-          <h2>A Ruby Flavored JavaScript Experiment</h2>
-        </header>
-
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/AdamBrodzinski/RedScript/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/AdamBrodzinski/RedScript/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/AdamBrodzinski/RedScript" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
-
-        <hr>
-
-        <section id="main_content">
-          <ul>
+    <section class="main-content">
+      <ul>
 <li>Paste (almost) any JS into a RedScript file</li>
 <li>Native feeling module syntax (AMD &amp; CommonJS)</li>
 <li>Easier class like inheritance or self based prototypal inheritance syntax</li>
-</ul><p>RedScript is an experiment created to provide a better syntax for AMD modules, easier inheritance and a more usable ES5 object syntax. It was also created as a side project to learn more about Node, NPM Modules and Regular Expressions. In the future I would also like convert this prototype compiler into a proper one with a lexer/parser to implement more advanced features like optional parens, variable scope and <code>attr_accessor</code> like ES5 object properties. <em>Pull requests welcome ;-)</em></p>
+</ul>
 
-<h4>To Install Globally and Run</h4>
+<p>RedScript is an experiment created to provide a better syntax for AMD modules, easier inheritance and a more usable ES5 object syntax. It was also created as a side project to learn more about Node, NPM Modules and Regular Expressions. In the future I would also like convert this prototype compiler into a proper one with a lexer/parser to implement more advanced features like optional parens, variable scope and <code>attr_accessor</code> like ES5 object properties. <em>Pull requests welcome ;-)</em></p>
+
+<h4>
+<a id="to-install-globally-and-run" class="anchor" href="#to-install-globally-and-run" aria-hidden="true"><span class="octicon octicon-link"></span></a>To Install Globally and Run</h4>
 
 <pre><code>sudo npm install -g redscript
 redscript watch [fileName1.rs fileName2.rs]
 </code></pre>
 
-<h2>Syntax</h2>
+<h2>
+<a id="syntax" class="anchor" href="#syntax" aria-hidden="true"><span class="octicon octicon-link"></span></a>Syntax</h2>
 
 <p>If you have suggestions on different syntax, please create
 an issue: <a href="https://github.com/AdamBrodzinski/RedScript/issues">here</a>.</p>
 
-<hr><h4>Comments</h4>
+<hr>
+
+<h4>
+<a id="comments" class="anchor" href="#comments" aria-hidden="true"><span class="octicon octicon-link"></span></a>Comments</h4>
 
 <p><em>Status</em>: <em>Working</em></p>
 
 <p>Line comments are made with a <code>#</code>. RedScript currently does not have multi-line comments but <code>/*...*/</code> can be used if needed.</p>
 
-<div class="highlight"><pre><span class="c1"># I'm a comment                          // I'm a comment</span>
-<span class="nx">$</span><span class="p">(</span><span class="s">'#someID'</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">foo</span><span class="p">)</span>                   <span class="nx">$</span><span class="p">(</span><span class="s">'#someID'</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">foo</span><span class="p">)</span> <span class="c1"># No worries here</span>
-</pre></div>
+<div class="highlight highlight-source-coffee"><pre><span class="pl-c"># I'm a comment                          // I'm a comment</span>
+$(<span class="pl-s"><span class="pl-pds">'</span>#someID<span class="pl-pds">'</span></span>).<span class="pl-en">html</span>(foo)                   $(<span class="pl-s"><span class="pl-pds">'</span>#someID<span class="pl-pds">'</span></span>).<span class="pl-en">html</span>(foo) <span class="pl-c"># No worries here</span></pre></div>
 
 <p><br></p>
 
-<h4>Alias @ with this</h4>
+<h4>
+<a id="alias--with-this" class="anchor" href="#alias--with-this" aria-hidden="true"><span class="octicon octicon-link"></span></a>Alias @ with this</h4>
 
 <p><em>Status:</em> Working</p>
 
-<div class="highlight"><pre><span class="n">function</span> <span class="no">Foo</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span> <span class="p">{</span>               <span class="n">function</span> <span class="no">Foo</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="n">age</span><span class="p">){</span>
-  <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span>                             <span class="n">this</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="nb">name</span><span class="p">;</span>
-  <span class="vi">@age</span> <span class="o">=</span> <span class="n">age</span>                               <span class="n">this</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span><span class="p">;</span>
-<span class="p">}</span>                                        <span class="p">}</span>
-</pre></div>
+<div class="highlight highlight-source-ruby"><pre>function <span class="pl-c1">Foo</span>(name, age) {               function <span class="pl-c1">Foo</span>(name, age){
+  <span class="pl-smi">@name</span> <span class="pl-k">=</span> name                             this.name <span class="pl-k">=</span> name;
+  <span class="pl-smi">@age</span> <span class="pl-k">=</span> age                               this.age <span class="pl-k">=</span> age;
+}                                        }</pre></div>
 
 <p><br></p>
 
-<h4>Loops</h4>
+<h4>
+<a id="loops" class="anchor" href="#loops" aria-hidden="true"><span class="octicon octicon-link"></span></a>Loops</h4>
 
 <p><em>Status:</em> <strong>Working</strong></p>
 
 <p><em>Note</em>, for in range loops only support <code>0..3</code>, <code>0...3</code> or variables e.g. <code>begin..ending</code>. Note, currently the range does not go backwards (<code>10..0</code>).<br>
 To prevent confusion until loops have an <code>//until</code> comment next to the compiled output.</p>
 
-<div class="highlight"><pre><span class="k">while</span> <span class="n">foo</span> <span class="o">&lt;</span> <span class="mi">200</span>                        <span class="k">while</span> <span class="p">(</span><span class="n">foo</span> <span class="o">&lt;</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nb">puts</span> <span class="s2">"I'm looping forever"</span>              <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"I'm looping forever"</span><span class="p">);</span>
-<span class="k">end</span>                                     <span class="p">}</span>
+<div class="highlight highlight-source-ruby"><pre><span class="pl-k">while</span> foo <span class="pl-k">&lt;</span> <span class="pl-c1">200</span>                        <span class="pl-k">while</span> (foo <span class="pl-k">&lt;</span> <span class="pl-c1">200</span>) {
+  puts <span class="pl-s"><span class="pl-pds">"</span>I'm looping forever<span class="pl-pds">"</span></span>              console.log(<span class="pl-s"><span class="pl-pds">"</span>I'm looping forever<span class="pl-pds">"</span></span>);
+<span class="pl-k">end</span>                                     }
 
 
-<span class="c1"># loops until a condition is true</span>
-<span class="k">until</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">5</span>                            <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">5</span><span class="p">))</span> <span class="p">{</span> <span class="sr">//</span> <span class="kp">loop</span> <span class="k">until</span>  
-   <span class="nb">puts</span> <span class="n">i</span>                                  <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>                
-   <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>                                  <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>                        
-<span class="k">end</span>                                     <span class="p">}</span>                                 
+<span class="pl-c"># loops until a condition is true</span>
+<span class="pl-k">until</span> i <span class="pl-k">==</span> <span class="pl-c1">5</span>                            <span class="pl-k">while</span> (!(i <span class="pl-k">==</span> <span class="pl-c1">5</span>)) { <span class="pl-k">//</span> <span class="pl-k">loop</span> <span class="pl-k">until</span>  
+   puts i                                  console.log(i);                
+   i <span class="pl-k">+=</span> <span class="pl-c1">1</span>                                  i <span class="pl-k">+=</span> <span class="pl-c1">1</span>;                        
+<span class="pl-k">end</span>                                     }                                 
 
 
-<span class="c1"># prints 5x, 0,1,2,3,4                  </span>
-<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="mi">5</span>                           <span class="k">for</span> <span class="p">(</span><span class="n">var</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>    
-  <span class="nb">puts</span> <span class="n">i</span>                                  <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>           
-<span class="k">end</span>                                     <span class="p">}</span>                             
+<span class="pl-c"># prints 5x, 0,1,2,3,4                  </span>
+<span class="pl-k">for</span> i <span class="pl-k">in</span> <span class="pl-c1">0</span>..<span class="pl-c1">5</span>                           <span class="pl-k">for</span> (var i<span class="pl-k">=</span><span class="pl-c1">0</span>; i <span class="pl-k">&lt;</span> <span class="pl-c1">5</span>; i<span class="pl-k">++</span>) {    
+  puts i                                  console.log(i);           
+<span class="pl-k">end</span>                                     }                             
 
 
-<span class="c1"># prints 6x, 0,1,2,3,4,5                </span>
-<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="mi">5</span>                          <span class="k">for</span> <span class="p">(</span><span class="n">var</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nb">puts</span> <span class="n">i</span>                                  <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>       
-<span class="k">end</span>                                     <span class="p">}</span>                          
-</pre></div>
+<span class="pl-c"># prints 6x, 0,1,2,3,4,5                </span>
+<span class="pl-k">for</span> i <span class="pl-k">in</span> <span class="pl-c1">0</span>...<span class="pl-c1">5</span>                          <span class="pl-k">for</span> (var i<span class="pl-k">=</span><span class="pl-c1">0</span>; i <span class="pl-k">&lt;=</span> <span class="pl-c1">5</span>; i<span class="pl-k">++</span>) {
+  puts i                                  console.log(i)       
+<span class="pl-k">end</span>                                     }                          </pre></div>
 
 <p><br></p>
 
-<h4>Iterating over arrays and objects</h4>
+<h4>
+<a id="iterating-over-arrays-and-objects" class="anchor" href="#iterating-over-arrays-and-objects" aria-hidden="true"><span class="octicon octicon-link"></span></a>Iterating over arrays and objects</h4>
 
 <p><em>Status:</em> <strong>Working</strong></p>
 
-<div class="highlight"><pre><span class="c1"># Iterate over arrays</span>
-<span class="n">basket</span> <span class="o">=</span> <span class="o">[</span><span class="s1">'lemon'</span><span class="p">,</span> <span class="s1">'pear'</span><span class="p">,</span> <span class="s1">'apple'</span><span class="o">]</span>     <span class="n">var</span> <span class="n">basket</span> <span class="o">=</span> <span class="o">[</span><span class="s1">'lemon'</span><span class="p">,</span> <span class="s1">'pear'</span><span class="p">,</span> <span class="s1">'apple'</span><span class="o">]</span><span class="p">;</span>
+<div class="highlight highlight-source-ruby"><pre><span class="pl-c"># Iterate over arrays</span>
+basket <span class="pl-k">=</span> [<span class="pl-s"><span class="pl-pds">'</span>lemon<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>pear<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>apple<span class="pl-pds">'</span></span>]     var basket <span class="pl-k">=</span> [<span class="pl-s"><span class="pl-pds">'</span>lemon<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>pear<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>apple<span class="pl-pds">'</span></span>];
 
-<span class="k">for</span> <span class="n">fruit</span> <span class="n">inArr</span> <span class="n">basket</span>                  <span class="k">for</span> <span class="p">(</span><span class="n">var</span> <span class="n">i1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">len1</span><span class="o">=</span><span class="n">basket</span><span class="o">.</span><span class="n">length</span><span class="p">;</span> <span class="n">i1</span> <span class="o">&lt;</span> <span class="n">len1</span><span class="p">;</span> <span class="n">i1</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="n">var</span> <span class="n">fruit</span> <span class="o">=</span> <span class="n">basket</span><span class="o">[</span><span class="n">i1</span><span class="o">]</span><span class="p">;</span>    
-  <span class="nb">puts</span> <span class="n">fruit</span>                              <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">fruit</span><span class="p">);</span>                                                            
-<span class="k">end</span>                                     <span class="p">}</span>                                                                                
-
-
-<span class="k">for</span> <span class="n">key</span> <span class="k">in</span> <span class="n">obj</span>                          <span class="k">for</span> <span class="p">(</span><span class="n">var</span> <span class="n">key</span> <span class="k">in</span> <span class="n">obj</span><span class="p">)</span> <span class="p">{</span>
-   <span class="n">alert</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>                             <span class="n">alert</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
-<span class="k">end</span>                                     <span class="p">}</span>
+<span class="pl-k">for</span> fruit inArr basket                  <span class="pl-k">for</span> (var i1<span class="pl-k">=</span><span class="pl-c1">0</span>, len1<span class="pl-k">=</span>basket.length; i1 <span class="pl-k">&lt;</span> len1; i1<span class="pl-k">++</span>) { var fruit <span class="pl-k">=</span> basket[i1];    
+  puts fruit                              console.log(fruit);                                                            
+<span class="pl-k">end</span>                                     }                                                                                
 
 
-<span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">val</span> <span class="k">in</span> <span class="n">obj</span>                      <span class="k">for</span> <span class="p">(</span><span class="n">var</span> <span class="n">key</span> <span class="k">in</span> <span class="n">obj</span><span class="p">)</span> <span class="p">{</span> <span class="n">var</span> <span class="n">val</span> <span class="o">=</span> <span class="n">obj</span><span class="o">[</span><span class="n">key</span><span class="o">]</span><span class="p">;</span>
-  <span class="nb">puts</span> <span class="s1">'My key is: #{key}'</span>                <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">'My key is: '</span> <span class="o">+</span> <span class="n">key</span><span class="p">);</span>
-  <span class="nb">puts</span> <span class="s1">'My value is: #{val}'</span>              <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">'My value is: '</span> <span class="o">+</span> <span class="n">val</span><span class="p">);</span>
-<span class="k">end</span>                                     <span class="p">}</span>
-</pre></div>
+<span class="pl-k">for</span> key <span class="pl-k">in</span> obj                          <span class="pl-k">for</span> (var key <span class="pl-k">in</span> obj) {
+   alert(key)                             alert(key);
+<span class="pl-k">end</span>                                     }
 
-<p><br></p>
 
-<h4>Convenience method aliases for puts &amp; printf</h4>
-
-<p><em>Status:</em> <strong>Working</strong><br><code>puts</code> and <code>printf</code> are aliases to <code>console.log</code> and <code>process.stdout.write</code>. <code>printf</code> is only available with node enviroments. These are the only methods that have optional parens at this time. If parens are omitted a closing paren will be appended to the end of the line. Parenless multi lines are not possible.</p>
-
-<div class="highlight"><pre><span class="nb">puts</span> <span class="s2">"Hello there"</span>                      <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"Hello there"</span><span class="p">);</span>
-<span class="nb">puts</span><span class="p">(</span><span class="s2">"Hai!"</span><span class="p">)</span>                            <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"Hai"</span><span class="p">)</span>
-<span class="nb">printf</span> <span class="s2">"Hola"</span>                           <span class="n">process</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"Hola"</span><span class="p">)</span>
-<span class="nb">printf</span><span class="p">(</span><span class="s2">"Hola"</span><span class="p">)</span>                          <span class="n">process</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"Hola"</span><span class="p">)</span>
-</pre></div>
+<span class="pl-k">for</span> key,val <span class="pl-k">in</span> obj                      <span class="pl-k">for</span> (var key <span class="pl-k">in</span> obj) { var val <span class="pl-k">=</span> obj[key];
+  puts <span class="pl-s"><span class="pl-pds">'</span>My key is: #{key}<span class="pl-pds">'</span></span>                console.log(<span class="pl-s"><span class="pl-pds">'</span>My key is: <span class="pl-pds">'</span></span> <span class="pl-k">+</span> key);
+  puts <span class="pl-s"><span class="pl-pds">'</span>My value is: #{val}<span class="pl-pds">'</span></span>              console.log(<span class="pl-s"><span class="pl-pds">'</span>My value is: <span class="pl-pds">'</span></span> <span class="pl-k">+</span> val);
+<span class="pl-k">end</span>                                     }</pre></div>
 
 <p><br></p>
 
-<h4>Variables &amp; automatic semi-colon insertion</h4>
+<h4>
+<a id="convenience-method-aliases-for-puts--printf" class="anchor" href="#convenience-method-aliases-for-puts--printf" aria-hidden="true"><span class="octicon octicon-link"></span></a>Convenience method aliases for puts &amp; printf</h4>
+
+<p><em>Status:</em> <strong>Working</strong><br>
+<code>puts</code> and <code>printf</code> are aliases to <code>console.log</code> and <code>process.stdout.write</code>. <code>printf</code> is only available with node enviroments. These are the only methods that have optional parens at this time. If parens are omitted a closing paren will be appended to the end of the line. Parenless multi lines are not possible.</p>
+
+<div class="highlight highlight-source-ruby"><pre>puts <span class="pl-s"><span class="pl-pds">"</span>Hello there<span class="pl-pds">"</span></span>                      console.log(<span class="pl-s"><span class="pl-pds">"</span>Hello there<span class="pl-pds">"</span></span>);
+puts(<span class="pl-s"><span class="pl-pds">"</span>Hai!<span class="pl-pds">"</span></span>)                            console.log(<span class="pl-s"><span class="pl-pds">"</span>Hai<span class="pl-pds">"</span></span>)
+printf <span class="pl-s"><span class="pl-pds">"</span>Hola<span class="pl-pds">"</span></span>                           process.stdout.write(<span class="pl-s"><span class="pl-pds">"</span>Hola<span class="pl-pds">"</span></span>)
+printf(<span class="pl-s"><span class="pl-pds">"</span>Hola<span class="pl-pds">"</span></span>)                          process.stdout.write(<span class="pl-s"><span class="pl-pds">"</span>Hola<span class="pl-pds">"</span></span>)</pre></div>
+
+<p><br></p>
+
+<h4>
+<a id="variables--automatic-semi-colon-insertion" class="anchor" href="#variables--automatic-semi-colon-insertion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Variables &amp; automatic semi-colon insertion</h4>
 
 <p><em>Status</em>: <strong>Partially implemented, known bug</strong></p>
 
@@ -155,339 +151,339 @@ variables that are declared inside of a function multiple times can
 lead to unintended global leaks. To disable auto declaration pass <code>no--declare</code>. Another workaround is
 to manually declare variables with the var keyword.</em></p>
 
-<div class="highlight"><pre><span class="n">foo</span> <span class="o">=</span> <span class="mi">12</span>                 <span class="n">var</span> <span class="n">foo</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
-<span class="n">foo</span> <span class="o">=</span> <span class="mi">20</span>                 <span class="n">foo</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+<div class="highlight highlight-source-ruby"><pre>foo <span class="pl-k">=</span> <span class="pl-c1">12</span>                 var foo <span class="pl-k">=</span> <span class="pl-c1">12</span>;
+foo <span class="pl-k">=</span> <span class="pl-c1">20</span>                 foo <span class="pl-k">=</span> <span class="pl-c1">20</span>;
 
-<span class="c1"># Constants are preprocessed</span>
-<span class="no">AMOUNT</span> <span class="o">=</span> <span class="mi">233</span>            
-<span class="nb">puts</span> <span class="no">AMOUNT</span>             <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">233</span><span class="p">)</span>
+<span class="pl-c"># Constants are preprocessed</span>
+<span class="pl-c1">AMOUNT</span> <span class="pl-k">=</span> <span class="pl-c1">233</span>            
+puts <span class="pl-c1">AMOUNT</span>             console.log(<span class="pl-c1">233</span>)
 
-<span class="c1"># !! Lexical scoping bug in current version !!</span>
-<span class="n">func</span> <span class="n">foo</span>                <span class="n">var</span> <span class="n">foo</span> <span class="o">=</span> <span class="n">function</span><span class="p">()</span> <span class="p">{</span>
-  <span class="n">baz</span> <span class="o">=</span> <span class="mi">20</span>                <span class="n">var</span> <span class="n">baz</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>       
-<span class="k">end</span>                     <span class="p">};</span>                    
+<span class="pl-c"># !! Lexical scoping bug in current version !!</span>
+func foo                var foo <span class="pl-k">=</span> function() {
+  baz <span class="pl-k">=</span> <span class="pl-c1">20</span>                var baz <span class="pl-k">=</span> <span class="pl-c1">20</span>;       
+<span class="pl-k">end</span>                     };                    
 
-<span class="n">func</span> <span class="n">bar</span>                <span class="n">var</span> <span class="n">bar</span> <span class="o">=</span> <span class="n">function</span><span class="p">()</span> <span class="p">{</span>
-  <span class="n">baz</span> <span class="o">=</span> <span class="mi">30</span>                <span class="n">baz</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>       
-<span class="k">end</span>                     <span class="p">};</span>                     
-</pre></div>
+func bar                var bar <span class="pl-k">=</span> function() {
+  baz <span class="pl-k">=</span> <span class="pl-c1">30</span>                baz <span class="pl-k">=</span> <span class="pl-c1">30</span>;       
+<span class="pl-k">end</span>                     };                     </pre></div>
 
 <p><br></p>
 
-<h4>Optional Parenthesis</h4>
+<h4>
+<a id="optional-parenthesis" class="anchor" href="#optional-parenthesis" aria-hidden="true"><span class="octicon octicon-link"></span></a>Optional Parenthesis</h4>
 
 <p><em>Status:</em> <strong>Implemented with RedScript constructs only</strong></p>
 
 <p>Currently I cannot implement this until I can create a proper lexer. Pull requests welcome ;-) For the time being you have to include parens. A temporary kludgey alias for <code>end)</code> is <code>end-</code>. This is slightly easier to look at for the short run, but expect this to be dropped in the future.</p>
 
-<div class="highlight"><pre><span class="n">alert</span> <span class="s1">'Hello World!'</span>
+<div class="highlight highlight-source-ruby"><pre>alert <span class="pl-s"><span class="pl-pds">'</span>Hello World!<span class="pl-pds">'</span></span>
 
-<span class="n">getUser</span> <span class="s1">'/users/1'</span><span class="p">,</span> <span class="k">do</span>
-  <span class="n">alert</span> <span class="n">user</span>
-<span class="k">end</span>
+getUser <span class="pl-s"><span class="pl-pds">'</span>/users/1<span class="pl-pds">'</span></span>, <span class="pl-k">do</span>
+  alert user
+<span class="pl-k">end</span>
 
-<span class="c1"># Currently you still have to use parens for anything that's not a RedScript construct.</span>
-<span class="n">getUser</span><span class="p">(</span> <span class="s1">'/users/1'</span><span class="p">,</span> <span class="k">do</span>
-  <span class="n">alert</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-<span class="k">end</span><span class="p">)</span>
+<span class="pl-c"># Currently you still have to use parens for anything that's not a RedScript construct.</span>
+getUser( <span class="pl-s"><span class="pl-pds">'</span>/users/1<span class="pl-pds">'</span></span>, <span class="pl-k">do</span>
+  alert(user)
+<span class="pl-k">end</span>)
 
-<span class="c1"># A kludgey alias for `end)` is `end-`</span>
-<span class="n">getUser</span><span class="p">(</span> <span class="s1">'/users/1'</span><span class="p">,</span> <span class="k">do</span>
-  <span class="n">alert</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-<span class="k">end</span><span class="o">-</span>
-</pre></div>
+<span class="pl-c"># A kludgey alias for `end)` is `end-`</span>
+getUser( <span class="pl-s"><span class="pl-pds">'</span>/users/1<span class="pl-pds">'</span></span>, <span class="pl-k">do</span>
+  alert(user)
+<span class="pl-k">end</span><span class="pl-k">-</span></pre></div>
 
 <p><br></p>
 
-<h4>Ruby flavored functions</h4>
+<h4>
+<a id="ruby-flavored-functions" class="anchor" href="#ruby-flavored-functions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ruby flavored functions</h4>
 
 <p><code>Func [name]</code> declares the function as an expression and sets <code>[name]</code> to a variable. Parens are optional if no arguments are being passed. If arguments are passed braces must be used. Anonymous functions are declared as <code>func</code>, parens are also optional. This type of anonymous function should only be used when using <code>do |x|</code> would be awkward, such as in an <a href="https://github.com/caolan/async">async</a>'s array of parallel functions.</p>
 
 <p><em>Status:</em> <strong>Working</strong></p>
 
-<div class="highlight"><pre><span class="n">func</span> <span class="n">say</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>                            <span class="n">var</span> <span class="n">say</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nb">puts</span> <span class="s2">"Message: </span><span class="si">#{</span><span class="n">msg</span><span class="si">}</span><span class="s2">"</span>                   <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"Message: "</span> <span class="o">+</span> <span class="n">msg</span><span class="p">);</span>
-<span class="k">end</span>                                      <span class="p">};</span>
+<div class="highlight highlight-source-ruby"><pre>func say(msg)                            var say <span class="pl-k">=</span> function(msg) {
+  puts <span class="pl-s"><span class="pl-pds">"</span>Message: <span class="pl-pse">#{</span><span class="pl-s1">msg</span><span class="pl-pse"><span class="pl-s1">}</span></span><span class="pl-pds">"</span></span>                   console.log(<span class="pl-s"><span class="pl-pds">"</span>Message: <span class="pl-pds">"</span></span> <span class="pl-k">+</span> msg);
+<span class="pl-k">end</span>                                      };
 
-<span class="c1"># Optional function parens</span>
-<span class="n">func</span> <span class="n">sayHello</span>
-  <span class="nb">puts</span> <span class="s2">"Hello"</span>
-<span class="k">end</span>
+<span class="pl-c"># Optional function parens</span>
+func sayHello
+  puts <span class="pl-s"><span class="pl-pds">"</span>Hello<span class="pl-pds">"</span></span>
+<span class="pl-k">end</span>
 
-<span class="c1"># anonymous function</span>
-<span class="n">func</span>                                    <span class="n">function</span><span class="p">()</span> <span class="p">{</span>
-  <span class="c1"># do stuff                              // do stuff</span>
-<span class="k">end</span>                                     <span class="p">}</span>
+<span class="pl-c"># anonymous function</span>
+func                                    function() {
+  <span class="pl-c"># do stuff                              // do stuff</span>
+<span class="pl-k">end</span>                                     }
 
-<span class="n">func</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>                               <span class="n">function</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1"># do stuff                              // do stuff</span>
-<span class="k">end</span>                                     <span class="p">}</span>
-</pre></div>
+func(a,b)                               function(a,b) {
+  <span class="pl-c"># do stuff                              // do stuff</span>
+<span class="pl-k">end</span>                                     }</pre></div>
 
 <p><br></p>
 
-<h4>If/else/else if</h4>
+<h4>
+<a id="ifelseelse-if" class="anchor" href="#ifelseelse-if" aria-hidden="true"><span class="octicon octicon-link"></span></a>If/else/else if</h4>
 
 <p><em>Status:</em> <strong>Partially implemented</strong></p>
 
 <p>If statements currently are multi-line. If you would like to use a one liner, you can still use vanilla js <code>if (err) throw err;</code>.</p>
 
-<div class="highlight"><pre><span class="k">if</span> <span class="n">foo</span> <span class="o">==</span> <span class="mi">10</span>                            <span class="k">if</span> <span class="p">(</span><span class="n">foo</span> <span class="o">===</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">bar</span><span class="p">(</span><span class="s2">"do stuff"</span><span class="p">)</span>                         <span class="n">bar</span><span class="p">(</span><span class="s2">"do stuff"</span><span class="p">);</span>
-<span class="k">else</span> <span class="k">if</span> <span class="n">foo</span> <span class="o">==</span> <span class="mi">20</span>                       <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">foo</span> <span class="o">===</span> <span class="mi">20</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">bar</span><span class="p">(</span><span class="s2">"do stuff"</span><span class="p">)</span>                         <span class="n">bar</span><span class="p">(</span><span class="s2">"do stuff"</span><span class="p">);</span>
-<span class="k">else</span>                                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-  <span class="n">bar</span><span class="p">(</span><span class="s2">"do stuff"</span><span class="p">)</span>                         <span class="n">bar</span><span class="p">(</span><span class="s2">"do stuff"</span><span class="p">);</span>
-<span class="k">end</span>                                     <span class="p">}</span>
+<div class="highlight highlight-source-ruby"><pre><span class="pl-k">if</span> foo <span class="pl-k">==</span> <span class="pl-c1">10</span>                            <span class="pl-k">if</span> (foo <span class="pl-k">===</span> <span class="pl-c1">10</span>) {
+  bar(<span class="pl-s"><span class="pl-pds">"</span>do stuff<span class="pl-pds">"</span></span>)                         bar(<span class="pl-s"><span class="pl-pds">"</span>do stuff<span class="pl-pds">"</span></span>);
+<span class="pl-id">else if</span> foo <span class="pl-k">==</span> <span class="pl-c1">20</span>                       } <span class="pl-id">else if</span> (foo <span class="pl-k">===</span> <span class="pl-c1">20</span>) {
+  bar(<span class="pl-s"><span class="pl-pds">"</span>do stuff<span class="pl-pds">"</span></span>)                         bar(<span class="pl-s"><span class="pl-pds">"</span>do stuff<span class="pl-pds">"</span></span>);
+<span class="pl-k">else</span>                                    } <span class="pl-k">else</span> {
+  bar(<span class="pl-s"><span class="pl-pds">"</span>do stuff<span class="pl-pds">"</span></span>)                         bar(<span class="pl-s"><span class="pl-pds">"</span>do stuff<span class="pl-pds">"</span></span>);
+<span class="pl-k">end</span>                                     }
 
-<span class="kp">throw</span> <span class="n">err</span> <span class="k">if</span> <span class="n">err</span>                        <span class="k">if</span> <span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="p">{</span> <span class="kp">throw</span> <span class="n">err</span><span class="p">;</span> <span class="p">}</span>
-</pre></div>
+<span class="pl-k">throw</span> err <span class="pl-k">if</span> err                        <span class="pl-k">if</span> (err) { <span class="pl-k">throw</span> err; }</pre></div>
 
 <p><br></p>
 
-<h4>Methods &amp; Object Literal</h4>
+<h4>
+<a id="methods--object-literal" class="anchor" href="#methods--object-literal" aria-hidden="true"><span class="octicon octicon-link"></span></a>Methods &amp; Object Literal</h4>
 
 <p><em>Status:</em> <strong>Working</strong></p>
 
 <p>Methods are declared using the def keyword and parens are optional <em>if</em> arguments are not used.<br>
 Attaching a method to an object's prototype be defined using <code>def objName &gt;&gt; mthdName</code>.</p>
 
-<div class="highlight"><pre><span class="n">object</span> <span class="n">auto</span>                                   <span class="n">var</span> <span class="n">auto</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="ss">wheels</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>                                    <span class="ss">wheels</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-  <span class="ss">engine</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span>                                 <span class="ss">engine</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span>
+<div class="highlight highlight-source-ruby"><pre>object auto                                   var auto <span class="pl-k">=</span> {
+  <span class="pl-c1">wheels:</span> <span class="pl-c1">4</span>,                                    <span class="pl-c1">wheels:</span> <span class="pl-c1">4</span>,
+  <span class="pl-c1">engine:</span> <span class="pl-c1">true</span>,                                 <span class="pl-c1">engine:</span> <span class="pl-c1">true</span>,
 
-  <span class="k">def</span> <span class="nf">honk</span>                                      <span class="ss">honk</span><span class="p">:</span> <span class="n">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nb">puts</span> <span class="s2">"hoooonk"</span>                                <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"hooooonk"</span><span class="p">);</span>
-  <span class="k">end</span><span class="p">,</span>                                          <span class="p">},</span>
+  <span class="pl-k">def</span> <span class="pl-en">honk</span>                                      <span class="pl-smi">honk</span>: function() {
+    puts <span class="pl-s"><span class="pl-pds">"</span>hoooonk<span class="pl-pds">"</span></span>                                console.log(<span class="pl-s"><span class="pl-pds">"</span>hooooonk<span class="pl-pds">"</span></span>);
+  <span class="pl-k">end</span>,                                          },
 
-  <span class="k">def</span> <span class="nf">sayHi</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>                                <span class="ss">sayHi</span><span class="p">:</span> <span class="n">function</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nb">puts</span> <span class="n">msg</span>                                      <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span>
-  <span class="k">end</span>                                           <span class="p">}</span>
-<span class="k">end</span>                                           <span class="p">}</span>
+  <span class="pl-k">def</span> <span class="pl-en">sayHi</span>(<span class="pl-smi">msg</span>)                                <span class="pl-c1">sayHi:</span> function(msg) {
+    puts msg                                      console.log(msg);
+  <span class="pl-k">end</span>                                           }
+<span class="pl-k">end</span>                                           }
 
-<span class="c1"># Define outside of object literal</span>
-<span class="k">def</span> <span class="nc">auto</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>                            <span class="n">auto</span><span class="o">.</span><span class="n">add</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="vi">@wheels</span>                            <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">this</span><span class="o">.</span><span class="n">wheels</span><span class="p">;</span>
-<span class="k">end</span>                                           <span class="p">};</span>
+<span class="pl-c"># Define outside of object literal</span>
+<span class="pl-k">def</span> <span class="pl-en">auto.add</span>(<span class="pl-smi">x</span>, <span class="pl-smi">y</span>)                            auto.add <span class="pl-k">=</span> function(x,y) {
+  <span class="pl-k">return</span> x <span class="pl-k">+</span> <span class="pl-smi">@wheels</span>                            <span class="pl-k">return</span> x <span class="pl-k">+</span> this.wheels;
+<span class="pl-k">end</span>                                           };
 
-<span class="c1"># Define method attached to prototype</span>
-<span class="k">def</span> <span class="nf">Car</span> <span class="o">&gt;&gt;</span> <span class="nb">sub</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>                          <span class="no">Car</span><span class="o">.</span><span class="n">prototype</span><span class="o">.</span><span class="n">sub</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span>                                  <span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">;</span>
-<span class="k">end</span>                                           <span class="p">};</span>
-</pre></div>
+<span class="pl-c"># Define method attached to prototype</span>
+<span class="pl-k">def</span> <span class="pl-en">Car</span> <span class="pl-k">&gt;&gt;</span> sub(x,<span class="pl-smi">y</span>)                          <span class="pl-c1">Car</span>.prototype.sub <span class="pl-k">=</span> function(x, <span class="pl-smi">y</span>) {
+  <span class="pl-k">return</span> x <span class="pl-k">-</span> y                                  <span class="pl-k">return</span> x <span class="pl-k">-</span> y;
+<span class="pl-k">end</span>                                           };</pre></div>
 
 <p><br></p>
 
-<h4>Block-like Syntax for Anonymous Functions</h4>
+<h4>
+<a id="block-like-syntax-for-anonymous-functions" class="anchor" href="#block-like-syntax-for-anonymous-functions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Block-like Syntax for Anonymous Functions</h4>
 
 <p><em>Status:</em> <strong>Working</strong></p>
 
 <p>Block like syntax is a shorter way to write an anonymous function. The preceding comma is optional. However, including it may be easier to understand if it's included. Once we have optional parens working this will look <em>much</em> nicer! </p>
 
-<div class="highlight"><pre>
-<span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'/users/:user'</span><span class="p">,</span> <span class="k">do</span> <span class="o">|</span><span class="n">req</span><span class="o">|</span>        <span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'/users/:user'</span><span class="p">,</span> <span class="n">function</span><span class="p">(</span><span class="n">req</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nb">puts</span> <span class="n">req</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">name</span>                    <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">name</span><span class="p">);</span>
-<span class="k">end</span><span class="p">)</span>                                    <span class="p">});</span>
+<div class="highlight highlight-source-ruby"><pre>
+app.get(<span class="pl-s"><span class="pl-pds">'</span>/users/:user<span class="pl-pds">'</span></span>, <span class="pl-k">do </span>|<span class="pl-smi">req</span>|        app.get(<span class="pl-s"><span class="pl-pds">'</span>/users/:user<span class="pl-pds">'</span></span>, function(req) {
+  puts req.params.name                    console.log(req.params.name);
+<span class="pl-k">end</span>)                                    });
 
-<span class="c1"># no params</span>
-<span class="vg">$myBtn</span><span class="o">.</span><span class="n">click</span><span class="p">(</span> <span class="k">do</span>                        <span class="vg">$myBtn</span><span class="o">.</span><span class="n">click</span><span class="p">(</span> <span class="n">function</span><span class="p">()</span> <span class="p">{</span>
-  <span class="n">alert</span><span class="p">(</span><span class="s2">"hi"</span><span class="p">)</span>                             <span class="n">alert</span><span class="p">(</span><span class="s2">"hi"</span><span class="p">);</span>
-<span class="k">end</span><span class="p">)</span>                                    <span class="p">});</span>
-</pre></div>
+<span class="pl-c"># no params</span>
+<span class="pl-smi">$myBtn</span>.click( <span class="pl-k">do                        </span><span class="pl-smi">$myBtn</span>.click( function() {
+  alert(<span class="pl-s"><span class="pl-pds">"</span>hi<span class="pl-pds">"</span></span>)                             alert(<span class="pl-s"><span class="pl-pds">"</span>hi<span class="pl-pds">"</span></span>);
+<span class="pl-k">end</span>)                                    });</pre></div>
 
 <p><br></p>
 
-<h4>CommonJS Modules</h4>
+<h4>
+<a id="commonjs-modules" class="anchor" href="#commonjs-modules" aria-hidden="true"><span class="octicon octicon-link"></span></a>CommonJS Modules</h4>
 
 <p><em>Status:</em> <strong>Partially Implemented</strong>  </p>
 
-<div class="highlight"><pre><span class="c1"># Require a module as set variable as that name</span>
-<span class="nb">require</span> <span class="s1">'express'</span>                                          <span class="n">var</span> <span class="n">express</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="s1">'express'</span><span class="p">);</span>
+<div class="highlight highlight-source-ruby"><pre><span class="pl-c"># Require a module as set variable as that name</span>
+<span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>express<span class="pl-pds">'</span></span>                                          var express <span class="pl-k">=</span> <span class="pl-k">require</span>(<span class="pl-s"><span class="pl-pds">'</span>express<span class="pl-pds">'</span></span>);
 
-<span class="c1"># Require a directory as a different name</span>
-<span class="nb">require</span> <span class="s1">'./lib/widget'</span> <span class="n">as</span> <span class="no">Widget</span>                           <span class="n">var</span> <span class="no">Widget</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="s1">'./lib/widget'</span><span class="p">);</span>
+<span class="pl-c"># Require a directory as a different name</span>
+<span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>./lib/widget<span class="pl-pds">'</span></span> as <span class="pl-c1">Widget</span>                           var <span class="pl-c1">Widget</span> <span class="pl-k">=</span> <span class="pl-k">require</span>(<span class="pl-s"><span class="pl-pds">'</span>./lib/widget<span class="pl-pds">'</span></span>);
 
-<span class="c1"># Require a property of a module</span>
-<span class="nb">require</span> <span class="s1">'events'</span><span class="o">.</span><span class="n">EventEmitter</span> <span class="n">as</span> <span class="no">EM</span>                        <span class="n">var</span> <span class="no">EM</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="s1">'events'</span><span class="p">)</span><span class="o">.</span><span class="n">EventEmitter</span><span class="p">;</span>
+<span class="pl-c"># Require a property of a module</span>
+<span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>events<span class="pl-pds">'</span></span>.<span class="pl-c1">EventEmitter</span> as <span class="pl-c1">EM</span>                        var <span class="pl-c1">EM</span> <span class="pl-k">=</span> <span class="pl-k">require</span>(<span class="pl-s"><span class="pl-pds">'</span>events<span class="pl-pds">'</span></span>).<span class="pl-c1">EventEmitter</span>;
 
-<span class="c1"># Require file foo and set it's variable to foo</span>
-<span class="nb">require</span> <span class="s1">'../lib/Router'</span>                                    <span class="n">var</span> <span class="no">Router</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="s1">'../lib/Router'</span><span class="p">);</span> 
+<span class="pl-c"># Require file foo and set it's variable to foo</span>
+<span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>../lib/Router<span class="pl-pds">'</span></span>                                    var <span class="pl-c1">Router</span> <span class="pl-k">=</span> <span class="pl-k">require</span>(<span class="pl-s"><span class="pl-pds">'</span>../lib/Router<span class="pl-pds">'</span></span>); 
 
-<span class="c1"># export methods</span>
-<span class="n">export</span> <span class="k">def</span> <span class="nf">getName</span>                                         <span class="n">exports</span><span class="o">.</span><span class="n">getName</span> <span class="o">=</span> <span class="n">function</span><span class="p">()</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span>                                           <span class="k">return</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">;</span>
-<span class="k">end</span>                                                        <span class="p">};</span>
+<span class="pl-c"># export methods</span>
+export <span class="pl-k">def</span> <span class="pl-en">getName</span>                                         <span class="pl-smi">exports</span>.getName <span class="pl-k">=</span> function() {
+  <span class="pl-k">return</span> user.name                                           <span class="pl-k">return</span> user.name;
+<span class="pl-k">end</span>                                                        };
 
-<span class="c1"># export properties</span>
-<span class="n">export</span> <span class="n">age</span>                                                 <span class="n">exports</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="mi">22</span><span class="p">;</span>
-</pre></div>
+<span class="pl-c"># export properties</span>
+export age                                                 exports.age <span class="pl-k">=</span> <span class="pl-c1">22</span>;</pre></div>
 
-<div class="highlight"><pre>
-<span class="n">func</span> <span class="nb">name</span>                                                <span class="n">var</span> <span class="nb">name</span> <span class="o">=</span> <span class="n">function</span><span class="p">()</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="s2">"John"</span>                                            <span class="k">return</span> <span class="s2">"John"</span><span class="p">;</span>
-<span class="k">end</span>                                                      <span class="p">}</span>
+<div class="highlight highlight-source-ruby"><pre>
+func name                                                var name <span class="pl-k">=</span> function() {
+  <span class="pl-k">return</span> <span class="pl-s"><span class="pl-pds">"</span>John<span class="pl-pds">"</span></span>                                            <span class="pl-k">return</span> <span class="pl-s"><span class="pl-pds">"</span>John<span class="pl-pds">"</span></span>;
+<span class="pl-k">end</span>                                                      }
 
-<span class="n">age</span> <span class="o">=</span> <span class="mi">92</span>                                                 <span class="n">var</span> <span class="n">age</span> <span class="o">=</span> <span class="mi">92</span><span class="p">;</span>
+age <span class="pl-k">=</span> <span class="pl-c1">92</span>                                                 var age <span class="pl-k">=</span> <span class="pl-c1">92</span>;
 
-<span class="n">export</span>                                                    <span class="n">module</span><span class="o">.</span><span class="n">exports</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="n">getName</span> <span class="n">from</span> <span class="nb">name</span>                                           <span class="ss">getName</span><span class="p">:</span> <span class="nb">name</span><span class="p">,</span>
-  <span class="n">age</span>                                                       <span class="ss">age</span><span class="p">:</span> <span class="n">age</span>
-<span class="k">end</span>                                                       <span class="p">}</span>
-</pre></div>
+export                                                    <span class="pl-k">module</span>.exports <span class="pl-k">=</span> {
+  getName as name                                           <span class="pl-c1">getName:</span> name,
+  age                                                       <span class="pl-c1">age:</span> age
+<span class="pl-k">end</span>                                                       }</pre></div>
 
 <p><br></p>
 
-<h4>RequireJS Module Sugar</h4>
+<h4>
+<a id="requirejs-module-sugar" class="anchor" href="#requirejs-module-sugar" aria-hidden="true"><span class="octicon octicon-link"></span></a>RequireJS Module Sugar</h4>
 
 <p><em>Status:</em> <strong>Not Implemented</strong>  </p>
 
 <p>Using <code>define module</code> wraps the current file in a new anonymous RequireJS module. Exports can either be exported in a export object literal or by using <code>export foo</code> to export the foo variable only. Any dependencies can be declared by using <code>require 'foo' as foo</code> which assigns <code>'foo'</code>'s returned value to a variable called <code>foo</code>.</p>
 
-<div class="highlight"><pre><span class="n">define</span> <span class="k">module</span>                                                  <span class="nn">define</span><span class="p">(</span><span class="n">function</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight highlight-source-ruby"><pre>define <span class="pl-k">module</span>                                                  define(function() {
 
-<span class="n">func</span> <span class="n">foo</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>                                                      <span class="n">var</span> <span class="n">foo</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nb">puts</span> <span class="n">x</span>                                                           <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-<span class="k">end</span>                                                              <span class="p">}</span>
+func foo(x)                                                      var foo <span class="pl-k">=</span> function(x) {
+  puts x                                                           console.log(x);
+<span class="pl-k">end</span>                                                              }
 
-<span class="n">export</span> <span class="n">foo</span>                                                       <span class="k">return</span> <span class="n">foo</span><span class="p">;</span> <span class="p">});</span>
-</pre></div>
+export foo                                                       <span class="pl-k">return</span> foo; });</pre></div>
 
-<div class="highlight"><pre>
-<span class="n">define</span> <span class="k">module</span>                                                   <span class="nn">define</span><span class="p">(</span><span class="o">[</span> <span class="s1">'jquery'</span><span class="p">,</span>
-<span class="nb">require</span> <span class="s1">'jquery'</span> <span class="n">as</span> <span class="err">$</span>                                                    <span class="s1">'./views/widget'</span><span class="o">]</span><span class="p">,</span>
-<span class="nb">require</span> <span class="s1">'./views/widget'</span> <span class="n">as</span> <span class="no">Widget</span>                                <span class="n">function</span><span class="p">(</span><span class="vg">$,</span> <span class="no">Widget</span><span class="p">)</span> <span class="p">{</span>        
+<div class="highlight highlight-source-ruby"><pre>
+define <span class="pl-k">module</span>                                                   define([ <span class="pl-s"><span class="pl-pds">'</span>jquery<span class="pl-pds">'</span></span>,
+<span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>jquery<span class="pl-pds">'</span></span> as $                                                    <span class="pl-s"><span class="pl-pds">'</span>./views/widget<span class="pl-pds">'</span></span>],
+<span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>./views/widget<span class="pl-pds">'</span></span> as <span class="pl-c1">Widget</span>                                function(<span class="pl-smi">$,</span> <span class="pl-c1">Widget</span>) {        
 
-<span class="n">options</span> <span class="o">=</span> <span class="p">{</span>                                                        <span class="n">var</span> <span class="n">options</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="ss">moonRoof</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span>                                                    <span class="ss">moonRoof</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span>   
-  <span class="ss">seats</span><span class="p">:</span> <span class="mi">5</span>                                                           <span class="ss">seats</span><span class="p">:</span> <span class="mi">5</span>      
-<span class="p">}</span>                                                                  <span class="p">}</span>          
+options <span class="pl-k">=</span> {                                                        var options <span class="pl-k">=</span> {
+  <span class="pl-c1">moonRoof:</span> <span class="pl-c1">true</span>,                                                    <span class="pl-c1">moonRoof:</span> <span class="pl-c1">true</span>,   
+  <span class="pl-c1">seats:</span> <span class="pl-c1">5</span>                                                           <span class="pl-c1">seats:</span> <span class="pl-c1">5</span>      
+}                                                                  }          
 
-<span class="n">getCost</span> <span class="o">=</span> <span class="mi">16899</span>                                                    <span class="n">var</span> <span class="n">getCost</span> <span class="o">=</span> <span class="mi">16899</span><span class="p">;</span>
-<span class="n">wheels</span> <span class="o">=</span> <span class="mi">4</span>                                                         <span class="n">var</span> <span class="n">wheels</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+getCost <span class="pl-k">=</span> <span class="pl-c1">16899</span>                                                    var getCost <span class="pl-k">=</span> <span class="pl-c1">16899</span>;
+wheels <span class="pl-k">=</span> <span class="pl-c1">4</span>                                                         var wheels <span class="pl-k">=</span> <span class="pl-c1">4</span>;
 
-<span class="c1"># export literal compiles to an object that gets returned</span>
-<span class="n">export</span>                                                              <span class="k">return</span> <span class="p">{</span>   
-  <span class="n">getCost</span>                                                               <span class="n">getCost</span> <span class="p">:</span> <span class="n">getCost</span><span class="p">,</span>
-  <span class="n">hasMoonRoof</span> <span class="n">from</span> <span class="n">options</span><span class="o">.</span><span class="n">moonRoof</span>                                     <span class="n">hasMoonRoof</span> <span class="p">:</span> <span class="n">options</span><span class="o">.</span><span class="n">moonRoof</span><span class="p">,</span>   
-  <span class="n">getWheels</span> <span class="n">from</span> <span class="n">wheels</span>                                                 <span class="n">getWheels</span> <span class="p">:</span> <span class="n">wheels</span>     
-<span class="k">end</span>                                                                 <span class="p">}</span>           
-                                                                <span class="p">});</span> 
-</pre></div>
+<span class="pl-c"># export literal compiles to an object that gets returned</span>
+export                                                              <span class="pl-k">return</span> {   
+  getCost                                                               getCost : getCost,
+  hasMoonRoof from options.moonRoof                                     hasMoonRoof : options.moonRoof,   
+  getWheels from wheels                                                 getWheels : wheels     
+<span class="pl-k">end</span>                                                                 }           
+                                                                }); </pre></div>
 
 <p><br></p>
 
-<h4>Ruby / Coffee style case switch statement</h4>
+<h4>
+<a id="ruby--coffee-style-case-switch-statement" class="anchor" href="#ruby--coffee-style-case-switch-statement" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ruby / Coffee style case switch statement</h4>
 
 <p><em>Status:</em> <strong>Working</strong></p>
 
 <p>Switch statements still need <code>break</code> inserted to prevent falling through. The exception is one liners, then it's appened to the line.</p>
 
-<div class="highlight"><pre><span class="n">switch</span> <span class="n">fruit</span>                                             <span class="n">switch</span> <span class="p">(</span><span class="n">fruit</span><span class="p">)</span> <span class="p">{</span>
-<span class="k">when</span> <span class="s2">"apple"</span>                                               <span class="k">case</span> <span class="s2">"apple"</span><span class="p">:</span>
-  <span class="nb">puts</span> <span class="s2">"it's an appppple"</span>                                    <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"it's an appppple"</span><span class="p">);</span>
-  <span class="k">break</span>                                                      <span class="k">break</span><span class="p">;</span>
-<span class="k">when</span> <span class="s2">"bannana"</span> <span class="k">then</span> <span class="nb">puts</span><span class="p">(</span><span class="s2">"bannana"</span><span class="p">)</span>                        <span class="k">case</span> <span class="s2">"bannana"</span><span class="p">:</span> <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"bannana"</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
-<span class="k">when</span> <span class="s2">"orange"</span>                                              <span class="k">case</span> <span class="s2">"orange"</span><span class="p">:</span>
-  <span class="nb">puts</span> <span class="s2">"it's an orange"</span>                                      <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"it's an orange"</span><span class="p">);</span>
-  <span class="k">break</span>                                                      <span class="k">break</span><span class="p">;</span>
-<span class="n">default</span>                                                    <span class="ss">default</span><span class="p">:</span>
-  <span class="nb">puts</span> <span class="s2">"uh oh, bummer"</span>                                       <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"uh oh, bummer"</span><span class="p">);</span>
-<span class="k">end</span>                                                      <span class="p">}</span>
-</pre></div>
+<div class="highlight highlight-source-ruby"><pre>switch fruit                                             switch (fruit) {
+<span class="pl-k">when</span> <span class="pl-s"><span class="pl-pds">"</span>apple<span class="pl-pds">"</span></span>                                               <span class="pl-k">case</span> <span class="pl-s"><span class="pl-pds">"</span>apple<span class="pl-pds">"</span></span>:
+  puts <span class="pl-s"><span class="pl-pds">"</span>it's an appppple<span class="pl-pds">"</span></span>                                    console.log(<span class="pl-s"><span class="pl-pds">"</span>it's an appppple<span class="pl-pds">"</span></span>);
+  <span class="pl-k">break</span>                                                      <span class="pl-k">break</span>;
+<span class="pl-k">when</span> <span class="pl-s"><span class="pl-pds">"</span>bannana<span class="pl-pds">"</span></span> <span class="pl-k">then</span> puts(<span class="pl-s"><span class="pl-pds">"</span>bannana<span class="pl-pds">"</span></span>)                        <span class="pl-k">case</span> <span class="pl-s"><span class="pl-pds">"</span>bannana<span class="pl-pds">"</span></span>: console.log(<span class="pl-s"><span class="pl-pds">"</span>bannana<span class="pl-pds">"</span></span>); <span class="pl-k">break</span>;
+<span class="pl-k">when</span> <span class="pl-s"><span class="pl-pds">"</span>orange<span class="pl-pds">"</span></span>                                              <span class="pl-k">case</span> <span class="pl-s"><span class="pl-pds">"</span>orange<span class="pl-pds">"</span></span>:
+  puts <span class="pl-s"><span class="pl-pds">"</span>it's an orange<span class="pl-pds">"</span></span>                                      console.log(<span class="pl-s"><span class="pl-pds">"</span>it's an orange<span class="pl-pds">"</span></span>);
+  <span class="pl-k">break</span>                                                      <span class="pl-k">break</span>;
+default                                                    <span class="pl-c1">default:</span>
+  puts <span class="pl-s"><span class="pl-pds">"</span>uh oh, bummer<span class="pl-pds">"</span></span>                                       console.log(<span class="pl-s"><span class="pl-pds">"</span>uh oh, bummer<span class="pl-pds">"</span></span>);
+<span class="pl-k">end</span>                                                      }</pre></div>
 
 <p><br></p>
 
-<h4>Private Blocks</h4>
+<h4>
+<a id="private-blocks" class="anchor" href="#private-blocks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Private Blocks</h4>
 
 <p><em>Status:</em> <strong>Working</strong></p>
 
 <p>Private blocks keep variables scoped inside the block using function scope. There is a slight performance hit due to the IIFE. Again, due to the lack of proper lexing/parsing I can't yet use an <code>end</code> block. A workaround is <code>endPriv</code>, this calls the IIFE. Also due to the variable declaration bug mention above, variables like the example below will currently need var manually inserted to keep <code>foo</code> from leaking out and changing global <code>foo</code> to <code>10</code>. The beginning of the IIFE is nerfed with a semi-colon to prevent any potential errors (especially with the current state of RedScript not having automatic semi-colon insertion). </p>
 
-<div class="highlight"><pre><span class="n">foo</span> <span class="o">=</span> <span class="mi">200</span>                                                 <span class="n">var</span> <span class="n">foo</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span> 
+<div class="highlight highlight-source-ruby"><pre>foo <span class="pl-k">=</span> <span class="pl-c1">200</span>                                                 var foo <span class="pl-k">=</span> <span class="pl-c1">200</span>; 
 
-<span class="kp">private</span>                                                  <span class="p">(</span><span class="n">function</span><span class="p">(){</span>
-  <span class="n">var</span> <span class="n">foo</span> <span class="o">=</span> <span class="mi">10</span>                                              <span class="n">var</span> <span class="n">foo</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-<span class="n">endPriv</span>                                                   <span class="p">})();</span>
+<span class="pl-k">private</span>                                                  (function(){
+  var foo <span class="pl-k">=</span> <span class="pl-c1">10</span>                                              var foo <span class="pl-k">=</span> <span class="pl-c1">10</span>;
+endPriv                                                   })();
 
-<span class="n">alert</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span> <span class="c1">#alerts 200                                    alert(foo);</span>
-</pre></div>
+alert(foo) <span class="pl-c">#alerts 200                                    alert(foo);</span></pre></div>
 
 <p><br></p>
 
-<h4>Classical Inheritance</h4>
+<h4>
+<a id="classical-inheritance" class="anchor" href="#classical-inheritance" aria-hidden="true"><span class="octicon octicon-link"></span></a>Classical Inheritance</h4>
 
 <p><em>Status</em>: <strong>Working</strong></p>
 
-<p>RedScript classes are currently using John Resig's simple inheritance. In the future a solution closer to coffeescript would be ideal, allowing one to inherit from any constructor and still have the correct syntax. The current implementation will not inherit unless the base class is created with RedScript. However, backbone and ember both use the <code>.extend</code> method which is convenient since using<br><code>class Foo &lt; Backbone.Model.extend(</code> will call their own extend implementation. Backbone does not have a <code>this._super</code> method so if you want to call super you would need to use a backbone plugin for that. Ember uses the same <code>this._super</code> syntax as RedScript so calling super will call Ember's implementation.</p>
+<p>RedScript classes are currently using John Resig's simple inheritance. In the future a solution closer to coffeescript would be ideal, allowing one to inherit from any constructor and still have the correct syntax. The current implementation will not inherit unless the base class is created with RedScript. However, backbone and ember both use the <code>.extend</code> method which is convenient since using<br>
+<code>class Foo &lt; Backbone.Model.extend(</code> will call their own extend implementation. Backbone does not have a <code>this._super</code> method so if you want to call super you would need to use a backbone plugin for that. Ember uses the same <code>this._super</code> syntax as RedScript so calling super will call Ember's implementation.</p>
 
 <p>If you're only using their inheritance implementation you can disable the insertion of RedScript's inheritance by passing the <code>--no-class-insertion</code> flag.</p>
 
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">Animal</span>                                          <span class="n">var</span> <span class="no">Animal</span> <span class="o">=</span> <span class="no">Class</span><span class="o">.</span><span class="n">extend</span><span class="p">({</span>           
-  <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>                                        <span class="ss">init</span><span class="p">:</span> <span class="n">function</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span> <span class="p">{</span>              
-    <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span>                                          <span class="n">this</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="nb">name</span><span class="p">;</span>                 
-  <span class="k">end</span><span class="p">,</span>                                                  <span class="p">},</span>                                  
+<div class="highlight highlight-source-ruby"><pre><span class="pl-k">class</span> <span class="pl-en">Animal</span>                                          var <span class="pl-c1">Animal</span> <span class="pl-k">=</span> <span class="pl-c1">Class</span>.<span class="pl-k">extend</span>({           
+  <span class="pl-k">def</span> <span class="pl-en">init</span>(<span class="pl-smi">name</span>)                                        <span class="pl-c1">init:</span> function(name) {              
+    <span class="pl-smi">@name</span> <span class="pl-k">=</span> name                                          this.name <span class="pl-k">=</span> name;                 
+  <span class="pl-k">end</span>,                                                  },                                  
 
-  <span class="k">def</span> <span class="nf">sayHi</span>                                             <span class="ss">sayHi</span><span class="p">:</span> <span class="n">function</span><span class="p">()</span> <span class="p">{</span>                 
-    <span class="nb">puts</span> <span class="s2">"Hello"</span>                                          <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"Hello"</span><span class="p">);</span>             
-  <span class="k">end</span>                                                   <span class="p">}</span>                                   
-<span class="k">end</span><span class="p">)</span>                                                   <span class="p">});</span>                                   
+  <span class="pl-k">def</span> <span class="pl-en">sayHi</span>                                             <span class="pl-smi">sayHi</span>: function() {                 
+    puts <span class="pl-s"><span class="pl-pds">"</span>Hello<span class="pl-pds">"</span></span>                                          console.log(<span class="pl-s"><span class="pl-pds">"</span>Hello<span class="pl-pds">"</span></span>);             
+  <span class="pl-k">end</span>                                                   }                                   
+<span class="pl-k">end</span>)                                                   });                                   
 
-<span class="k">class</span> <span class="nc">Duck</span> <span class="o">&lt;</span> <span class="no">Animal</span>                                   <span class="n">var</span> <span class="no">Duck</span> <span class="o">=</span> <span class="no">Animal</span><span class="o">.</span><span class="n">extend</span><span class="p">({</span>            
-  <span class="k">def</span> <span class="nf">init</span>                                              <span class="ss">init</span><span class="p">:</span> <span class="n">function</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span> <span class="p">{</span>  
-    <span class="k">super</span> <span class="nb">name</span>                                            <span class="n">this</span><span class="o">.</span><span class="n">_super</span><span class="p">(</span><span class="nb">name</span><span class="p">);</span>                    
-    <span class="n">alert</span><span class="p">(</span><span class="s2">"</span><span class="si">#{</span><span class="vi">@name</span><span class="si">}</span><span class="s2"> is alive!"</span><span class="p">)</span>                           <span class="n">alert</span><span class="p">(</span><span class="n">this</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">" is alive!"</span><span class="p">)</span>   
-  <span class="k">end</span><span class="p">,</span>                                                  <span class="p">},</span>                                  
+<span class="pl-k">class</span> <span class="pl-en">Duck<span class="pl-e"> &lt; Animal</span></span>                                   var <span class="pl-c1">Duck</span> <span class="pl-k">=</span> <span class="pl-c1">Animal</span>.<span class="pl-k">extend</span>({            
+  <span class="pl-k">def</span> <span class="pl-en">init</span>                                              <span class="pl-smi">init</span>: function(name) {  
+    <span class="pl-k">super</span> name                                            this._super(name);                    
+    alert(<span class="pl-s"><span class="pl-pds">"</span><span class="pl-pse">#{</span><span class="pl-s1"><span class="pl-smi">@name</span></span><span class="pl-pse"><span class="pl-s1">}</span></span> is alive!<span class="pl-pds">"</span></span>)                           alert(this.name <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span> is alive!<span class="pl-pds">"</span></span>)   
+  <span class="pl-k">end</span>,                                                  },                                  
 
-  <span class="k">def</span> <span class="nf">sayHi</span>                                             <span class="ss">sayHi</span><span class="p">:</span> <span class="n">function</span><span class="p">()</span> <span class="p">{</span>                 
-    <span class="k">super</span>                                                 <span class="n">this</span><span class="o">.</span><span class="n">_super</span><span class="p">();</span>                    
-    <span class="nb">puts</span> <span class="s2">"Quack"</span>                                          <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"Quack"</span><span class="p">);</span>             
-  <span class="k">end</span>                                                   <span class="p">}</span>                                   
-<span class="k">end</span><span class="p">)</span>                                                   <span class="p">});</span>                                   
+  <span class="pl-k">def</span> <span class="pl-en">sayHi</span>                                             <span class="pl-smi">sayHi</span>: function() {                 
+    <span class="pl-k">super</span>                                                 this._super();                    
+    puts <span class="pl-s"><span class="pl-pds">"</span>Quack<span class="pl-pds">"</span></span>                                          console.log(<span class="pl-s"><span class="pl-pds">"</span>Quack<span class="pl-pds">"</span></span>);             
+  <span class="pl-k">end</span>                                                   }                                   
+<span class="pl-k">end</span>)                                                   });                                   
 
-<span class="n">duck</span> <span class="o">=</span> <span class="kp">new</span> <span class="no">Duck</span><span class="p">(</span><span class="s1">'Darick'</span><span class="p">)</span>                             <span class="n">var</span> <span class="n">duck</span> <span class="o">=</span> <span class="kp">new</span> <span class="no">Duck</span><span class="p">(</span><span class="s1">'Darick'</span><span class="p">);</span>
-<span class="n">duck</span><span class="o">.</span><span class="n">sayHi</span><span class="p">()</span>                                          <span class="n">duck</span><span class="o">.</span><span class="n">sayHi</span><span class="p">();</span>
-</pre></div>
+duck <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">Duck</span>(<span class="pl-s"><span class="pl-pds">'</span>Darick<span class="pl-pds">'</span></span>)                             var duck <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">Duck</span>(<span class="pl-s"><span class="pl-pds">'</span>Darick<span class="pl-pds">'</span></span>);
+duck.sayHi()                                          duck.sayHi();</pre></div>
 
 <p><br></p>
 
-<h4>Prototypal Inheritance</h4>
+<h4>
+<a id="prototypal-inheritance" class="anchor" href="#prototypal-inheritance" aria-hidden="true"><span class="octicon octicon-link"></span></a>Prototypal Inheritance</h4>
 
 <p><em>Status</em>: <strong>Partially Implemented</strong></p>
 
 <p>This is an experiment to try and bring out JavaScripts true prototypal nature. The goal is to be able to <em>easily</em> inherit without using constructors or faux classes. Vanilla JS makes it very verbose to inherit from another object, unlike <a href="http://en.wikipedia.org/wiki/Self_programming_language#Inheritance.2FDelegation">Self</a>, JavaScript's inheritance inspiration. One of the drawbacks to property delegation is keeping state in an object. Using <code>object myDuck clones duck</code> will copy all of the properties from duck into myDuck, ensuring it won't grab it's parents property by accident. Currently <code>clones</code> is not implemeneted yet.</p>
 
-<div class="highlight"><pre><span class="n">object</span> <span class="n">animal</span>
-  <span class="nb">name</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+<div class="highlight highlight-source-ruby"><pre>object animal
+  <span class="pl-c1">name:</span> null,
 
-  <span class="k">def</span> <span class="nf">sayHi</span>
-    <span class="nb">puts</span> <span class="s2">"Hello"</span>
-  <span class="k">end</span>
-<span class="k">end</span>
+  <span class="pl-k">def</span> <span class="pl-en">sayHi</span>
+    puts <span class="pl-s"><span class="pl-pds">"</span>Hello<span class="pl-pds">"</span></span>
+  <span class="pl-k">end</span>
+<span class="pl-k">end</span>
 
-<span class="n">object</span> <span class="n">duck</span>
-  <span class="n">parent</span><span class="o">*</span><span class="p">:</span> <span class="n">animal</span><span class="p">,</span>
-  <span class="nb">name</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+object duck
+  parent<span class="pl-k">*</span>: animal,
+  <span class="pl-c1">name:</span> null,
 
-  <span class="k">def</span> <span class="nf">sayHi</span>
-    <span class="nb">puts</span> <span class="s2">"Quack"</span>
-  <span class="k">end</span>
-<span class="k">end</span>
+  <span class="pl-k">def</span> <span class="pl-en">sayHi</span>
+    puts <span class="pl-s"><span class="pl-pds">"</span>Quack<span class="pl-pds">"</span></span>
+  <span class="pl-k">end</span>
+<span class="pl-k">end</span>
 
-<span class="c1"># this duck's attr's are cloned instead of deligated</span>
-<span class="c1"># with `parent*`, usefull for statefull objects</span>
-<span class="c1">#</span>
-<span class="n">object</span> <span class="n">myDuck</span> <span class="n">clones</span> <span class="n">duck</span>
-  <span class="nb">name</span><span class="p">:</span> <span class="s1">'Darick'</span>
-<span class="k">end</span>
-</pre></div>
-        </section>
+<span class="pl-c"># this duck's attr's are cloned instead of deligated</span>
+<span class="pl-c"># with `parent*`, usefull for statefull objects</span>
+<span class="pl-c">#</span>
+object myDuck clones duck
+  <span class="pl-c1">name:</span> <span class="pl-s"><span class="pl-pds">'</span>Darick<span class="pl-pds">'</span></span>
+<span class="pl-k">end</span></pre></div>
 
-        <footer>
-          RedScript is maintained by <a href="https://github.com/AdamBrodzinski">AdamBrodzinski</a><br>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/AdamBrodzinski/RedScript">RedScript</a> is maintained by <a href="https://github.com/AdamBrodzinski">AdamBrodzinski</a>.</span>
 
-                  <script type="text/javascript">
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+            <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -498,7 +494,5 @@ Attaching a method to an object's prototype be defined using <code>def objName &
             } catch(err) {}
           </script>
 
-      </div>
-    </div>
   </body>
 </html>
