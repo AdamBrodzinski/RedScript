@@ -1,7 +1,5 @@
 # RedScript 2.0
 
-###### *Note, this compiler is just a prototype and is not production ready*
-
 * **Functional paradigm**
 * **Immutable data in RedScript**
 * **Think in *transformations* with pipe operator `|>` (like F# & Elixir)**
@@ -9,7 +7,7 @@
 * **Compile time type inference checking**
 
 
-RedScript was created to provide a first class functional experience in the browser. It is inspired from Elixir but does not have the same features (ElixirScript aims to do this). Our main goal is to provide easy interoperability with other JavaScript libraries.
+RedScript was created to provide a first class functional experience in the browser. It is inspired from Elixir but does not have the same features (ElixirScript aims to do this). Our main goal is to provide easy interoperability with other JavaScript libraries while still providing a first class experience.
 
 If this prototype is popular enough I would love help to create a proper compiler.
 
@@ -17,15 +15,24 @@ If this prototype is popular enough I would love help to create a proper compile
 #### To Install Globally and Run
 
 ```
+# Note, this compiler is just a prototype and is not production ready
 sudo npm install -g redscript
 redscript watch [fileName fileName2]
 ```
 
-#### A little RedScript...
+#### Think in pipes instead of nesting functions
 
 ```elixir
 # use functions like unix pipe
 
 "hello world " |> String.trim |> String.capitalize
 #>>> "HELLO WORLD"
+
+["foo", "bar ", " baz"]
+|> map (x) -> String.capitalize(x)
+|> inspect
+|> take 2
+
+#>>> ["FOO", "BAR", "BAZ"]
+#>>> ["FOO", "BAR"]
 ```
