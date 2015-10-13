@@ -33,8 +33,8 @@ redscript watch [fileName fileName2]
 |> inspect
 |> take 2
 
-#>>> ["FOO", "BAR", "BAZ"]
-#>>> ["FOO", "BAR"]
+# log ["FOO", "BAR", "BAZ"]
+# >>> ["FOO", "BAR"]
 ```
 
 #### Plays well with React
