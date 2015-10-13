@@ -42,21 +42,20 @@ redscript watch [fileName fileName2]
 ```elixir
 let Complex = React.createClass({
   def getInitialState do
-    return { isReady: false }
+    { isReady: false }
   end,
 
-  def render() do
+  def render do
     <div>
       <h1>Hello World</h1>
-      <p>Is ready: {this.isReady}</p>
+      <p>Is ready: {this.state.isReady}</p>
     </div>
   end
 })
-export Complex;
 
 # stateless React components work best!
 
-def simple(props) do
+def Simple(props) do
   <div>
     <h1>Stateless Component</h1>
     <p>Is ready: {props.isReady}</p>
