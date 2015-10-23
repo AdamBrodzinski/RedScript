@@ -93,9 +93,11 @@ Enum.reject([1, 2, 3, 4], (n) => n % 2 == 0)         [1, 2, 3, 4] |> Enum.reject
 
 
 #### Plays well with React
-We've added a bit of sugar for creating 
+We've added a bit of sugar for creating render function. It must be the *last* function in the module for this to work.
 
 ```elixir
+# must use .StateComponent to module name to activate React sugar
+
 defmodule Complex.StateComponent do
   def getInitialState do
     return { isReady: false }
@@ -112,19 +114,18 @@ end
 
 ```elixir
 # however stateless React components work best!
+# using .Component adds render sugar (no parens and return)
 
-defmodule PagePartials.Component do
+defmodule MySimple.Component do
+  defp handle_click(e) do
+    alert("Hello World")
+  end
+
   def Simple(props) do
     <div>
       <h1>Stateless Component</h1>
       <p>Is ready: {props.isReady}</p>
-    </div>
-  end
-
-  def Second(props) do
-    <div>
-      <h1>Stateless Component</h1>
-      <p>Is ready: {props.isReady}</p>
+      <input type='button' onClick={handleClick} />
     </div>
   end
 end
