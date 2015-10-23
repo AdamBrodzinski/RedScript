@@ -80,7 +80,7 @@ end
 #### Plays well with React
 
 ```elixir
-let Complex = React.createClass({
+Complex = React.createClass({
   def getInitialState do
     { isReady: false }
   end,
