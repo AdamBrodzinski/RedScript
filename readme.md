@@ -76,20 +76,20 @@ end
 
 ```
 
-#### Built in support for Lo-Dash
-Just snake case the [API you already know](https://lodash.com/docs). To keep things tidy, functions are in namespaces. Collections are in the Enum namespace, Array in List, Strings are in a String namespace, etc...
+#### Built In Support For Lo-Dash
+Just snake case the [API you already know](https://lodash.com/docs). To keep things tidy, functions are placed in namespaces. Collections are in the Enum namespace, Array in List, Strings are in a String namespace, etc... (however you could still just import lo-dash ES6 style to remove the namespace).
 
 ```elixir
 
 List.take(["a", "b", "c"], 2)
-# >> ["a", "b"]
+#>> ["a", "b"]
 
+List.flatten_deep [1, [2, 3, [4]]]
+#>> [1, 2, 3, 4]
 
 Enum.reject([1, 2, 3, 4], (n) => n % 2 == 0)
-# >> [1, 3]
+#>> [1, 3]
 ```
-
-#### Pattern Matching Coming Soon!
 
 
 #### Plays well with React
@@ -116,4 +116,19 @@ def Simple(props) do
     <p>Is ready: {props.isReady}</p>
   </div>
 end
+```
+
+#### Pattern Matching Coming Soon!
+Pattern matching can eliminate the use of if statements and can really clean up code. This is on the backlog but PRs are welcome!
+```elixir
+defmodule MyUtils do
+  def count([]) do
+    return 0
+  end
+
+  def count([head|tail]) do
+    return 1 + count(tail)
+  end
+end
+
 ```
