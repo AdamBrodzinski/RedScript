@@ -40,14 +40,14 @@ redscript watch [fileName fileName2]
 
 #### Immutable Data
 ```elixir
-let state = {bar: 5}
+state = {bar: 5}
 state.foo = 10   # won't mutate
 # merge new keys into state and return new object
-let state2 = {state <- foo: 2, bar: 3}
+state2 = {state <- foo: 2, bar: 3}
 
-let list = []
-let list2 = [list <- 1, 2, 3]
-let list3 = [list <- new_list]
+list = []
+list2 = [list <- 1, 2, 3]
+list3 = [list <- new_list]
 ```
 
 #### Modules exposing public functions (no classes!)
@@ -73,6 +73,8 @@ defmodule PhoneUtils do                    // Module: PhoneUtils
 end
 
 ```
+
+#### Pattern Matching Coming Soon!
 
 
 #### Plays well with React
