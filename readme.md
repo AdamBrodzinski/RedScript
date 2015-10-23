@@ -84,7 +84,7 @@ Just snake case the [API you already know](https://lodash.com/docs). To keep thi
 List.take(["a", "b", "c"], 2)
 #>> ["a", "b"]
 
-List.flatten_deep [1, [2, 3, [4]]]
+List.flatten_deep([1, [2, 3, [4]]])
 #>> [1, 2, 3, 4]
 
 Enum.reject([1, 2, 3, 4], (n) => n % 2 == 0)
