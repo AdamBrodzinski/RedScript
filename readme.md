@@ -1,13 +1,14 @@
 # RedScript 2.0
+### It's like CoffeeScript but immutable & functional
 
-* **Functional paradigm**
-* **Immutable data in RedScript**
 * **Think in *transformations* with pipe operator `|>` (like F# & Elixir)**
 * **Lodash built in (patched to be immutable)**
+* **Immutable data in RedScript**
+* **Functional paradigm**
 * **Compile time type inference checking**
 
 
-RedScript was created to provide a first class functional experience in the browser. It is inspired from Elixir but does not have the same features (ElixirScript aims to do this). Our main goal is to provide easy interoperability with other JavaScript libraries while still providing a first class experience.
+RedScript was created to provide a first class functional experience in the browser. It is inspired from Elixir but does not have all of the features (ElixirScript aims to do this). Our main goal is to provide easy interoperability with other JavaScript libraries while still providing a first class functional experience in JavaScript.
 
 If this prototype is popular enough I would love help to create a proper compiler.
 
@@ -29,7 +30,7 @@ redscript watch [fileName fileName2]
 #>>> "HELLO WORLD"
 
 ["foo", "bar ", " baz"]
-|> map (x) -> String.capitalize(x)
+|> Enum.map (x) -> String.upcase(x)
 |> inspect
 |> take 2
 
