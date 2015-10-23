@@ -50,6 +50,31 @@ let list2 = [list <- 1, 2, 3]
 let list3 = [list <- new_list]
 ```
 
+#### Modules exposing public functions (no classes!)
+
+```elixir
+# RedScript                                # compiled JavaScript
+
+defmodule PhoneUtils do                    // Module: PhoneUtils
+  def normalize_number(number) do          export function normalize_number(number) {
+    return number                            return _.chain(number)
+    |> remove_char('-')                      .call(remove_char, '-')
+    |> remove_char(' ')                      .call(remove_char, ' ')
+    |> remove_us_code                        .call(remove_us_code).value();
+  end                                      };
+
+  def remove_us_code(str) do               export function remove_us_code(number) {
+    return str.replace(/^+1/g, '')           return str.replace(/^+1/g, '')
+  end                                      };
+
+  defp remove_char(str, char) do           function remove_char(number) {
+    return str.replace(/\s/g, '')            return str.replace(/\s/g, '')
+  end                                      };
+end
+
+```
+
+
 #### Plays well with React
 
 ```elixir
