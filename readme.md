@@ -93,30 +93,40 @@ Enum.reject([1, 2, 3, 4], (n) => n % 2 == 0)         [1, 2, 3, 4] |> Enum.reject
 
 
 #### Plays well with React
+We've added a bit of sugar for creating 
 
 ```elixir
-Complex = React.createClass({
+defmodule Complex.StateComponent do
   def getInitialState do
     return { isReady: false }
-  end,
-
-  def render do
-    return (
-      <div>
-        <h1>Hello World</h1>
-        <p>Is ready: {this.state.isReady}</p>
-      </div>
-    )
   end
-})
 
-# stateless React components work best!
+  def render(props, state) do
+    <div>
+      <h1>Hello World</h1>
+      <p>Is ready: {state.isReady}</p>
+    </div>
+  end
+end
+```
 
-def Simple(props) do
-  <div>
-    <h1>Stateless Component</h1>
-    <p>Is ready: {props.isReady}</p>
-  </div>
+```elixir
+# however stateless React components work best!
+
+defmodule PagePartials.Component do
+  def Simple(props) do
+    <div>
+      <h1>Stateless Component</h1>
+      <p>Is ready: {props.isReady}</p>
+    </div>
+  end
+
+  def Second(props) do
+    <div>
+      <h1>Stateless Component</h1>
+      <p>Is ready: {props.isReady}</p>
+    </div>
+  end
 end
 ```
 
