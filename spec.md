@@ -8,47 +8,25 @@ an issue: [here](https://github.com/AdamBrodzinski/RedScript/issues).
 #### Variables & automatic semi-colon insertion  
 *Status*: **Partially implemented, known bug**
 
-Variables are automatically declared. Using the var keyword is optional and allowed.  
-Constants are pre-processed at compile time. This allows some memory savings in certain cases where itcan be utilized.
-Semi-colons are automatically inserted as needed (currently not implemented).
+Variables are automatically declared and cannot be re-declared.
 
-
-*Currently RedScript does not take function scope into account. Any
-variables that are declared inside of a function multiple times can
-lead to unintended global leaks. To disable auto declaration pass `no--declare`. Another workaround is
-to manually declare variables with the var keyword.*
-
-```ruby
-foo = 12                 var foo = 12;
-foo = 20                 foo = 20;
-
-# Constants are preprocessed
-AMOUNT = 233            
-puts AMOUNT             console.log(233)
-
-# !! Lexical scoping bug in current version !!
-func foo                var foo = function() {
-  baz = 20                var baz = 20;       
-end                     };                    
-
-func bar                var bar = function() {
-  baz = 30                baz = 30;       
-end                     };                     
+```elixir
+foo = 12                 const foo = 12;
 ```
 <br>
+
 
 #### Convenience method aliases for puts & printf
 
 *Status:* **Working**  
-`puts` and `printf` are aliases to `console.log` and `process.stdout.write`. `printf` is only available with node enviroments. These are the only methods that have optional parens at this time. If parens are omitted a closing paren will be appended to the end of the line. Parenless multi lines are not possible.
+`puts` is an alias to `console.log`. This is the only funciton that has optional parens at this time. If parens are omitted a closing paren will be appended to the end of the line.
 
 ```ruby
 puts "Hello there"                      console.log("Hello there");
 puts("Hai!")                            console.log("Hai")
-printf "Hola"                           process.stdout.write("Hola")
-printf("Hola")                          process.stdout.write("Hola")
 ```
 <br>
+
 
 #### Optional Parenthesis
 
@@ -59,49 +37,14 @@ Currently I cannot implement this until I can create a proper lexer. Pull reques
 ```ruby
 alert 'Hello World!'
 
-getUser '/users/1', do
-  alert user
-end
+# this is how it should be with proper compiler support
+some_method one, two
 
-# Currently you still have to use parens for anything that's not a RedScript construct.
-getUser( '/users/1', do
-  alert(user)
-end)
-
-# A kludgey alias for `end)` is `end-`
-getUser( '/users/1', do
-  alert(user)
-end-
+# currently you have to make do and use parens
+some_method(one, two)
 ```
 <br>
 
-
-#### Ruby flavored functions
-
-`Func [name]` declares the function as an expression and sets `[name]` to a variable. Parens are optional if no arguments are being passed. If arguments are passed braces must be used. Anonymous functions are declared as `func`, parens are also optional. This type of anonymous function should only be used when using `do |x|` would be awkward, such as in an [async](https://github.com/caolan/async)'s array of parallel functions.
-
-*Status:* **Working**
-
-```ruby
-func say(msg)                            var say = function(msg) {
-  puts "Message: #{msg}"                   console.log("Message: " + msg);
-end                                      };
-
-# Optional function parens
-func sayHello
-  puts "Hello"
-end
-
-# anonymous function
-func                                    function() {
-  # do stuff                              // do stuff
-end                                     }
-
-func(a,b)                               function(a,b) {
-  # do stuff                              // do stuff
-end                                     }
-```
-<br>
 
 #### Comments
 
@@ -111,88 +54,18 @@ Line comments are made with a `#`. RedScript currently does not have multi-line 
 
 ```coffeescript
 # I'm a comment                          // I'm a comment
-$('#someID').html(foo)                   $('#someID').html(foo) # No worries here
-```
-<br>
-
-#### Alias @ with this
-
-*Status:* Working
-
-```ruby
-function FooClass(name, age) {           function FooClass(name, age){
-  @name = name                             this.name = name;
-  @age = age                               this.age = age;
-}                                        }
+$('#someID').html(foo)                   $('#someID').html(foo)
 ```
 <br>
 
 
-#### Loops
 
-*Status:* **Working**
-
-*Note*, for loops only support `0..3`, `0...3` or variables e.g. `begin...ending`. Using two dots will loop up until that number, and using 3 dots will loop up to and including the end number.  
-Using `for in [2,4,6]` or `for in myArray` will not work at this time. See next section for more info on arrays.  
-To prevent confusion until loops have a `//until` comment next to the compiled output.
-
-```ruby
-while foo < 200                        while (foo < 200) {
-  puts "I'm looping forever"              console.log("I'm looping forever");
-end                                     }
-
-
-# loops until a condition is true
-until i == 5                            while (!(i == 5)) { // loop until  
-   puts i                                  console.log(i);                
-   i += 1                                  i += 1;                        
-end                                     }                                 
-                                        
-                                        
-# prints 5x, 0,1,2,3,4                  
-for i in 0..5                           for (var i=0; i < 5; i++) {    
-  puts i                                  console.log(i);           
-end                                     }                             
-                                        
-                                        
-# prints 6x, 0,1,2,3,4,5                
-for i in 0...5                          for (var i=0; i <= 5; i++) {
-  puts i                                  console.log(i)       
-end                                     }                          
-```
-<br>
-
-
-#### Iterating over arrays and objects
-
-*Status:* **Working**
-
-```
-# Iterate over arrays
-basket = ['lemon', 'pear', 'apple']     var basket = ['lemon', 'pear', 'apple'];
-
-for fruit inArr basket                  for (var _i=0, _len=basket.length; _i < _len; _i++) { var fruit = basket[_i];    
-  puts fruit                              console.log(fruit);                                                            
-end                                     }                                                                                
-
-
-for key in obj                          for (var key in obj) {
-   alert(key)                             alert(key);
-end                                     }
-
-
-for key,val in obj                      for (var key in obj) { var val = obj[key];
-  puts 'My key is: #{key}'                console.log('My key is: ' + key);
-  puts 'My value is: #{val}'              console.log('My value is: ' + val);
-end                                     }
-```
-<br>
 
 #### If/else/else if
 
 *Status:* **Partially implemented**
 
-If statements currently are multi-line. If you would like to use a one liner, you can still use vanilla js `if (err) throw err;`.
+If statements currently are multi-line only.
 
 ```ruby
 if foo == 10                            if (foo === 10) {
@@ -207,37 +80,33 @@ throw err if err                        if (err) { throw err; }
 ```
 <br>
 
-#### Methods & Object Literal
 
-*Status:* **Working**
 
-An optional way to declare an object literal. The idea is to make it read a bit nicer.  
-Methods are declared using the def keyword and parens are optional *if* they're not used.  
-Attaching a method to an object's prototype be defined using `def objName >>> mthdName`.
+#### Modules and module functions
 
-```ruby
-object auto                                   var auto = {
-  wheels: 4,                                    wheels: 4,
-  engine: true,                                 engine: true,
+*Status:* **Not Working**
 
-  def honk                                      honk: function() {
-    puts "hoooonk"                                console.log("hooooonk");
-  end,                                          },
+Modules in RedScript are one module per file. ***Multi modules per file will break***.
+Public functions are defined with the `def` keyword. Private functions are defined with the `defp` keyword.
 
-  def sayHi(msg)                                sayHi: function(msg) {
-    puts msg                                      console.log(msg);
-  end                                           }
-end                                           }
 
-# Define outside of object literal
-def auto.add(x, y)                            auto.add = function(x,y) {
-  return x + @wheels                            return x + this.wheels;
-end                                           };
+```elixir
+defmodule PhoneUtils do                    // Module: PhoneUtils
+  def normalize_number(number) do          export function normalize_number(number) {
+    return number                            return _.chain(number)
+    |> remove_char('-')                      .call(remove_char, '-')
+    |> remove_char(' ')                      .call(remove_char, ' ')
+    |> remove_us_code                        .call(remove_us_code).value();
+  end                                      };
 
-# Define method attached to prototype
-def Car >>> sub(x,y)                          Car.prototype.sub = function(x, y) {
-  return x - y                                  return x - y;
-end                                           };
+  def remove_us_code(str) do               export function remove_us_code(number) {
+    return str.replace(/^+1/g, '')           return str.replace(/^+1/g, '')
+  end                                      };
+
+  defp remove_char(str, char) do           function remove_char(number) {
+    return str.replace(/\s/g, '')            return str.replace(/\s/g, '')
+  end                                      };
+end
 ```
 <br>
 
