@@ -26,7 +26,7 @@ redscript watch [fileName fileName2]
 ```elixir
 # use functions like unix pipe
 
-"hello world " |> String.trim |> String.capitalize
+"hello world " |> String.trim |> String.uppercase
 #>>> "HELLO WORLD"
 
 ["foo", "bar ", " baz"]
@@ -39,6 +39,7 @@ redscript watch [fileName fileName2]
 ```
 
 #### Immutable Data
+Mutable data in JavaScript can be painful. RedScript uses [Seamless-Immutable](https://github.com/rtfeldman/seamless-immutable) to effeciently reuse the existing nested objects rather than instantiating new ones when merging.
 ```elixir
 state = {bar: 5}
 state.foo = 10   # won't mutate
@@ -54,11 +55,12 @@ list3 = [list <- new_list]
 
 ```elixir
 # RedScript                                # compiled JavaScript
+import {imported_func} from "foo"          import {imported_func} from "foo";
 
 defmodule PhoneUtils do                    // Module: PhoneUtils
   def normalize_number(number) do          export function normalize_number(number) {
     return number                            return _.chain(number)
-    |> remove_char('-')                      .call(remove_char, '-')
+    |> imported_func('-')                    .call(imported_func, '-')
     |> remove_char(' ')                      .call(remove_char, ' ')
     |> remove_us_code                        .call(remove_us_code).value();
   end                                      };
@@ -72,6 +74,19 @@ defmodule PhoneUtils do                    // Module: PhoneUtils
   end                                      };
 end
 
+```
+
+#### Built in support for Lo-Dash
+Just snake case the [API you already know](https://lodash.com/docs). To keep things tidy, functions are in namespaces. Collections are in the Enum namespace, Array in List, Strings are in a String namespace, etc...
+
+```elixir
+
+List.take(["a", "b", "c"], 2)
+# >> ["a", "b"]
+
+
+Enum.reject([1, 2, 3, 4], (n) => n % 2 == 0)
+# >> [1, 3]
 ```
 
 #### Pattern Matching Coming Soon!
