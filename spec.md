@@ -110,61 +110,31 @@ end
 ```
 <br>
 
-#### Block-like Syntax for Anonymous Functions
+#### Anonymous Functions
 
 *Status:* **Working**
 
-Block like syntax is a shorter way to write an anonymous function. The preceding comma is optional. However, including it may be easier to understand if it's included. Once we have optional parens working this will look *much* nicer! 
-```ruby
+Anonymous functions are like ES6 but with a skinny arrow. These compile to fat arrows so they have the same scoping rules (though you shouldn't need to use `this` anyhow).
+```elixir
 
-app.get('/users/:user', do |req|        app.get('/users/:user', function(req) {
-  puts req.params.name                    console.log(req.params.name);
-end)                                    });
-
-# no params
-$myBtn.click( do                        $myBtn.click( function() {
-  alert("hi")                             alert("hi");
-end)                                    });
+Enum.reject([1, 2, 3, 4], (n) -> n % 2 == 0)
 ```
 <br>
 
-#### RequireJS Module Sugar 
 
-*Status:* **Not Implemented**  
+#### Equality
 
-Using `define module` wraps the current file in a new anonymous RequireJS module. Exports can either be exported in a export object literal or by using `export foo` to export the foo variable only. Any dependencies can be declared by using `require 'foo' as foo` which sets up foo's returned value in a variable called `foo`.
+Double equals are compiled to tripple equals.
 
-```ruby
+```elixir
+4 == 4
+# >> true
 
-define module                                                   define([ 'jquery',
-require 'jquery' as $                                                    './views/widget'],
-require './views/widget' as Widget                                function($, Widget) {        
-
-options = {                                                        var options = {
-  moonRoof: true,                                                    moonRoof: true,   
-  seats: 5                                                           seats: 5      
-}                                                                  }          
-
-getCost = 16899                                                    var getCost = 16899;
-wheels = 4                                                         var wheels = 4;
- 
-# export literal compiles to an object that gets returned
-export                                                              return {   
-  getCost                                                               getCost : getCost,
-  hasMoonRoof from options.moonRoof                                     hasMoonRoof : options.moonRoof,   
-  getWheels from wheels                                                 getWheels : wheels     
-end                                                                 }           
-                                                                }); 
-# --------------------------------------  new file  -------------------------------------------
-define module                                                  define(function() {
-
-func foo(x)                                                      var foo = function(x) {
-  puts x                                                           console.log(x);
-end                                                              }
-
-export foo                                                       return foo; });
+4 == "4"
+# >> false
 ```
-<br>
+
+
 
 #### Ruby / Coffee style case switch statement
 
@@ -186,87 +156,3 @@ default                                                    default:
 end                                                      }
 ```
 <br>
-
-#### Private Blocks
-
-*Status:* **Working**
-
-Private blocks keep variables scoped inside the block using function scope. There is a slight performance hit due to the IIFE. Again, due to the lack of proper lexing/parsing I can't yet use an `end` block. A workaround is `endPriv`, this calls the IIFE. Also due to the variable declaration bug mention above, variables like the example below will currently need var manually inserted to keep `foo` from leaking out and changing global `foo` to `10`. The beginning of the IIFE is nerfed with a semi-colon to prevent any potential errors (especially with the current state of RedScript not having automatic semi-colon insertion). 
-
-```ruby                                                   
-foo = 200                                                 var foo = 200; 
-
-private                                                  (function(){
-  var foo = 10                                              var foo = 10;
-endPriv                                                   })();
-
-alert(foo) #alerts 200                                    alert(foo);
-```
-<br>
-
-#### Classical Inheritance
-
-*Status*: **Working**
-
-RedScript classes are currently using John Resig's simple inheritance. In the future a solution closer to coffeescript would be ideal, allowing one to inherit from any constructor and still have the correct syntax. The current implementation will not inherit unless the base class is created with RedScript. However, backbone and ember both use the `.extend` method which is convenient since using `class Foo < Backbone.Model.extend(` will call their own extend implementation. Backbone does not have a `this._super` method so if you want to call super you would need to use a backbone plugin for that. Ember uses the same `this._super` syntax as RedScript so calling super will call Ember's implementation.
-
-If you're only using their inheritance implementation you can disable the insertion of RedScript's inheritance by passing the `--no-class` flag.
-
-```ruby
-class Animal                                          var Animal = Class.extend({           
-  def init(name)                                        init: function(name) {              
-    @name = name                                          this.name = name;                 
-  end,                                                  },                                  
-                                                                                            
-  def sayHi                                             sayHi: function() {                 
-    puts "Hello"                                          console.log("Hello");             
-  end                                                   }                                   
-end                                                   });                                   
-                                                                                            
-class Duck < Animal                                   var Duck = Animal.extend({            
-  def init                                              init: function(name) {              
-    alert("#{@name} is alive!")                           alert(this.name + " is alive!")   
-  end,                                                  },                                  
-                                                                                            
-  def sayHi                                             sayHi: function() {                 
-    super                                                 this._super();                    
-    puts "Quack"                                          console.log("Quack");             
-  end                                                   }                                   
-end                                                   });                                   
-
-duck = new Duck('Darick')                             var duck = new Duck('Darick');
-duck.sayHi()                                          duck.sayHi();
-```
-<br>
-
-#### Prototypal Inheritance
-
-*Status*: **Partially Implemented**
-
-This is an experiment to try and bring out JavaScripts true prototypal nature. The goal is to be able to *easily* inherit without using constructors or faux classes. Vanilla JS makes it very difficult to inherit from another object, unlike [self](http://en.wikipedia.org/wiki/Self_programming_language#Inheritance.2FDelegation), JavaScript's inheritance inspiration. One of the drawbacks to property delegation is keeping state in an object. Using `object myDuck clones duck` will copy all of the properties from duck into myDuck, ensuring it won't grab it's parents property by accident. Currently `clones` is not implemeneted yet.
-
-```ruby
-object animal
-  name: null,
-  
-  def sayHi
-    puts "Hello"
-  end
-end
-
-object duck
-  parent*: animal,
-  name: null,
-
-  def sayHi
-    puts "Quack"
-  end
-end
-
-# this duck's attr's are cloned instead of deligated
-# with `parent*`, usefull for statefull objects
-#
-object myDuck clones duck
-  name: 'Darick'
-end
-```
