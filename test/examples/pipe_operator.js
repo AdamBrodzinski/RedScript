@@ -1,5 +1,14 @@
 // single line pipes not finished
-bar = [1, 2, 3] |> Enum.uppcase
+bar = _.chain(Immutable([1, 2, 3])).pipesCall(Enum.uppcase).value();
+
+// [1, 2, 3] .pipesCall(Enum.uppcase).pipesCall(Enum.uppcase).value();
+// [1, 2, 3] |> Enum.uppcase |> Enum.uppcase
+
+f = _.chain(Immutable([1, 2, 3])).pipesCall(Enum.uppcase(3, 2)).pipesCall(Enum.uppcase).value();
+return _.chain(Immutable([5, 2, 3])).pipesCall(Enum.uppcase).value();
+b = _.chain(bar).pipesCall(Enum.uppcase).value();
+return _.chain(bar).pipesCall(Enum.uppcase).value();
+
 
 foo = 20
 

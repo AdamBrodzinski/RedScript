@@ -1,6 +1,15 @@
 # single line pipes not finished
 bar = [1, 2, 3] |> Enum.uppcase
 
+# [1, 2, 3] .pipesCall(Enum.uppcase).pipesCall(Enum.uppcase).value();
+# [1, 2, 3] |> Enum.uppcase |> Enum.uppcase
+
+f = [1, 2, 3] |> Enum.uppcase(3, 2) |> Enum.uppcase
+return [5, 2, 3] |> Enum.uppcase
+b = bar |> Enum.uppcase
+return bar |> Enum.uppcase
+
+
 foo = 20
 
 return foo
