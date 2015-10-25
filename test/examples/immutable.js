@@ -15,7 +15,9 @@ arr = Immutable({one: 1, two: {three: []}});
 // merge/concat
 
 // const state = state.merge({foo: 2, bar: 3});
-state2 = Immutable({state <- foo: 2, bar: 3});
+state = Immutable({isValid: false});
+state2 = state.merge({ isValid: true, loading: false});
 
 // const list2 = list.concat([1, 2, 3]);
-list2 = Immutable([list <- 1, 2, 3]);
+list = Immutable([1, 2, 3]);
+list2 = list.concat([ 4, 5, 6]);

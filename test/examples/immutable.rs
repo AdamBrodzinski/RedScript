@@ -15,7 +15,9 @@ arr = {one: 1, two: {three: []}}
 # merge/concat
 
 # const state = state.merge({foo: 2, bar: 3});
-state2 = {state <- foo: 2, bar: 3}
+state = {isValid: false}
+state2 = {state <- isValid: true, loading: false}
 
 # const list2 = list.concat([1, 2, 3]);
-list2 = [list <- 1, 2, 3]
+list = [1, 2, 3]
+list2 = [list <- 4, 5, 6]
