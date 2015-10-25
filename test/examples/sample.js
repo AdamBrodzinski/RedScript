@@ -2,11 +2,11 @@ define module
 import 'jQuery' as $
 import 'http' as http
 
-bool foo = false
-bool bar = true
-int score = 23
-double = 1.43
-obj = 
+bool const foo = false
+bool const bar = true
+int const score = 23
+const double = 1.43
+const obj = 
 
 //## check for aliases *before converting* ###
 
@@ -46,7 +46,7 @@ $('#someID').on('click', (foo, bar) =>
 //#
 
 
-changeIt = (foo, bar) =>
+const changeIt = (foo, bar) =>
   printc "hello world"
 }
 
@@ -115,7 +115,7 @@ object.prototype.method = function() { ||
   
 }
 
-mySlice = someString[1:3]
+const mySlice = someString[1:3]
 mySlice = someString.slice(1,3)
 
 
