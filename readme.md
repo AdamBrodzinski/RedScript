@@ -41,14 +41,14 @@ redscript watch [fileName fileName2]
 #### Immutable Data
 Mutable data in JavaScript can be painful. RedScript uses [Seamless-Immutable](https://github.com/rtfeldman/seamless-immutable) to effeciently reuse the existing nested objects rather than instantiating new ones when merging.
 ```elixir
-state = {bar: 5}
+state = {bar: 5}                                const state = Immutable({bar: 5});
 state.foo = 10   # won't mutate
-# merge new keys into state and return new object
-state2 = {state <- foo: 2, bar: 3}
+# merge object and return new object
+state2 = {state <- foo: 2, bar: 3}              const state = state.merge({foo: 2, bar: 3});
 
-list = []
-list2 = [list <- 1, 2, 3]
-list3 = [list <- new_list]
+list = []                                       const list = Immutable([]);
+list2 = [list <- 1, 2, 3]                       const list2 = list.concat([1, 2, 3]);
+list3 = [list <- new_list]                      const list3 = list.concat(new_list);
 ```
 
 #### Modules exposing public functions (no classes!)
