@@ -12,7 +12,7 @@ bar /= 10
 @someProp = foo
 
 // valid__q = true
-valid? = true
+valid__q = true
 
 // double check ||= behaves with Immutable
 opts ||= Immutable({thing: false})
@@ -22,7 +22,7 @@ if (foo == false do) {
   // do stuff
 }
 
-if (isValid? do) {
+if (isValid__q do) {
     return true
   } else {
     return false
