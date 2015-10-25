@@ -8,7 +8,7 @@
 
 
 // The at sign should is aliased to this
-  this.myProperly = false
+  @myProperly = false
   
 // It also works correctly when a period is appended
-  this.myProperty = false
+  @.myProperty = false
