@@ -2,93 +2,93 @@ define module
 import 'jQuery' as $
 import 'http' as http
 
-bool foo = false
-bool bar = true
-int score = 23
-double = 1.43
-obj = 
+bool var foo = false
+bool var bar = true
+int var score = 23
+var double = 1.43
+var obj = 
 
-### check for aliases *before converting* ###
+////// check for aliases *before converting* //////
 
-if foo is false or bar isnt true and baz != false
-  # do stuff
-end
+if (foo is false or bar isnt true and baz != false) {
+  // do stuff
+}
 
-# Alias @ with this.
-@someProp = foo
+// Alias @ with this.
+this.someProp = foo
 
-# has a do after if
-if foo is false do
-  # do stuff
-end
+// has a do after if
+if (foo is false , function() {) {
+  // do stuff
+}
 
-# no do on end
-if /foo/.test(line)
+// no do on end
+if (/foo/.test(line)) {
   line.append
-end
+}
 
-# function alias
-func () {
+// function alias
+function() { {
 
 }
 
 printc("foo");
 
 $('#someID').on('click', (foo, bar) =>
-  # do stuff
-end);
+  // do stuff
+});
 
-##
-# widget =
-#   attach: ->
-#     el.bind 'click', (event) =>
-#       doStuffWithThis()
-##
+////
+// widget =
+//   attach: ->
+//click', (event) =>
+//       doStuffWithThis()
+////
 
 
-changeIt = (foo, bar) =>
+var changeIt = (foo, bar) =>
   printc "hello world"
-end
+}
 
 changeIt = (foo, bar) ->
   printc "hello world"
-end
+}
 
 changeIt = -> |foo|
   printc "hello world"
-end
+}
 
 changeIt = -> |$, _, 1, foo, BaR|
   printc "hello world"
-end
+}
 
-# func def
+// func def
 
-changeIt = func do
+changeIt = var do = function() {
 
-end
+}
 
 if (arg is '-w'
   or arg is '--watch'
   or arg is 'watch') do
   options.watchFiles = true;
   argList.splice(index,index);
-end
+}
 
 
-################################
-object foo
+////////////////////////////////////////////////////////////////
+var foo = {
   status: on,
 
-  def foo
-    return @status
-  end
+  foo: function() {
+    return this.status
+  }
 endO
 
-# attach a method to foo's prototype
-def foo >> method2 |msg| do
+//s prototype
+foo.prototype.method2 = function() { |msg| do
   alert msg
-end
+}
 
 
 foo = {
@@ -99,23 +99,23 @@ foo = {
   }
 };
 
-#// attach a method to foo's prototype
+//s prototype
 foo.prototype.method2 = function (msg) {
   alert(msg);
 };
 
 
-##################################
+////////////////////////////////////////////////////////////////////
 
-def object >> method ||
+object.prototype.method = function() { ||
   
-end
+}
 
-def object >> method ||
+object.prototype.method = function() { ||
   
-end
+}
 
-mySlice = someString[1:3]
+var mySlice = someString[1:3]
 mySlice = someString.slice(1,3)
 
 
@@ -123,15 +123,15 @@ module.exports.hellWorld = function () {
   alert("hello world");
 }
 
-def exports.helloWorld
+exports.helloWorld = function() {
   alert "hello world"
-end
+}
 
 
-def someOb >> helloWorld
+someOb.prototype.helloWorld = function() {
   alert "hello world"
-end
+}
 
 var someOb >> helloWorld
   alert "hello world"
-end   Testing output
+}  
