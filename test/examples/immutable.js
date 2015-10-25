@@ -2,6 +2,12 @@
 arr = Immutable([1, 2, 3]);
 arr = Immutable([1, {foo: 1}, [2,[3]] , 3]);
 
+return Immutable([1, 2, 3]);
+
+json = {
+  foo: [1, 2, 3]
+}
+
 // const arr = Immutable({foo: 1, bar: 2});
 arr = Immutable({foo: 1, bar: 2});
 arr = Immutable({one: 1, two: {three: []}});
