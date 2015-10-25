@@ -23,6 +23,6 @@ const res = _.chain(foo)
 .pipesCall(has_parens, 10, 20)
 .pipesCall(map, (x) => x * 2)
 .pipesCall(map, ((x) => x * 2))
-.pipesCall(map, (const x => x * 2))
+.pipesCall(map, (x => x * 2))
 .pipesCall(map, x => x * 2).value();
 
