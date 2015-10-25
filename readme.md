@@ -145,3 +145,5 @@ defmodule MyUtils do
 end
 
 ```
+
+##### [More syntax:](https://github.com/AdamBrodzinski/RedScript/blob/master/spec.md)
