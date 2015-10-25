@@ -2,13 +2,13 @@ define module
 import 'jQuery' as $
 import 'http' as http
 
-bool var foo = false
-bool var bar = true
-int var score = 23
-var double = 1.43
-var obj = 
+bool foo = false
+bool bar = true
+int score = 23
+double = 1.43
+obj = 
 
-////// check for aliases *before converting* //////
+//## check for aliases *before converting* ###
 
 if (foo is false or bar isnt true and baz != false) {
   // do stuff
@@ -38,15 +38,15 @@ $('#someID').on('click', (foo, bar) =>
   // do stuff
 });
 
-////
+//#
 // widget =
 //   attach: ->
-//click', (event) =>
+//     el.bind 'click', (event) =>
 //       doStuffWithThis()
-////
+//#
 
 
-var changeIt = (foo, bar) =>
+changeIt = (foo, bar) =>
   printc "hello world"
 }
 
@@ -76,7 +76,7 @@ if (arg is '-w'
 }
 
 
-////////////////////////////////////////////////////////////////
+//###############################
 var foo = {
   status: on,
 
@@ -85,7 +85,7 @@ var foo = {
   }
 endO
 
-//s prototype
+// attach a method to foo's prototype
 foo.prototype.method2 = function() { |msg| do
   alert msg
 }
@@ -99,13 +99,13 @@ foo = {
   }
 };
 
-//s prototype
+//// attach a method to foo's prototype
 foo.prototype.method2 = function (msg) {
   alert(msg);
 };
 
 
-////////////////////////////////////////////////////////////////////
+//#################################
 
 object.prototype.method = function() { ||
   
@@ -115,7 +115,7 @@ object.prototype.method = function() { ||
   
 }
 
-var mySlice = someString[1:3]
+mySlice = someString[1:3]
 mySlice = someString.slice(1,3)
 
 

@@ -4,6 +4,7 @@ arr = [1, {foo: 1}, [2,[3]] , 3]
 
 return [1, 2, 3]
 
+# doesnt convert json
 json = {
   foo: [1, 2, 3]
 }
