@@ -1,9 +1,15 @@
-// var arr = Immutable([1, 2, 3]);
-arr = [1, 2, 3]
+// const arr = Immutable([1, 2, 3]);
+arr = Immutable([1, 2, 3]);
+arr = Immutable([1, {foo: 1}, [2,[3]] , 3]);
 
-// var arr = Immutable({foo: 1, bar: 2});
-arr = {foo: 1, bar: 2}
+// const arr = Immutable({foo: 1, bar: 2});
+arr = Immutable({foo: 1, bar: 2});
+arr = Immutable({one: 1, two: {three: []}});
 
+// merge/concat
 
-// var arr = Immutable(["totally", "immutable", {hammer: "Can’t Touch This"}]);
-arr = ["totally", "immutable", {hammer: "Can’t Touch This"}]
+// const state = state.merge({foo: 2, bar: 3});
+state2 = Immutable({state <- foo: 2, bar: 3});
+
+// const list2 = list.concat([1, 2, 3]);
+list2 = Immutable([list <- 1, 2, 3]);
