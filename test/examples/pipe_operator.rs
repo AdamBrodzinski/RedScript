@@ -1,10 +1,25 @@
 foo = 2
 
-foo
+res = foo
 |> add 10, 20
 |> has_parens(10, 20)
 |> noparens
 |> emprty_parens()
+
+res
+|> add 10, 20
+|> has_parens(10, 20)
+|> map (x) => x * 2
+
+|> emprty_parens()
+
+
+return {foo: 1, bar: 2}
+|> add 10, 20
+
+[1, 2, 22]
+|> add 10, 20
+
 //|> square 2
 //|> map (x) => x * 2
 //|> square
