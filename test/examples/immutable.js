@@ -1,3 +1,4 @@
+import Immutable from 'seamless-immutable';
 // const arr = Immutable([1, 2, 3]);
 const arr = Immutable([1, 2, 3])
 const arr = Immutable([1, {foo: 1}, [2,[3]] , 3])

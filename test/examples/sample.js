@@ -1,3 +1,4 @@
+import Immutable from 'seamless-immutable';
 // auto declared constants
   const bar = 2
 

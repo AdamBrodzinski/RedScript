@@ -1,3 +1,4 @@
+import Immutable from 'seamless-immutable';
 //  compiles to eq. JavaScript, this example does not
 //  include the module syntax: `defmodule` as that is
 //  a separate transform (see test/examples/module.rs)

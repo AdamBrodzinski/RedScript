@@ -1,3 +1,4 @@
+import Immutable from 'seamless-immutable';
 // this is a single line comment
 
 //#

@@ -1,4 +1,4 @@
-import Immutable from 'seamless-immutable'
+import Immutable from 'seamless-immutable';
 export function add(a, b) {
   return a + b
 }

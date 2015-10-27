@@ -1,3 +1,4 @@
+import Immutable from 'seamless-immutable';
 // single line pipes not finished
 const bar = _.chain(Immutable([1, 2, 3])).pipesCall(Enum.uppcase).value();
 
