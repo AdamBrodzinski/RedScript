@@ -91,45 +91,6 @@ Enum.reject([1, 2, 3, 4], (n) => n % 2 == 0)      [1, 2, 3, 4] |> Enum.reject((n
 ```
 
 
-#### Plays well with React
-We've added a bit of sugar for creating React render function so that you don't have to wrap it in parens and use a `return` keyword. It must be the *last* function in the module for this to work.
-
-```elixir
-# must use ::ReactStateComponent to module name to activate React sugar
-
-defmodule Complex::ReactStateComponent do
-  def getInitialState do
-    return { isReady: false }
-  end
-
-  def render(props, state) do
-    <div>
-      <h1>Hello World</h1>
-      <p>Is ready: {state.isReady}</p>
-    </div>
-  end
-end
-```
-
-```elixir
-# however stateless React components work best!
-# using ::ReactComponent adds render sugar (no parens and return needed)
-
-defmodule MySimple::ReactComponent do
-  defp handle_click(e) do
-    alert("Hello World")
-  end
-
-  def Simple(props) do
-    <div>
-      <h1>Stateless Component</h1>
-      <p>Is ready: { props.is_ready }</p>
-      <input type='button' onClick={ handle_click } />
-    </div>
-  end
-end
-```
-
 #### Pattern Matching Coming Soon!
 Pattern matching can eliminate the use of if statements and can really clean up code. This is on the backlog but PRs are welcome!
 ```elixir
@@ -144,5 +105,32 @@ defmodule MyUtils do
 end
 
 ```
+
+
+#### Plays well with React
+We've added a bit of sugar for creating React stateless components so that you don't have to wrap it in parens and use a `return` keyword. It must be the *last* function in the module for this to work.
+
+
+```elixir
+# Stateless React components work great in RedScript modules. We've added optional
+# sugar to add parens and a return in the component function. Just add ::ReactComponent
+# to the module name and place the component first
+
+
+defmodule TodoItem::ReactComponent do
+  def component(props) do
+    <div>
+      <h1>Name: { state.player_name }</h1>
+      <p>Is selected: { props.is_selected }</p>
+      <input type='button' onClick={ handle_click } />
+    </div>
+  end
+
+  defp handle_click(e) do
+    alert("Hello World")
+  end
+end
+```
+
 
 ##### [More syntax:](https://github.com/AdamBrodzinski/RedScript/blob/master/spec.md)
