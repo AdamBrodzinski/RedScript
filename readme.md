@@ -41,39 +41,38 @@ redscript watch [fileName fileName2]
 #### Immutable Data
 Mutable data in JavaScript can be painful. RedScript uses [Seamless-Immutable](https://github.com/rtfeldman/seamless-immutable) to effeciently reuse the existing nested objects rather than instantiating new ones when merging.
 ```elixir
-state = {bar: 5}                                const state = Immutable({bar: 5});
+state = {bar: 5}
 state.foo = 10   # won't mutate
 # merge object and return new object
-state2 = {state <- foo: 2, bar: 3}              const state = state.merge({foo: 2, bar: 3});
+state2 = {state <- foo: 2, bar: 3}
 
-list = []                                       const list = Immutable([]);
-list2 = [list <- 1, 2, 3]                       const list2 = list.concat([1, 2, 3]);
-list3 = [list <- new_list]                      const list3 = list.concat(new_list);
+list = []             
+list2 = [list <- 1, 2, 3]
+list3 = [list <- new_list]
 ```
 
 #### Modules exposing public functions (no classes!)
 
 ```elixir
-# RedScript                                # compiled JavaScript
-import {imported_func} from "foo"          import {imported_func} from "foo";
+# RedScript
+import {imported_func} from "foo"
 
-defmodule PhoneUtils do                    // Module: PhoneUtils
-  def normalize_number(number) do          export function normalize_number(number) {
-    return number                            return _.chain(number)
-    |> imported_func('-')                    .call(imported_func, '-')
-    |> remove_char(' ')                      .call(remove_char, ' ')
-    |> remove_us_code                        .call(remove_us_code).value();
-  end                                      };
+defmodule PhoneUtils do
+  def normalize_number(number) do
+    return number
+    |> imported_func('-')
+    |> remove_char(' ')  
+    |> remove_us_code    
+  end                    
 
-  def remove_us_code(str) do               export function remove_us_code(number) {
-    return str.replace(/^+1/g, '')           return str.replace(/^+1/g, '')
-  end                                      };
+  def remove_us_code(str) do
+    return str.replace(/^+1/g, '')
+  end                             
 
-  defp remove_char(str, char) do           function remove_char(number) {
-    return str.replace(/\s/g, '')            return str.replace(/\s/g, '')
-  end                                      };
+  defp remove_char(str, char) do  
+    return str.replace(/\s/g, '') 
+  end
 end
-
 ```
 
 #### Built In Support For Lo-Dash
