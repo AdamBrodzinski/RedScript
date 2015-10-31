@@ -79,14 +79,14 @@ end
 Just snake case the [API you already know](https://lodash.com/docs). To keep things tidy, functions are placed in namespaces. Collections are in the Enum namespace, Array in List, Strings are in a String namespace, etc... (however you could still just import lo-dash ES6 style to remove the namespace).
 
 ```elixir
-                                                     # or use pipe operator with lo-dash
-List.take(["a", "b", "c"], 2)                        ["a", "b", "c"] |> List.take(2)
+                                                 # or use pipe operator with lo-dash
+List.take(["a", "b", "c"], 2)                    ["a", "b", "c"] |> List.take(2)
 #>> ["a", "b"]
 
-List.flatten_deep([1, [2, 3, [4]]])                  [1, [2, 3, [4]]] |> List.flatten_deep
+List.flatten_deep([1, [2, 3, [4]]])              [1, [2, 3, [4]]] |> List.flatten_deep
 #>> [1, 2, 3, 4]
 
-Enum.reject([1, 2, 3, 4], (n) => n % 2 == 0)         [1, 2, 3, 4] |> Enum.reject((n) => n % 2 == 0)
+Enum.reject([1, 2, 3, 4], (n) => n % 2 == 0)      [1, 2, 3, 4] |> Enum.reject((n) => n % 2 == 0)
 #>> [1, 3]
 ```
 
