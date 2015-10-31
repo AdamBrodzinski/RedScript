@@ -112,10 +112,6 @@ We've added a bit of sugar for creating React stateless components so that you d
 
 
 ```elixir
-# Stateless React components work great in RedScript modules. We've added optional
-# sugar to add parens and a return in the component function. Just add ::ReactComponent
-# to the module name and place the component first
-
 
 defmodule TodoItem::ReactComponent do
   def component(props) do
