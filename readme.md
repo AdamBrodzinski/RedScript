@@ -3,7 +3,7 @@
 
 * **Think in *transformations* with pipe operator `|>` (like F# & Elixir)**
 * **Lodash built in (patched to be immutable)**
-* Pattern matching like Elixir eliminates most if/else statement
+* **Pattern matching like Elixir eliminates most if/else statements**
 * **Immutable data in RedScript**
 * **Functional paradigm**
 * **Compile time type inference checking**
