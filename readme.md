@@ -3,6 +3,7 @@
 
 * **Think in *transformations* with pipe operator `|>` (like F# & Elixir)**
 * **Lodash built in (patched to be immutable)**
+* Pattern matching like Elixir eliminates most if/else statement
 * **Immutable data in RedScript**
 * **Functional paradigm**
 * **Compile time type inference checking**
@@ -108,7 +109,7 @@ end
 
 
 #### Plays well with React
-We've added a bit of sugar for creating React stateless components so that you don't have to wrap it in parens and use a `return` keyword. It must be the *last* function in the module for this to work.
+We've added a bit of sugar for creating React stateless components so that you don't have to wrap it in parens and use a `return` keyword.
 
 
 ```elixir
