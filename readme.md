@@ -108,26 +108,4 @@ end
 ```
 
 
-#### Plays well with React
-We've added a bit of sugar for creating React stateless components so that you don't have to wrap it in parens and use a `return` keyword.
-
-
-```elixir
-
-defmodule TodoItem::ReactComponent do
-  def component(props) do
-    <div>
-      <h1>Name: { state.player_name }</h1>
-      <p>Is selected: { props.is_selected }</p>
-      <input type='button' onClick={ handle_click } />
-    </div>
-  end
-
-  defp handle_click(e) do
-    alert("Hello World")
-  end
-end
-```
-
-
-##### [More syntax:](https://github.com/AdamBrodzinski/RedScript/blob/master/spec.md)
+##### [More syntax](https://github.com/AdamBrodzinski/RedScript/blob/master/spec.md)
