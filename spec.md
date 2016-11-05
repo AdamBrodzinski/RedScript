@@ -47,6 +47,8 @@ end
 
 if foo > 2 do
   # do work
+else if foo > 2
+  # do work
 else
   # do work
 end
