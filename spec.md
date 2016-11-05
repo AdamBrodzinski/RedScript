@@ -35,6 +35,46 @@ result = result + 5
 // 15
 ```
 
+## If Else Uness
+
+RedScript borrows the same sytax from Elixir for if, else, and unless
+
+```elixir
+
+if foo > 2 do
+  # do work
+end
+
+if foo > 2 do
+  # do work
+else
+  # do work
+end
+
+unless foo > 2 do
+  # do work
+end
+```
+
+Compiled JavaScript
+
+```javascript
+
+if (foo > 2) {
+  // do work
+}
+
+if (foo > 2) {
+  // do work
+else
+  // do work
+}
+
+if (!(foo > 2)) {
+ // do work
+}
+```
+
 
 ## Maps
 
