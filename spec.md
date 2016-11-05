@@ -14,6 +14,28 @@ RedScript has one kind of comment, a single line. All text is ignored to the rig
 # commented_out_func()
 ```
 
+
+## Variables
+
+RedScript has one kind of variable and does not need to be declared. 
+However they have the same scoping rules as JavaScript's `let`. 
+
+```elixir
+result = 10 + 5
+result = result + 5
+# IO.puts(result)
+# 15
+```
+
+Compiled JavaScript:
+```javascript
+let result = 10 + 5
+result = result + 5
+// IO.inspect(result)
+// 15
+```
+
+
 ## Maps
 
 RedScript does not not have an "Object" type like JavaScript. It has
@@ -33,9 +55,11 @@ call `Map.mutate`
 #### trying to mutate JS style will throw an error
 ```text
 map.bar = 4
+# or
+map["bar"] = 4
 
-Error: you can't mutate using the dot notation
-Try using:
+Error: you can't mutate Maps
+Perhaps you want to try using:
   map_copy = {old_map <- bar: 4}
 or
   map_copy = Map.put(old_map, "bar", 4)
@@ -55,4 +79,17 @@ IO.inspect(map)
 #log {foo: 2, bar: 4}
 ```
 
+Compiled JavaScript
+
+```javascript
+map = {foo: 1, bar: 2}
+map = Map.put(map, "bar", 4)
+IO.inspect(map)
+//log {foo: 1, bar: 4}
+
+// or literal notation
+map = {...map, foo: 2}
+IO.inspect(map)
+//log {foo: 2, bar: 4}
+```
 
