@@ -2,16 +2,17 @@
 ### It's like CoffeeScript but immutable & functional
 
 * **Think in *transformations* with pipe operator `|>` (like F# & Elixir)**
-* **Lodash built in (patched to be immutable)**
-* **Pattern matching like Elixir eliminates most if/else statements**
-* **Immutable data in RedScript**
+* **Standard Lib that utilizes Lodash (patched to be immutable)**
 * **Functional paradigm**
-* **Compile time type inference checking**
+
+In the future...
+
+* **Immutable maps/lists**
+* **Pattern matching like Elixir eliminates most if/else statements**
+* **Compile time type inference checking using Flow**
 
 
-RedScript was created to provide a first class functional experience in the browser. It is inspired from Elixir but does not have all of the features (ElixirScript aims to do this). Our main goal is to provide easy interoperability with other JavaScript libraries while still providing a first class functional experience in JavaScript.
-
-If this prototype is popular enough I would love help to create a proper compiler.
+RedScript was created to provide a first class functional experience in the browser. It is inspired from Elixir but does not have all of the features ([ElixirScript](https://github.com/bryanjos/elixirscript) aims to do this). Our main goal is to provide easy interoperability with other JavaScript libraries (like CoffeeScript, not like Elm) while still providing a first class functional experience in JavaScript.
 
 
 #### To Install Globally and Run
@@ -31,16 +32,16 @@ redscript watch [fileName fileName2]
 #>>> "HELLO WORLD"
 
 ["foo", "bar ", " baz"]
-|> Enum.map (x) -> String.upcase(x)
-|> inspect
-|> take 2
+  |> Enum.map (x) -> String.upcase(x)
+  |> inspect
+  |> take 2
 
-# log ["FOO", "BAR", "BAZ"]
+# inspect log ["FOO", "BAR", "BAZ"]
 # >>> ["FOO", "BAR"]
 ```
 
-#### Immutable Data
-Mutable data in JavaScript can be painful. RedScript uses [Seamless-Immutable](https://github.com/rtfeldman/seamless-immutable) to effeciently reuse the existing nested objects rather than instantiating new ones when merging.
+#### Immutable Data (not currently supported)
+Mutable data in JavaScript can lead to tricky bugs. RedScript uses [Seamless-Immutable](https://github.com/rtfeldman/seamless-immutable) to effeciently reuse the existing nested objects rather than instantiating new ones when merging.
 ```elixir
 state = {bar: 5}
 state.foo = 10   # won't mutate
@@ -56,7 +57,7 @@ list3 = [list <- new_list]
 
 ```elixir
 # RedScript
-import {imported_func} from "foo"
+import {some_js_function} from "some-js-module"
 
 defmodule PhoneUtils do
   def normalize_number(number) do
@@ -104,8 +105,7 @@ defmodule MyUtils do
     return 1 + count(tail)
   end
 end
-
 ```
 
 
-##### [More syntax](https://github.com/AdamBrodzinski/RedScript/blob/master/spec.md)
+### [Full Syntax](https://github.com/AdamBrodzinski/RedScript/blob/master/spec.md)
