@@ -17,16 +17,17 @@ RedScript has one kind of comment, a single line. All text is ignored to the rig
 ## Maps
 
 RedScript does not not have an "Object" type like JavaScript. It has
-a "Map" type that acts like an immutable JavaScript literal. To make a change 
-you can call `Map.put` to make a copy of the object with the new keys. This
-works similar to using ES6 spread syntax in a new object in JavaScript.
+a "Map" type that acts like an immutable JavaScript literal. To make a change
+you must copy the object and merge in the new key/values. 
 
-You can also use the literal notation `new_map = {old_map <- new_key: "foo"}`,
-this works the same as Map.put but it can be easier to read in certain
-situtations (Map.put can also be piped).
+You can copy maps in several ways. However `Map.put` and the literal notation are
+the most frequently used. `Map.put` is ideal for changing a map inside a pipeline.
+Both of these are similar to using ES6 spread syntax in JavaScript.
 
-If you have to mutate a map for performance reasons you have to explicitly
+If you *have* to mutate a map for performance reasons you have to explicitly
 call `Map.mutate`
+
+
 
 
 #### trying to mutate JS style will throw an error
@@ -51,7 +52,7 @@ IO.inspect(map)
 # or literal notation
 map = {map <- foo: 2}
 IO.inspect(map)
-#log {foo: 1, bar: 4}
+#log {foo: 2, bar: 4}
 ```
 
 
