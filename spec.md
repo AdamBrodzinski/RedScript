@@ -37,8 +37,8 @@ let name = "Jane"
 Number is the same as the JavaScript implementation.
 
 ```javascript
-typeof 1 == 'number'
-typeof 1.4 == 'number'
+typeof 1 == "number"
+typeof 1.4 == "number"
 ```
 
 ## Symbol
@@ -49,9 +49,9 @@ Symbol is the same as the ES6 JavaScript implementation with a syntax similar to
 ```elixir
 env = :prod
 
-typeof :prod == 'symbol'
+typeof :prod == "symbol"
 # >> true
-typeof env == 'symbol'
+typeof env == "symbol"
 # >> true
 
 # use a symbol with a map (string keys are standard)
@@ -63,8 +63,8 @@ Compiles to JavaScript:
 ```javascript
 let env = Symbol.for(":prod")
 
-typeof Symbol.for(":prod") == 'symbol'
-typeof env == 'symbol'
+typeof Symbol.for(":prod") == "symbol"
+typeof env == "symbol"
 
 // use a symbol with a map (string keys are standard)
 let res = {foo: 1, [Symbol.for(":bar")]: 2}
@@ -220,4 +220,3 @@ map = {...map, foo: 2}
 IO.inspect(map)
 //log {foo: 2, bar: 4}
 ```
-
