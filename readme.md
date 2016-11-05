@@ -1,23 +1,26 @@
 # RedScript 2.0
 ### It's like CoffeeScript but immutable & functional
 
-* **Think in *transformations* with pipe operator `|>` (like F# & Elixir)**
+Why use yet another sugar for JavaScript? Here are some features that go beyond a nice sytax:
+
+* **Immutable data**
+* **Pattern matching in module functions**
+* **No support for classes or OO forces a functional (yet pragmatic) coding style**
+* **Think in *data transformations* with the pipe operator `|>` (like Unix pipes, F# & Elixir)**
 * **Standard Lib that utilizes Lodash (patched to be immutable)**
-* **Functional paradigm**
-
-In the future...
-
-* **Immutable maps/lists**
-* **Pattern matching like Elixir eliminates most if/else statements**
+* **CLI for compiling and creating projects **
 * **Compile time type inference checking using Flow**
 
 
-RedScript was created to provide a first class functional experience in the browser. It is inspired from Elixir but does not have all of the features ([ElixirScript](https://github.com/bryanjos/elixirscript) aims to do this). Our main goal is to provide easy interoperability with other JavaScript libraries (like CoffeeScript, not like Elm) while still providing a first class functional experience in JavaScript.
+RedScript was created to provide a first class functional experience in the browser. I was tired of trying to coerce JavaScript into being a functional language (by not using the bad parts by convention and using other libs).
+
+It is inspired from Elixir but it does not have all of the features ([ElixirScript](https://github.com/bryanjos/elixirscript) aims to do this). Our main goal is to provide easy interoperability with other JavaScript libraries (like CoffeeScript, not like Elm) while still providing a first class functional experience in JavaScript.
 
 
 #### To Install Globally and Run
 
 ```
+# 2.0 is a work in progress, not all features implemented
 # Note, this compiler is just a prototype and is not production ready
 sudo npm install -g redscript
 redscript watch [fileName fileName2]
@@ -31,33 +34,36 @@ redscript watch [fileName fileName2]
 "hello world " |> String.trim |> String.uppercase
 #>>> "HELLO WORLD"
 
-["foo", "bar ", " baz"]
-  |> Enum.map (x) -> String.upcase(x)
-  |> inspect
-  |> take 2
+["foo", "bar", " baz"]
+  |> Enum.map((x) -> String.upcase(x))
+  |> inspect()
+  |> take(2)
 
-# inspect log ["FOO", "BAR", "BAZ"]
+# inspect-output ["FOO", "BAR", "BAZ"]
 # >>> ["FOO", "BAR"]
 ```
 
 #### Immutable Data (not currently supported)
-Mutable data in JavaScript can lead to tricky bugs. RedScript uses [Seamless-Immutable](https://github.com/rtfeldman/seamless-immutable) to effeciently reuse the existing nested objects rather than instantiating new ones when merging.
+Mutable data in JavaScript can lead to tricky bugs
 ```elixir
-state = {bar: 5}
-state.foo = 10   # won't mutate
-# merge object and return new object
-state2 = {state <- foo: 2, bar: 3}
+state = {bar: 3}
 
-list = []             
-list2 = [list <- 1, 2, 3]
-list3 = [list <- new_list]
+# throws an error
+state.bar = 10
+
+# create copy and merge in new key/values
+new_state = {state <- foo: 2, baz: 4}
+# >> {foo: 2, bar: 3, baz: 4}
+
+list = [1, 2]             
+list_two = [5, 6]
+combined_list = [list <- 3, 4, list_two]
 ```
 
 #### Modules exposing public functions (no classes!)
 
 ```elixir
-# RedScript
-import {some_js_function} from "some-js-module"
+import {some_js_function} from "some-js-or-redscript-module"
 
 defmodule PhoneUtils do
   def normalize_number(number) do
