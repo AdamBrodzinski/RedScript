@@ -13,7 +13,7 @@ However they have the same scoping rules as JavaScript's `let`.
 ```elixir
 result = 10 + 5
 result = result + 5
-# IO.puts(result)
+# IO.inspect(result)
 # 15
 ```
 
@@ -211,8 +211,10 @@ if (foo > 2) {
 }
 
 if (foo > 2) {
-  // do work
-else
+  // do work  
+} else if (foo > 2) {
+  // do work  
+} else {
   // do work
 }
 
