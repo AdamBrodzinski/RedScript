@@ -120,6 +120,19 @@ Undefined is the same as the JavaScript implementation.
 undefined
 ```
 
+## Basic Arithmetic
+
+Arithmetic is the same as the JavaScript implementation.
+
+```elixir
+1 + 2
+# 3
+5 * 5
+# 25
+10 / 2
+# 5.0
+```
+
 
 ## Maps
 
