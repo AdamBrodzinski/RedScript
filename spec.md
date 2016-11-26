@@ -130,7 +130,7 @@ Arithmetic is the same as the JavaScript implementation.
 5 * 5
 # 25
 10 / 2
-# 5.0
+# 5
 ```
 
 
