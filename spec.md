@@ -134,6 +134,20 @@ Arithmetic is the same as the JavaScript implementation.
 ```
 
 
+
+## Anonymous functions
+
+Anonymous functions have the same scoping rules as JavaScript but the syntax has a skinny arrow instead of a fat arrow.
+
+```elixir
+double_num = (x) -> x * 2
+```
+
+```javascript
+let double_num = (x) => x * 2
+```
+
+
 ## Maps
 
 RedScript does not not have an "Object" type like JavaScript. It has
