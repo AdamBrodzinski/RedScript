@@ -1,4 +1,16 @@
 # RedScript 2.0
+
+
+## Project is Deprecated
+
+After the recent changes in ReasonML there really isn't a valid reason to keep working on this project anymore as ReasonML does a much better job, provides more safety, and in my opinion has an even nicer syntax and developer exerience.
+
+https://reasonml.github.io/
+
+-----------------------
+
+
+
 ### It's like CoffeeScript but immutable & functional
 
 Why use yet another sugar for JavaScript? Here are some features that go beyond a nice sytax:
